@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import logo from "../../assets/logo/logo.png";
 
 const Navbar = () => {
  const { theme, toggleTheme } = useTheme();
@@ -55,9 +56,11 @@ const changeLanguage = (lang) => {
           to="/"
           className="flex items-center gap-3"
         >
-          <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-            SN
-          </div>
+          <img
+            src={logo}
+            alt="Sauiti Nyikani Church logo"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+          />
 
           <div>
             <h1 className="text-base md:text-2xl font-bold text-white">
