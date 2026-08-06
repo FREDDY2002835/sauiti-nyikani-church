@@ -1,0 +1,33 @@
+import { Routes, Route } from "react-router-dom";
+
+import Home from "../pages/Home";
+import About from "../pages/About";
+import Ministries from "../pages/Ministries";
+import Sermons from "../pages/Sermons";
+import Events from "../pages/Events";
+import Gallery from "../pages/Gallery";
+import Giving from "../pages/Giving";
+import Prayer from "../pages/Prayer";
+import Contact from "../pages/Contact";
+import Settings from "../pages/Settings";
+import NotFound from "../pages/NotFound";
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/ministries" element={<Ministries />} />
+      <Route path="/sermons" element={<Sermons />} />
+      <Route path="/events" element={<Events />} />
+      <Route path="/gallery" element={<Gallery />} />
+      <Route path="/giving" element={<Giving />} />
+      <Route path="/prayer" element={<Prayer />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
+export default AppRoutes;
