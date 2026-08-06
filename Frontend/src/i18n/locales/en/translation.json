@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "ministries": "Ministries",
+    "sermons": "Sermons",
+    "events": "Events",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "badge": "Welcome to Sauiti Nyikani Church",
+    "title1": "Growing Together",
+    "title2": "In Christ",
+    "description": "Join us as we worship God, strengthen our faith, and serve our community.",
+    "join": "Join Us",
+    "watch": "Watch Sermons",
+    "services": {
+      "title": "Service Times",
+      "sunday": "Sunday Worship",
+      "sundayTime": "9:00 AM & 11:00 AM",
+      "wednesday": "Wednesday Bible Study",
+      "wednesdayTime": "6:30 PM",
+      "friday": "Friday Prayer Meeting",
+      "fridayTime": "6:30 PM"
+    },
+    "verse": {
+      "text": "For where two or three gather in my name, there am I with them.",
+      "reference": "Matthew 18:20"
+    }
+  }
+}

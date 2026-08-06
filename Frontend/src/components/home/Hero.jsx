@@ -1,103 +1,112 @@
 import heroImage from "../../assets/images/church.jpg";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
+  const services = [
+    {
+      title: t("hero.services.sunday"),
+      time: t("hero.services.sundayTime"),
+    },
+    {
+      title: t("hero.services.wednesday"),
+      time: t("hero.services.wednesdayTime"),
+    },
+    {
+      title: t("hero.services.friday"),
+      time: t("hero.services.fridayTime"),
+    },
+  ];
+
   return (
     <section
-      className="relative min-h-screen bg-cover bg-center"
+      className="relative bg-cover bg-center"
       style={{
         backgroundImage: `url(${heroImage})`,
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#081B33]/75"></div>
+      <div className="absolute inset-0 bg-[#081B33]/80"></div>
 
-      <div className="relative max-w-7xl mx-auto px-5 py-24 lg:py-0 min-h-screen flex items-center">
+      <div className="relative max-w-7xl mx-auto px-5 py-12 md:py-20 lg:min-h-screen flex items-center">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center w-full">
 
-          {/* LEFT */}
+          {/* Left Content */}
+
           <div className="text-center lg:text-left">
 
-            <span className="inline-block bg-blue-700/30 text-blue-200 px-3 py-2 rounded-full text-xs sm:text-sm">
-              Welcome to Sauiti Nyikani Church
+            <span className="inline-block bg-blue-600/30 text-blue-100 px-4 py-2 rounded-full text-xs sm:text-sm">
+              {t("hero.badge")}
             </span>
 
             <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight">
-              Growing Together
+              {t("hero.title1")}
               <br />
-              In Christ
+              {t("hero.title2")}
             </h1>
 
             <p className="mt-5 text-sm sm:text-base lg:text-lg text-slate-200 leading-7 max-w-xl mx-auto lg:mx-0">
-              Join us as we worship God, strengthen our faith,
-              and impact our community through the love of Jesus Christ.
+              {t("hero.description")}
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 
-              <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold transition">
-                Join Us
+              <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition">
+                {t("hero.join")}
               </button>
 
-              <button className="w-full sm:w-auto border border-blue-400 text-blue-200 hover:bg-blue-800 px-8 py-3 rounded-xl transition">
-                Watch Sermons
+              <button className="w-full sm:w-auto border border-blue-400 text-blue-200 hover:bg-blue-700/40 px-8 py-3 rounded-xl font-semibold transition">
+                {t("hero.watch")}
               </button>
 
             </div>
 
           </div>
 
-          {/* RIGHT CARD */}
+          {/* Weekly Services */}
 
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 max-w-md mx-auto w-full">
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 lg:p-8 max-w-md mx-auto w-full">
 
-            <h2 className="text-xl lg:text-2xl font-bold text-white text-center">
-              Weekly Services
+            <h2 className="text-xl lg:text-2xl font-bold text-white text-center mb-8">
+              {t("hero.services.title")}
             </h2>
 
-            <div className="mt-6 space-y-5 text-center">
+            <div className="space-y-6">
 
-              <div>
-                <h3 className="font-semibold text-white">
-                  Sunday Worship
-                </h3>
+              {services.map((service) => (
+                <div
+                  key={service.title}
+                  className="flex justify-between items-center border-b border-white/10 pb-4"
+                >
+                  <div>
 
-                <p className="text-slate-300 text-sm">
-                  09:00 AM
-                </p>
-              </div>
+                    <h3 className="text-white font-semibold text-sm sm:text-base">
+                      {service.title}
+                    </h3>
 
-              <div>
-                <h3 className="font-semibold text-white">
-                  Wednesday Prayer
-                </h3>
+                    <p className="text-slate-300 text-sm mt-1">
+                      {service.time}
+                    </p>
 
-                <p className="text-slate-300 text-sm">
-                  06:00 PM
-                </p>
-              </div>
+                  </div>
 
-              <div>
-                <h3 className="font-semibold text-white">
-                  Friday Youth Fellowship
-                </h3>
+                  <div className="w-3 h-3 rounded-full bg-blue-400"></div>
 
-                <p className="text-slate-300 text-sm">
-                  05:30 PM
-                </p>
-              </div>
+                </div>
+              ))}
 
             </div>
 
-            <div className="mt-8 border-t border-white/20 pt-5">
+            <div className="mt-8 pt-6 border-t border-white/20">
 
-              <p className="italic text-sm text-slate-300 text-center">
-                "For where two or three gather in my name,
-                there am I with them."
+              <p className="italic text-slate-300 text-sm leading-7 text-center">
+                "{t("hero.verse.text")}"
               </p>
 
-              <p className="text-blue-300 text-center mt-3">
-                Matthew 18:20
+              <p className="mt-4 text-blue-300 font-semibold text-center">
+                {t("hero.verse.reference")}
               </p>
 
             </div>

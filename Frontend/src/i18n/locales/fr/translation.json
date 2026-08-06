@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "ministries": "Ministères",
+    "sermons": "Prédications",
+    "events": "Événements",
+    "gallery": "Galerie",
+    "contact": "Contact",
+    "language": "Langue"
+  },
+  "hero": {
+    "badge": "Bienvenue à l'Église Sauiti Nyikani",
+    "title1": "Grandir Ensemble",
+    "title2": "En Christ",
+    "description": "Rejoignez-nous pour adorer Dieu, fortifier notre foi et servir notre communauté.",
+    "join": "Nous Rejoindre",
+    "watch": "Regarder les Prédications",
+    "services": {
+      "title": "Horaires des Cultes",
+      "sunday": "Culte du Dimanche",
+      "sundayTime": "9h00 et 11h00",
+      "wednesday": "Étude Biblique du Mercredi",
+      "wednesdayTime": "18h30",
+      "friday": "Réunion de Prière du Vendredi",
+      "fridayTime": "18h30"
+    },
+    "verse": {
+      "text": "Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d'eux.",
+      "reference": "Matthieu 18:20"
+    }
+  }
+}

@@ -1,53 +1,167 @@
 import { useState } from "react";
-import { FaBars, FaTimes, FaMoon, FaGlobe } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import {
+  FaBars,
+  FaTimes,
+  FaMoon,
+  FaSun,
+  FaGlobe,
+  FaChevronDown,
+} from "react-icons/fa";
+import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+ const { theme, toggleTheme } = useTheme();
+const { t, i18n } = useTranslation();
 
+const [menuOpen, setMenuOpen] = useState(false);
+const [showLanguages, setShowLanguages] = useState(false);
+
+const [language, setLanguage] = useState(
+  localStorage.getItem("language") || "en"
+);
+
+
+const changeLanguage = (lang) => {
+  i18n.changeLanguage(lang);
+  localStorage.setItem("language", lang);
+  setLanguage(lang);
+  setShowLanguages(false);
+};
+
+ const links = [
+  { name: t("nav.home"), path: "/" },
+  { name: t("nav.about"), path: "/about" },
+  { name: t("nav.ministries"), path: "/ministries" },
+  { name: t("nav.sermons"), path: "/sermons" },
+  { name: t("nav.events"), path: "/events" },
+  { name: t("nav.gallery"), path: "/gallery" },
+  { name: t("nav.contact"), path: "/contact" },
+];
   return (
-    <header className="sticky top-0 z-50 bg-[#0A2342] text-white shadow-lg">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4 md:px-8">
+    <header
+      className="sticky top-0 z-50 shadow-lg border-b"
+      style={{
+        background: "var(--nav)",
+        borderColor: "rgba(255,255,255,.08)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 md:h-20 px-4 md:px-8">
 
         {/* Logo */}
-        <div>
-          <h1 className="text-lg md:text-2xl font-bold">
-            Sauiti Nyikani
-          </h1>
-        </div>
+
+        <NavLink
+          to="/"
+          className="flex items-center gap-3"
+        >
+          <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+            SN
+          </div>
+
+          <div>
+            <h1 className="text-base md:text-2xl font-bold text-white">
+              Sauiti Nyikani
+            </h1>
+
+            <p className="hidden md:block text-xs text-slate-300">
+              Church
+            </p>
+          </div>
+        </NavLink>
 
         {/* Desktop Navigation */}
+
         <nav className="hidden lg:flex items-center gap-8">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/ministries">Ministries</a>
-          <a href="/sermons">Sermons</a>
-          <a href="/events">Events</a>
-          <a href="/gallery">Gallery</a>
-          <a href="/contact">Contact</a>
+
+          {links.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                `font-medium transition ${
+                  isActive
+                    ? "text-blue-400"
+                    : "text-slate-200 hover:text-blue-300"
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
+
         </nav>
 
         {/* Desktop Controls */}
+
         <div className="hidden lg:flex items-center gap-5">
-          <button>
-            <FaGlobe />
+
+          {/* Language */}
+
+          <div className="relative">
+
+            <button
+              onClick={() => setShowLanguages(!showLanguages)}
+              className="flex items-center gap-2 text-slate-200 hover:text-white"
+            >
+              <FaGlobe />
+              {language.toUpperCase()}
+              <FaChevronDown size={12} />
+            </button>
+
+            {showLanguages && (
+              <div className="absolute right-0 mt-3 w-40 rounded-xl bg-[#102845] shadow-xl overflow-hidden">
+
+               {[
+  { code: "en", label: "🇬🇧 English" },
+  { code: "fr", label: "🇫🇷 Français" },
+  { code: "sw", label: "🇹🇿 Kiswahili" },
+].map((lang) => (
+                  <button
+  key={lang.code}
+  onClick={() => changeLanguage(lang.code)}
+  className="w-full px-4 py-3 text-left hover:bg-blue-600 text-white"
+>
+  {lang.label}
+</button>
+                ))}
+
+              </div>
+            )}
+
+          </div>
+
+          {/* Theme */}
+
+          <button
+            onClick={toggleTheme}
+            className="text-xl text-slate-200 hover:text-yellow-300 transition"
+          >
+            {theme === "dark" ? <FaSun /> : <FaMoon />}
           </button>
 
-          <button>
-            <FaMoon />
-          </button>
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex lg:hidden items-center gap-4">
 
-          <button>
-            <FaMoon size={18} />
+        <div className="flex items-center gap-4 lg:hidden">
+
+          <button
+            onClick={toggleTheme}
+            className="text-white"
+          >
+            {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
           </button>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            className="text-white"
           >
-            {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            {menuOpen ? (
+              <FaTimes size={22} />
+            ) : (
+              <FaBars size={22} />
+            )}
           </button>
 
         </div>
@@ -55,38 +169,63 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-[#081B33] border-t border-slate-700">
 
-          <div className="flex flex-col">
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen ? "max-h-screen" : "max-h-0"
+        }`}
+        style={{ background: "var(--nav)" }}
+      >
+        <nav className="flex flex-col py-2">
 
-            {[
-              "Home",
-              "About",
-              "Ministries",
-              "Sermons",
-              "Events",
-              "Gallery",
-              "Contact",
-            ].map((item) => (
-              <a
-                key={item}
-                href="/"
-                className="px-5 py-4 hover:bg-blue-700"
-              >
-                {item}
-              </a>
-            ))}
+          {links.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-5 py-4 transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "text-slate-200 hover:bg-blue-700"
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
 
-            <button className="flex items-center gap-2 px-5 py-4">
-              <FaGlobe />
-              English
+          <div className="border-t border-slate-700 mt-2">
+
+            <p className="px-5 pt-4 text-sm text-slate-400">
+              {t("nav.language")}
+            </p>
+
+            <button
+             onClick={() => changeLanguage("en")}
+              className="w-full text-left px-5 py-3 text-slate-200 hover:bg-blue-700"
+            >
+              🇬🇧 English
+            </button>
+
+            <button
+             onClick={() => changeLanguage("fr")}
+              className="w-full text-left px-5 py-3 text-slate-200 hover:bg-blue-700"
+            >
+              🇫🇷 Français
+            </button>
+
+            <button
+             onClick={() => changeLanguage("sw")}
+              className="w-full text-left px-5 py-3 text-slate-200 hover:bg-blue-700"
+            >
+              🇹🇿 Kiswahili
             </button>
 
           </div>
 
-        </div>
-      )}
+        </nav>
+      </div>
     </header>
   );
 };
