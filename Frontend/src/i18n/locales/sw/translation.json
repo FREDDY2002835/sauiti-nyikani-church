@@ -19,11 +19,11 @@
     "services": {
       "title": "Nyakati za Ibada",
       "sunday": "Ibada ya Jumapili",
-      "sundayTime": "Saa 3:00 na Saa 5:00 Asubuhi",
-      "wednesday": "Funzo la Biblia la Jumatano",
-      "wednesdayTime": "Saa 12:30 Jioni",
-      "friday": "Mkutano wa Maombi wa Ijumaa",
-      "fridayTime": "Saa 12:30 Jioni"
+      "sundayTime": "Saa 3:00 hadi Saa 5:30 Asubuhi",
+      "tuesday": "Ibada ya Jumainne",
+      "tuesdayTime": "17:00 to 18:00 PM",
+      "saturday": "Maombi ya Kanisa ya jumamosi",
+      "saturdayTime": "9h00 à 11h30"
     },
     "verse": {
       "text": "Kwa maana walipo wawili au watatu wamekusanyika kwa jina langu, nami nipo papo hapo katikati yao.",
@@ -33,7 +33,7 @@
   "about": {
     "badge": "Kuhusu Kanisa Letu",
     "title": "Historia Yetu",
-    "intro": "Kanisa la Sauti Nyikani ni sehemu ya familia ya Evangelical Mission Church, lililojikita katika Neno la Mungu na kujitolea kujenga jamii inayomlenga Kristo huko Mubende na kwingineko.",
+    "intro": "Kanisa la Sauti Nyikani ni sehemu ya familia ya Evangelical Mission Church, lililojikita katika Neno la Mungu na kujitolea kujenga jamii inayomlenga Kristo huko Uganda na kwingineko.",
     "mission": {
       "title": "Dhamira Yetu",
       "text": "Kuhubiri Injili ya Yesu Kristo, kuwafundisha waumini, na kuitumikia jamii yetu kwa upendo na huruma."

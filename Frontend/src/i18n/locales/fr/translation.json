@@ -19,11 +19,11 @@
     "services": {
       "title": "Horaires des Cultes",
       "sunday": "Culte du Dimanche",
-      "sundayTime": "9h00 et 11h00",
-      "wednesday": "Étude Biblique du Mercredi",
-      "wednesdayTime": "18h30",
-      "friday": "Réunion de Prière du Vendredi",
-      "fridayTime": "18h30"
+      "sundayTime": "9h00 à 11h30",
+      "tuesday": "Culte du Soir du Mardi",
+      "tuesdayTime": "17:00 à 18:00 PM",
+      "saturday": "Prière du Samedi",
+      "saturdayTime": "9h00 à 11h30"
     },
     "verse": {
       "text": "Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d'eux.",
@@ -33,7 +33,7 @@
   "about": {
     "badge": "À Propos de Notre Église",
     "title": "Notre Histoire",
-    "intro": "L'Église Sauiti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu et engagée à bâtir une communauté centrée sur Christ à Mubende et au-delà.",
+    "intro": "L'Église Sauiti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu et engagée à bâtir une communauté centrée sur Christ en Ouganda et au-delà.",
     "mission": {
       "title": "Notre Mission",
       "text": "Proclamer l'Évangile de Jésus-Christ, faire des disciples et servir notre communauté avec amour et compassion."

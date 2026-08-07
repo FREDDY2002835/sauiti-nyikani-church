@@ -19,11 +19,11 @@
     "services": {
       "title": "Service Times",
       "sunday": "Sunday Worship",
-      "sundayTime": "9:00 AM & 11:00 AM",
-      "wednesday": "Wednesday Bible Study",
-      "wednesdayTime": "6:30 PM",
-      "friday": "Friday Prayer Meeting",
-      "fridayTime": "6:30 PM"
+      "sundayTime": "9:00 AM to 11:30 AM",
+      "tuesday": "Tuesday Evening Service",
+      "tuesdayTime": "17:00 to 18:00 PM",
+      "saturday": "Saturday Prayer",
+      "saturdayTime": "9h00 to 11h30 AM"
     },
     "verse": {
       "text": "For where two or three gather in my name, there am I with them.",
@@ -33,7 +33,7 @@
   "about": {
     "badge": "About Our Church",
     "title": "Our Story",
-    "intro": "Sauiti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Mubende and beyond.",
+    "intro": "Sauiti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Uganda and beyond.",
     "mission": {
       "title": "Our Mission",
       "text": "To proclaim the Gospel of Jesus Christ, disciple believers, and serve our community with love and compassion."

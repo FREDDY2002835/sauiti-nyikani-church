@@ -10,12 +10,12 @@ const Hero = () => {
       time: t("hero.services.sundayTime"),
     },
     {
-      title: t("hero.services.wednesday"),
-      time: t("hero.services.wednesdayTime"),
+      title: t("hero.services.tuesday"),
+      time: t("hero.services.tuesdayTime"),
     },
     {
-      title: t("hero.services.friday"),
-      time: t("hero.services.fridayTime"),
+      title: t("hero.services.saturday"),
+      time: t("hero.services.saturdayTime"),
     },
   ];
 
