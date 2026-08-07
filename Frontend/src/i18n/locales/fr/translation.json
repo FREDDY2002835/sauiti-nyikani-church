@@ -29,5 +29,196 @@
       "text": "Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d'eux.",
       "reference": "Matthieu 18:20"
     }
+  },
+  "about": {
+    "badge": "À Propos de Notre Église",
+    "title": "Notre Histoire",
+    "intro": "L'Église Sauiti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu et engagée à bâtir une communauté centrée sur Christ à Mubende et au-delà.",
+    "mission": {
+      "title": "Notre Mission",
+      "text": "Proclamer l'Évangile de Jésus-Christ, faire des disciples et servir notre communauté avec amour et compassion."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "text": "Une église où chaque génération grandit dans la foi, et où chaque voix porte l'Évangile aux nations."
+    },
+    "values": {
+      "title": "Ce Que Nous Croyons",
+      "items": [
+        {
+          "title": "La Bible",
+          "desc": "Nous croyons que la Bible est la Parole de Dieu inspirée et faisant autorité."
+        },
+        {
+          "title": "Le Salut",
+          "desc": "Nous croyons que le salut est par grâce, par la foi en Jésus-Christ seul."
+        },
+        {
+          "title": "La Communauté",
+          "desc": "Nous croyons que l'église est une famille appelée à s'aimer et à se servir mutuellement."
+        },
+        {
+          "title": "La Mission",
+          "desc": "Nous croyons que chaque croyant est appelé à partager l'Évangile localement et mondialement."
+        }
+      ]
+    },
+    "leadership": {
+      "title": "Notre Direction",
+      "text": "Notre équipe pastorale s'engage à guider cette congrégation avec sagesse, humilité et un profond amour pour le peuple de Dieu."
+    }
+  },
+  "ministries": {
+    "badge": "Impliquez-vous",
+    "title": "Nos Ministères",
+    "subtitle": "Il y a une place pour vous appartenir, grandir et servir.",
+    "list": [
+      {
+        "name": "Ministère des Enfants",
+        "desc": "Nourrir les jeunes cœurs de vérité biblique à travers chants, histoires et jeux."
+      },
+      {
+        "name": "Ministère de la Jeunesse",
+        "desc": "Équiper les adolescents et jeunes adultes à marcher avec audace avec Christ."
+      },
+      {
+        "name": "Communion des Femmes",
+        "desc": "Une sororité de prière, de discipulat et de soutien mutuel."
+      },
+      {
+        "name": "Communion des Hommes",
+        "desc": "Former des hommes d'intégrité, de foi et de leadership pieux."
+      },
+      {
+        "name": "Chorale et Louange",
+        "desc": "Conduire la congrégation dans une louange et une adoration sincères."
+      },
+      {
+        "name": "Évangélisation et Missions",
+        "desc": "Partager l'amour de Christ par le service dans notre communauté et au-delà."
+      }
+    ]
+  },
+  "sermons": {
+    "badge": "Prédications",
+    "title": "Messages Récents",
+    "subtitle": "Rattrapez la Parole prêchée à l'Église Sauiti Nyikani.",
+    "watchAll": "Voir Toutes les Prédications",
+    "list": [
+      {
+        "title": "Marcher par la Foi",
+        "speaker": "Pasteur John Mukasa",
+        "date": "27 juillet 2026",
+        "summary": "Un message sur la confiance en Dieu à travers les saisons d'incertitude."
+      },
+      {
+        "title": "Le Pouvoir de la Prière",
+        "speaker": "Pasteur John Mukasa",
+        "date": "20 juillet 2026",
+        "summary": "Explorer comment la prière transforme la marche quotidienne du croyant."
+      },
+      {
+        "title": "Enracinés dans l'Amour",
+        "speaker": "Ancienne Grace Nabirye",
+        "date": "13 juillet 2026",
+        "summary": "Comprendre ce que signifie demeurer dans l'amour de Christ."
+      }
+    ]
+  },
+  "events": {
+    "badge": "Ce Qui Se Passe",
+    "title": "Événements à Venir",
+    "subtitle": "Rejoignez-nous pour adorer, apprendre et servir ensemble.",
+    "list": [
+      {
+        "title": "Culte du Dimanche",
+        "date": "Chaque dimanche",
+        "time": "9h00 et 11h00",
+        "location": "Sanctuaire Principal",
+        "desc": "Rejoignez-nous pour un temps de louange, d'enseignement et de communion."
+      },
+      {
+        "title": "Conférence de Jeunesse",
+        "date": "22 août 2026",
+        "time": "14h00",
+        "location": "Salle de l'Église",
+        "desc": "Une journée d'adoration et d'enseignement pour adolescents et jeunes adultes."
+      },
+      {
+        "title": "Évangélisation Communautaire",
+        "date": "5 septembre 2026",
+        "time": "8h00",
+        "location": "Centre-ville de Mubende",
+        "desc": "Servir nos voisins par la distribution de nourriture et la prière."
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Moments",
+    "title": "Galerie de l'Église",
+    "subtitle": "Aperçus de la vie et du culte à l'Église Sauiti Nyikani.",
+    "comingSoon": "Plus de photos bientôt disponibles."
+  },
+  "giving": {
+    "badge": "Don",
+    "title": "Soutenir le Ministère",
+    "subtitle": "Votre générosité nous aide à répandre l'Évangile et à servir notre communauté.",
+    "intro": "« Que chacun donne comme il l'a résolu en son cœur, sans regret et sans contrainte, car Dieu aime celui qui donne avec joie. » — 2 Corinthiens 9:7",
+    "methods": {
+      "title": "Moyens de Donner",
+      "bank": {
+        "title": "Virement Bancaire",
+        "details": "Coordonnées bancaires disponibles au bureau de l'église."
+      },
+      "mobile": {
+        "title": "Mobile Money",
+        "details": "Contactez le bureau de l'église pour les instructions de don par mobile money."
+      },
+      "inPerson": {
+        "title": "En Personne",
+        "details": "Donnez lors de l'offrande de tout culte dominical."
+      }
+    },
+    "thankyou": "Merci de vous associer à nous dans le ministère."
+  },
+  "prayer": {
+    "badge": "Prière",
+    "title": "Demandes de Prière",
+    "subtitle": "Nous serions honorés de prier avec vous. Partagez votre demande ci-dessous.",
+    "form": {
+      "name": "Nom Complet",
+      "email": "Adresse E-mail",
+      "request": "Votre Demande de Prière",
+      "submit": "Envoyer la Demande"
+    },
+    "note": "Toutes les demandes restent confidentielles et ne sont partagées qu'avec notre équipe de prière."
+  },
+  "contact": {
+    "badge": "Contactez-Nous",
+    "title": "Entrer en Contact",
+    "subtitle": "Nous aimerions avoir de vos nouvelles.",
+    "info": {
+      "title": "Informations de Contact",
+      "address": "B.P. 210347, Mubende, Ouganda",
+      "phone": "Téléphone : disponible au bureau de l'église",
+      "email": "E-mail : disponible au bureau de l'église"
+    },
+    "form": {
+      "name": "Nom Complet",
+      "email": "Adresse E-mail",
+      "message": "Votre Message",
+      "submit": "Envoyer le Message",
+      "sent": "Merci ! Votre message a été reçu."
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "theme": "Apparence",
+    "language": "Langue"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "La page que vous recherchez n'existe pas.",
+    "backHome": "Retour à l'Accueil"
   }
 }

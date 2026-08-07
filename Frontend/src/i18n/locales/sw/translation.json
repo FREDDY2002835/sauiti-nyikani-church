@@ -29,5 +29,196 @@
       "text": "Kwa maana walipo wawili au watatu wamekusanyika kwa jina langu, nami nipo papo hapo katikati yao.",
       "reference": "Mathayo 18:20"
     }
+  },
+  "about": {
+    "badge": "Kuhusu Kanisa Letu",
+    "title": "Historia Yetu",
+    "intro": "Kanisa la Sauti Nyikani ni sehemu ya familia ya Evangelical Mission Church, lililojikita katika Neno la Mungu na kujitolea kujenga jamii inayomlenga Kristo huko Mubende na kwingineko.",
+    "mission": {
+      "title": "Dhamira Yetu",
+      "text": "Kuhubiri Injili ya Yesu Kristo, kuwafundisha waumini, na kuitumikia jamii yetu kwa upendo na huruma."
+    },
+    "vision": {
+      "title": "Maono Yetu",
+      "text": "Kanisa ambalo kila kizazi kinakua katika imani, na kila sauti inabeba Injili kwa mataifa."
+    },
+    "values": {
+      "title": "Tunachoamini",
+      "items": [
+        {
+          "title": "Biblia",
+          "desc": "Tunaamini Biblia ni Neno la Mungu lililoongozwa na lenye mamlaka."
+        },
+        {
+          "title": "Wokovu",
+          "desc": "Tunaamini wokovu ni kwa neema kupitia imani katika Yesu Kristo pekee."
+        },
+        {
+          "title": "Ushirika",
+          "desc": "Tunaamini kanisa ni familia iliyoitwa kupendana na kutumikiana."
+        },
+        {
+          "title": "Utume",
+          "desc": "Tunaamini kila muumini ameitwa kushiriki Injili kwa jamii na mataifa."
+        }
+      ]
+    },
+    "leadership": {
+      "title": "Uongozi Wetu",
+      "text": "Timu yetu ya kichungaji imejitolea kuchunga kutaniko hili kwa hekima, unyenyekevu, na upendo mkubwa kwa watu wa Mungu."
+    }
+  },
+  "ministries": {
+    "badge": "Jiunge Nasi",
+    "title": "Huduma Zetu",
+    "subtitle": "Kuna nafasi kwa ajili yako kujiunga, kukua, na kutumika.",
+    "list": [
+      {
+        "name": "Huduma ya Watoto",
+        "desc": "Kulea mioyo michanga kwa kweli za Kibiblia kupitia nyimbo, hadithi na michezo."
+      },
+      {
+        "name": "Huduma ya Vijana",
+        "desc": "Kuwawezesha vijana kutembea kwa ujasiri pamoja na Kristo."
+      },
+      {
+        "name": "Ushirika wa Wanawake",
+        "desc": "Undugu wa maombi, ufundishaji, na msaada wa pamoja."
+      },
+      {
+        "name": "Ushirika wa Wanaume",
+        "desc": "Kujenga wanaume wenye uadilifu, imani, na uongozi wa kimungu."
+      },
+      {
+        "name": "Kwaya na Ibada",
+        "desc": "Kuongoza kutaniko katika sifa na ibada ya moyoni."
+      },
+      {
+        "name": "Uinjilisti na Utume",
+        "desc": "Kushiriki upendo wa Kristo kwa huduma katika jamii yetu na kwingineko."
+      }
+    ]
+  },
+  "sermons": {
+    "badge": "Mahubiri",
+    "title": "Mahubiri ya Hivi Karibuni",
+    "subtitle": "Sikiliza Neno lililohubiriwa katika Kanisa la Sauti Nyikani.",
+    "watchAll": "Tazama Mahubiri Yote",
+    "list": [
+      {
+        "title": "Kutembea kwa Imani",
+        "speaker": "Mchungaji John Mukasa",
+        "date": "Julai 27, 2026",
+        "summary": "Ujumbe kuhusu kumtumaini Mungu katika nyakati za kutokuwa na uhakika."
+      },
+      {
+        "title": "Nguvu ya Maombi",
+        "speaker": "Mchungaji John Mukasa",
+        "date": "Julai 20, 2026",
+        "summary": "Kuchunguza jinsi maombi yanavyobadilisha maisha ya kila siku ya muumini."
+      },
+      {
+        "title": "Kuwa na Mizizi katika Upendo",
+        "speaker": "Mzee Grace Nabirye",
+        "date": "Julai 13, 2026",
+        "summary": "Kuelewa maana ya kukaa katika upendo wa Kristo."
+      }
+    ]
+  },
+  "events": {
+    "badge": "Kinachoendelea",
+    "title": "Matukio Yanayokuja",
+    "subtitle": "Jiunge nasi tunapoabudu, kujifunza na kutumika pamoja.",
+    "list": [
+      {
+        "title": "Ibada ya Jumapili",
+        "date": "Kila Jumapili",
+        "time": "Saa 3:00 na Saa 5:00 Asubuhi",
+        "location": "Ukumbi Mkuu",
+        "desc": "Jiunge nasi kwa wakati wa sifa, mafundisho, na ushirika."
+      },
+      {
+        "title": "Mkutano wa Vijana",
+        "date": "Agosti 22, 2026",
+        "time": "Saa 8:00 Mchana",
+        "location": "Jumba la Kanisa",
+        "desc": "Siku ya ibada na mafundisho kwa vijana."
+      },
+      {
+        "title": "Uinjilisti wa Jamii",
+        "date": "Septemba 5, 2026",
+        "time": "Saa 2:00 Asubuhi",
+        "location": "Katikati ya Mji wa Mubende",
+        "desc": "Kuwatumikia majirani wetu kupitia ugawaji wa chakula na maombi."
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Kumbukumbu",
+    "title": "Picha za Kanisa",
+    "subtitle": "Mwonekano wa maisha na ibada katika Kanisa la Sauti Nyikani.",
+    "comingSoon": "Picha zaidi zinakuja hivi karibuni."
+  },
+  "giving": {
+    "badge": "Sadaka",
+    "title": "Saidia Huduma",
+    "subtitle": "Ukarimu wako unatusaidia kueneza Injili na kuitumikia jamii yetu.",
+    "intro": "\"Kila mtu na atoe kama alivyokusudia moyoni mwake, si kwa huzuni wala kwa lazima; kwa maana Mungu humpenda yeye achangaye kwa moyo wa ukunjufu.\" — 2 Wakorintho 9:7",
+    "methods": {
+      "title": "Njia za Kutoa",
+      "bank": {
+        "title": "Uhamisho wa Benki",
+        "details": "Maelezo ya akaunti yanapatikana ofisini kwa kanisa."
+      },
+      "mobile": {
+        "title": "Pesa za Simu",
+        "details": "Wasiliana na ofisi ya kanisa kwa maelekezo ya kutoa kupitia pesa za simu."
+      },
+      "inPerson": {
+        "title": "Ana kwa Ana",
+        "details": "Toa wakati wa sadaka katika ibada yoyote ya Jumapili."
+      }
+    },
+    "thankyou": "Asante kwa kushirikiana nasi katika huduma."
+  },
+  "prayer": {
+    "badge": "Maombi",
+    "title": "Maombi ya Uombezi",
+    "subtitle": "Tutafurahi kuombea pamoja nawe. Shiriki ombi lako hapa chini.",
+    "form": {
+      "name": "Jina Kamili",
+      "email": "Anwani ya Barua Pepe",
+      "request": "Ombi Lako la Maombi",
+      "submit": "Wasilisha Ombi"
+    },
+    "note": "Maombi yote yanawekwa siri na kushirikiwa tu na timu yetu ya maombi."
+  },
+  "contact": {
+    "badge": "Wasiliana Nasi",
+    "title": "Wasiliana Nasi",
+    "subtitle": "Tungependa kusikia kutoka kwako.",
+    "info": {
+      "title": "Taarifa za Mawasiliano",
+      "address": "S.L.P 210347, Mubende, Uganda",
+      "phone": "Simu: Inapatikana ofisini kwa kanisa",
+      "email": "Barua Pepe: Inapatikana ofisini kwa kanisa"
+    },
+    "form": {
+      "name": "Jina Kamili",
+      "email": "Anwani ya Barua Pepe",
+      "message": "Ujumbe Wako",
+      "submit": "Tuma Ujumbe",
+      "sent": "Asante! Ujumbe wako umepokelewa."
+    }
+  },
+  "settings": {
+    "title": "Mipangilio",
+    "theme": "Muonekano",
+    "language": "Lugha"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Ukurasa unaoutafuta haupo.",
+    "backHome": "Rudi Nyumbani"
   }
 }

@@ -29,5 +29,196 @@
       "text": "For where two or three gather in my name, there am I with them.",
       "reference": "Matthew 18:20"
     }
+  },
+  "about": {
+    "badge": "About Our Church",
+    "title": "Our Story",
+    "intro": "Sauiti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Mubende and beyond.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To proclaim the Gospel of Jesus Christ, disciple believers, and serve our community with love and compassion."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "A church where every generation grows in faith, and every voice carries the Gospel to the nations."
+    },
+    "values": {
+      "title": "What We Believe",
+      "items": [
+        {
+          "title": "The Bible",
+          "desc": "We believe the Bible is the inspired, authoritative Word of God."
+        },
+        {
+          "title": "Salvation",
+          "desc": "We believe salvation is by grace through faith in Jesus Christ alone."
+        },
+        {
+          "title": "Community",
+          "desc": "We believe the church is a family called to love and serve one another."
+        },
+        {
+          "title": "Mission",
+          "desc": "We believe every believer is called to share the Gospel locally and globally."
+        }
+      ]
+    },
+    "leadership": {
+      "title": "Our Leadership",
+      "text": "Our pastoral team is committed to shepherding this congregation with wisdom, humility, and a deep love for God's people."
+    }
+  },
+  "ministries": {
+    "badge": "Get Involved",
+    "title": "Our Ministries",
+    "subtitle": "There's a place for you to belong, grow, and serve.",
+    "list": [
+      {
+        "name": "Children's Ministry",
+        "desc": "Nurturing young hearts with biblical truth through songs, stories, and play."
+      },
+      {
+        "name": "Youth Ministry",
+        "desc": "Equipping teenagers and young adults to walk boldly with Christ."
+      },
+      {
+        "name": "Women's Fellowship",
+        "desc": "A sisterhood of prayer, discipleship, and mutual support."
+      },
+      {
+        "name": "Men's Fellowship",
+        "desc": "Building men of integrity, faith, and godly leadership."
+      },
+      {
+        "name": "Choir & Worship",
+        "desc": "Leading the congregation in heartfelt praise and worship."
+      },
+      {
+        "name": "Outreach & Missions",
+        "desc": "Sharing Christ's love through service in our community and beyond."
+      }
+    ]
+  },
+  "sermons": {
+    "badge": "Sermons",
+    "title": "Recent Messages",
+    "subtitle": "Catch up on the Word preached at Sauiti Nyikani Church.",
+    "watchAll": "View All Sermons",
+    "list": [
+      {
+        "title": "Walking in Faith",
+        "speaker": "Pastor John Mukasa",
+        "date": "July 27, 2026",
+        "summary": "A message on trusting God through seasons of uncertainty."
+      },
+      {
+        "title": "The Power of Prayer",
+        "speaker": "Pastor John Mukasa",
+        "date": "July 20, 2026",
+        "summary": "Exploring how prayer transforms the believer's daily walk."
+      },
+      {
+        "title": "Rooted in Love",
+        "speaker": "Elder Grace Nabirye",
+        "date": "July 13, 2026",
+        "summary": "Understanding what it means to abide in Christ's love."
+      }
+    ]
+  },
+  "events": {
+    "badge": "What's Happening",
+    "title": "Upcoming Events",
+    "subtitle": "Join us as we worship, learn, and serve together.",
+    "list": [
+      {
+        "title": "Sunday Worship Service",
+        "date": "Every Sunday",
+        "time": "9:00 AM & 11:00 AM",
+        "location": "Main Sanctuary",
+        "desc": "Join us for a time of praise, teaching, and fellowship."
+      },
+      {
+        "title": "Youth Conference",
+        "date": "August 22, 2026",
+        "time": "2:00 PM",
+        "location": "Church Hall",
+        "desc": "A day of worship and teaching for teens and young adults."
+      },
+      {
+        "title": "Community Outreach",
+        "date": "September 5, 2026",
+        "time": "8:00 AM",
+        "location": "Mubende Town Center",
+        "desc": "Serving our neighbors through food distribution and prayer."
+      }
+    ]
+  },
+  "gallery": {
+    "badge": "Moments",
+    "title": "Church Gallery",
+    "subtitle": "Glimpses of life and worship at Sauiti Nyikani Church.",
+    "comingSoon": "More photos coming soon."
+  },
+  "giving": {
+    "badge": "Giving",
+    "title": "Support the Ministry",
+    "subtitle": "Your generosity helps us spread the Gospel and serve our community.",
+    "intro": "\"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.\" — 2 Corinthians 9:7",
+    "methods": {
+      "title": "Ways to Give",
+      "bank": {
+        "title": "Bank Transfer",
+        "details": "Account details available at the church office."
+      },
+      "mobile": {
+        "title": "Mobile Money",
+        "details": "Contact the church office for mobile money giving instructions."
+      },
+      "inPerson": {
+        "title": "In Person",
+        "details": "Give during any Sunday service offering."
+      }
+    },
+    "thankyou": "Thank you for partnering with us in ministry."
+  },
+  "prayer": {
+    "badge": "Prayer",
+    "title": "Prayer Requests",
+    "subtitle": "We would be honored to pray with you. Share your request below.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "request": "Your Prayer Request",
+      "submit": "Submit Request"
+    },
+    "note": "All requests are kept confidential and shared only with our prayer team."
+  },
+  "contact": {
+    "badge": "Contact Us",
+    "title": "Get in Touch",
+    "subtitle": "We'd love to hear from you.",
+    "info": {
+      "title": "Contact Information",
+      "address": "P.O. Box 210347, Mubende, Uganda",
+      "phone": "Phone: Available at church office",
+      "email": "Email: Available at church office"
+    },
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "sent": "Thank you! Your message has been received."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Appearance",
+    "language": "Language"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "The page you're looking for doesn't exist.",
+    "backHome": "Back to Home"
   }
 }
