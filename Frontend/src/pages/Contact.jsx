@@ -7,14 +7,32 @@ const Contact = () => {
   const { t } = useTranslation();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Server responded with an error");
+      }
+
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -99,6 +117,12 @@ const Contact = () => {
           {submitted && (
             <p className="text-blue-300 text-sm">
               {t("contact.form.sent")}
+            </p>
+          )}
+
+          {error && (
+            <p className="text-red-400 text-sm">
+              {error}
             </p>
           )}
         </form>
