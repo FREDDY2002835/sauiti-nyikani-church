@@ -29,7 +29,7 @@ const Gallery = () => {
           >
             <img
               src={churchImg}
-              alt="Sauiti Nyikani Church"
+              alt="Sauti Nyikani Church"
               className="w-full h-full object-cover hover:scale-105 transition duration-300"
             />
           </div>

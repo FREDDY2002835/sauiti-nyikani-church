@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import { initDb } from "./config/db.js";
 import contactRoutes from "./routes/contact.js";
 import prayerRoutes from "./routes/prayer.js";
+import ministriesRoutes from "./routes/ministries.js";
 
 dotenv.config();
 
@@ -32,10 +33,11 @@ app.use(express.json());
 // any request to /api/prayer gets handled by prayerRoutes.
 app.use("/api/contact", contactRoutes);
 app.use("/api/prayer", prayerRoutes);
+app.use("/api/ministries", ministriesRoutes);
 
 // Simple health check - visiting this URL confirms the server is alive.
 app.get("/", (req, res) => {
-  res.json({ status: "Sauiti Nyikani backend is running." });
+  res.json({ status: "Sauti Nyikani backend is running." });
 });
 
 // --- Start the server ---

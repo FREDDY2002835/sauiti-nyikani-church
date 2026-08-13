@@ -38,6 +38,8 @@ const changeLanguage = (lang) => {
   { name: t("nav.sermons"), path: "/sermons" },
   { name: t("nav.events"), path: "/events" },
   { name: t("nav.gallery"), path: "/gallery" },
+  { name: t("nav.giving"), path: "/giving" },
+  { name: t("nav.prayer"), path: "/prayer" },
   { name: t("nav.contact"), path: "/contact" },
 ];
   return (
@@ -58,13 +60,13 @@ const changeLanguage = (lang) => {
         >
           <img
             src={logo}
-            alt="Sauiti Nyikani Church logo"
+            alt="Sauti Nyikani Church logo"
             className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
           />
 
           <div>
             <h1 className="text-base md:text-2xl font-bold text-white">
-              Sauiti Nyikani
+              Sauti Nyikani
             </h1>
 
             <p className="hidden md:block text-xs text-slate-300">

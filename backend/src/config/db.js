@@ -43,5 +43,97 @@ export const initDb = async () => {
     );
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministries (
+      id SERIAL PRIMARY KEY,
+      name_en TEXT NOT NULL,
+      description_en TEXT NOT NULL,
+      name_fr TEXT NOT NULL,
+      description_fr TEXT NOT NULL,
+      name_sw TEXT NOT NULL,
+      description_sw TEXT NOT NULL,
+      sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  // --- Migration for anyone who already ran the OLD single-language
+  // version of this table (just "name" and "description" columns).
+  // We check if that old column still exists, and if so, upgrade the
+  // table in place instead of losing your existing data.
+  const oldColumn = await pool.query(`
+    SELECT column_name FROM information_schema.columns
+    WHERE table_name = 'ministries' AND column_name = 'name'
+  `);
+
+  if (oldColumn.rows.length > 0) {
+    console.log("Upgrading ministries table for multi-language support...");
+
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS name_en TEXT`);
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS description_en TEXT`);
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS name_fr TEXT`);
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS description_fr TEXT`);
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS name_sw TEXT`);
+    await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS description_sw TEXT`);
+
+    // Copy the old single-language text into the "en" columns so nothing is lost.
+    await pool.query(`
+      UPDATE ministries SET name_en = name, description_en = description
+      WHERE name_en IS NULL
+    `);
+
+    // Fill in French/Swahili for the 6 starter ministries specifically
+    // (anything you added yourself will just show English until you
+    // edit it in the admin page and add the other languages).
+    const translations = [
+      ["Children's Ministry", "Ministère des Enfants", "Nourrir les jeunes cœurs de vérité biblique à travers chants, histoires et jeux.", "Huduma ya Watoto", "Kulea mioyo michanga kwa kweli za Kibiblia kupitia nyimbo, hadithi na michezo."],
+      ["Youth Ministry", "Ministère de la Jeunesse", "Équiper les adolescents et jeunes adultes à marcher avec audace avec Christ.", "Huduma ya Vijana", "Kuwawezesha vijana kutembea kwa ujasiri pamoja na Kristo."],
+      ["Women's Fellowship", "Communion des Femmes", "Une sororité de prière, de discipulat et de soutien mutuel.", "Ushirika wa Wanawake", "Undugu wa maombi, ufundishaji, na msaada wa pamoja."],
+      ["Men's Fellowship", "Communion des Hommes", "Former des hommes d'intégrité, de foi et de leadership pieux.", "Ushirika wa Wanaume", "Kujenga wanaume wenye uadilifu, imani, na uongozi wa kimungu."],
+      ["Choir & Worship", "Chorale et Louange", "Conduire la congrégation dans une louange et une adoration sincères.", "Kwaya na Ibada", "Kuongoza kutaniko katika sifa na ibada ya moyoni."],
+      ["Outreach & Missions", "Évangélisation et Missions", "Partager l'amour de Christ par le service dans notre communauté et au-delà.", "Uinjilisti na Utume", "Kushiriki upendo wa Kristo kwa huduma katika jamii yetu na kwingineko."],
+    ];
+
+    for (const [nameEn, nameFr, descFr, nameSw, descSw] of translations) {
+      await pool.query(
+        `UPDATE ministries
+         SET name_fr = $2, description_fr = $3, name_sw = $4, description_sw = $5
+         WHERE name_en = $1 AND name_fr IS NULL`,
+        [nameEn, nameFr, descFr, nameSw, descSw]
+      );
+    }
+
+    // Anything still missing fr/sw (a ministry you added yourself, for
+    // example) just falls back to a copy of the English text for now.
+    await pool.query(`
+      UPDATE ministries SET name_fr = name_en WHERE name_fr IS NULL;
+      UPDATE ministries SET description_fr = description_en WHERE description_fr IS NULL;
+      UPDATE ministries SET name_sw = name_en WHERE name_sw IS NULL;
+      UPDATE ministries SET description_sw = description_en WHERE description_sw IS NULL;
+    `);
+
+    await pool.query(`ALTER TABLE ministries DROP COLUMN IF EXISTS name`);
+    await pool.query(`ALTER TABLE ministries DROP COLUMN IF EXISTS description`);
+
+    console.log("Ministries table upgraded.");
+  }
+
+  // Seed the ministries table with starter content, but ONLY if it's
+  // completely empty - this runs every time the server starts, so we
+  // don't want to re-add these every single time.
+  const { rows } = await pool.query("SELECT COUNT(*) FROM ministries");
+  if (parseInt(rows[0].count, 10) === 0) {
+    await pool.query(`
+      INSERT INTO ministries (name_en, description_en, name_fr, description_fr, name_sw, description_sw, sort_order) VALUES
+      ('Children''s Ministry', 'Nurturing young hearts with biblical truth through songs, stories, and play.', 'Ministère des Enfants', 'Nourrir les jeunes cœurs de vérité biblique à travers chants, histoires et jeux.', 'Huduma ya Watoto', 'Kulea mioyo michanga kwa kweli za Kibiblia kupitia nyimbo, hadithi na michezo.', 1),
+      ('Youth Ministry', 'Equipping teenagers and young adults to walk boldly with Christ.', 'Ministère de la Jeunesse', 'Équiper les adolescents et jeunes adultes à marcher avec audace avec Christ.', 'Huduma ya Vijana', 'Kuwawezesha vijana kutembea kwa ujasiri pamoja na Kristo.', 2),
+      ('Women''s Fellowship', 'A sisterhood of prayer, discipleship, and mutual support.', 'Communion des Femmes', 'Une sororité de prière, de discipulat et de soutien mutuel.', 'Ushirika wa Wanawake', 'Undugu wa maombi, ufundishaji, na msaada wa pamoja.', 3),
+      ('Men''s Fellowship', 'Building men of integrity, faith, and godly leadership.', 'Communion des Hommes', 'Former des hommes d''intégrité, de foi et de leadership pieux.', 'Ushirika wa Wanaume', 'Kujenga wanaume wenye uadilifu, imani, na uongozi wa kimungu.', 4),
+      ('Choir & Worship', 'Leading the congregation in heartfelt praise and worship.', 'Chorale et Louange', 'Conduire la congrégation dans une louange et une adoration sincères.', 'Kwaya na Ibada', 'Kuongoza kutaniko katika sifa na ibada ya moyoni.', 5),
+      ('Outreach & Missions', 'Sharing Christ''s love through service in our community and beyond.', 'Évangélisation et Missions', 'Partager l''amour de Christ par le service dans notre communauté et au-delà.', 'Uinjilisti na Utume', 'Kushiriki upendo wa Kristo kwa huduma katika jamii yetu na kwingineko.', 6)
+    `);
+    console.log("Seeded default ministries.");
+  }
+
   console.log("Database tables ready.");
 };

@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Ministries from "../pages/Ministries";
+import MinistryDetail from "../pages/MinistryDetail";
+import AdminMinistries from "../pages/AdminMinistries";
 import Sermons from "../pages/Sermons";
 import Events from "../pages/Events";
 import Gallery from "../pages/Gallery";
@@ -18,6 +20,8 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/ministries" element={<Ministries />} />
+      <Route path="/ministries/:id" element={<MinistryDetail />} />
+      <Route path="/admin/ministries" element={<AdminMinistries />} />
       <Route path="/sermons" element={<Sermons />} />
       <Route path="/events" element={<Events />} />
       <Route path="/gallery" element={<Gallery />} />

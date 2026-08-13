@@ -7,7 +7,9 @@
     "events": "Events",
     "gallery": "Gallery",
     "contact": "Contact",
-    "language": "Language"
+    "language": "Language",
+    "prayer": "Prayer",
+    "giving": "Giving"
   },
   "hero": {
     "badge": "Welcome to Sauti Nyikani Church",
@@ -19,11 +21,11 @@
     "services": {
       "title": "Service Times",
       "sunday": "Sunday Worship",
-      "sundayTime": "9:00 AM to 12:30 AM",
-      "tuesday": "Tuesday Evening Service",
-      "tuesdayTime": "17:00 to 18:00 PM",
-      "saturday": "Saturday Prayer",
-      "saturdayTime": "9h00 to 11h30 AM"
+      "sundayTime": "9:00 AM & 11:00 AM",
+      "wednesday": "Wednesday Bible Study",
+      "wednesdayTime": "6:30 PM",
+      "friday": "Friday Prayer Meeting",
+      "fridayTime": "6:30 PM"
     },
     "verse": {
       "text": "For where two or three gather in my name, there am I with them.",
@@ -33,7 +35,7 @@
   "about": {
     "badge": "About Our Church",
     "title": "Our Story",
-    "intro": "Sauiti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Uganda and beyond.",
+    "intro": "Sauti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Mubende and beyond.",
     "mission": {
       "title": "Our Mission",
       "text": "To proclaim the Gospel of Jesus Christ, disciple believers, and serve our community with love and compassion."
@@ -102,7 +104,7 @@
   "sermons": {
     "badge": "Sermons",
     "title": "Recent Messages",
-    "subtitle": "Catch up on the Word preached at Sauiti Nyikani Church.",
+    "subtitle": "Catch up on the Word preached at Sauti Nyikani Church.",
     "watchAll": "View All Sermons",
     "list": [
       {
@@ -156,7 +158,7 @@
   "gallery": {
     "badge": "Moments",
     "title": "Church Gallery",
-    "subtitle": "Glimpses of life and worship at Sauiti Nyikani Church.",
+    "subtitle": "Glimpses of life and worship at Sauti Nyikani Church.",
     "comingSoon": "More photos coming soon."
   },
   "giving": {

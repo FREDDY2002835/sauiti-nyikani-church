@@ -5,11 +5,11 @@ const Footer = () => {
     <footer className="bg-[#06172B] py-8 text-center">
       <img
         src={logo}
-        alt="Sauiti Nyikani Church logo"
+        alt="Sauti Nyikani Church logo"
         className="w-14 h-14 mx-auto mb-3 rounded-full object-cover"
       />
       <p className="text-sm text-slate-400">
-        © 2026 Sauiti Nyikani Church. All rights reserved.
+        © 2026 Sauti Nyikani Church. All rights reserved.
       </p>
     </footer>
   );
