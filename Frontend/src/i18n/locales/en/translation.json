@@ -68,6 +68,12 @@
     "leadership": {
       "title": "Our Leadership",
       "text": "Our pastoral team is committed to shepherding this congregation with wisdom, humility, and a deep love for God's people."
+    },
+    "bibleCta": {
+      "tag": "Explore Scripture",
+      "title": "Read The Bible",
+      "text": "Dive into God's Word in English, French, or Kiswahili, right here on our website.",
+      "button": "Open The Bible"
     }
   },
   "ministries": {
@@ -222,5 +228,16 @@
     "title": "404",
     "message": "The page you're looking for doesn't exist.",
     "backHome": "Back to Home"
+  },
+  "bible": {
+    "title": "Holy Bible",
+    "subtitle": "Read Scripture in English, French, or Swahili",
+    "chapter": "Chapter",
+    "prevChapter": "Previous chapter",
+    "nextChapter": "Next chapter",
+    "loading": "Loading...",
+    "loadError": "Couldn't load this passage. Please try again.",
+    "notAvailable": "No translation is available for this language yet.",
+    "source": "Scripture text: King James Version, Louis Segond 1910, and Swahili Union Version — all public domain, bundled with this site."
   }
 }

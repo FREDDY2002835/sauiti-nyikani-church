@@ -68,6 +68,12 @@
     "leadership": {
       "title": "Notre Direction",
       "text": "Notre équipe pastorale s'engage à guider cette congrégation avec sagesse, humilité et un profond amour pour le peuple de Dieu."
+    },
+    "bibleCta": {
+      "tag": "Explorer les Écritures",
+      "title": "Lire La Bible",
+      "text": "Plongez dans la Parole de Dieu en anglais, français ou kiswahili, directement sur notre site.",
+      "button": "Ouvrir La Bible"
     }
   },
   "ministries": {
@@ -222,5 +228,16 @@
     "title": "404",
     "message": "La page que vous recherchez n'existe pas.",
     "backHome": "Retour à l'Accueil"
+  },
+  "bible": {
+    "title": "Sainte Bible",
+    "subtitle": "Lisez les Écritures en anglais, français ou swahili",
+    "chapter": "Chapitre",
+    "prevChapter": "Chapitre précédent",
+    "nextChapter": "Chapitre suivant",
+    "loading": "Chargement...",
+    "loadError": "Impossible de charger ce passage. Veuillez réessayer.",
+    "notAvailable": "Aucune traduction n'est encore disponible pour cette langue.",
+    "source": "Texte biblique : King James Version, Louis Segond 1910 et version swahilie — domaine public, intégré à ce site."
   }
 }

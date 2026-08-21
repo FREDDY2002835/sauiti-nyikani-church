@@ -12,6 +12,7 @@ import Giving from "../pages/Giving";
 import Prayer from "../pages/Prayer";
 import Contact from "../pages/Contact";
 import Settings from "../pages/Settings";
+import Bible from "../pages/Bible";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
@@ -29,6 +30,7 @@ const AppRoutes = () => {
       <Route path="/prayer" element={<Prayer />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/bible" element={<Bible />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

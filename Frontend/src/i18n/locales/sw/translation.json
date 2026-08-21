@@ -68,6 +68,12 @@
     "leadership": {
       "title": "Uongozi Wetu",
       "text": "Timu yetu ya kichungaji imejitolea kuchunga kutaniko hili kwa hekima, unyenyekevu, na upendo mkubwa kwa watu wa Mungu."
+    },
+    "bibleCta": {
+      "tag": "Chunguza Maandiko",
+      "title": "Soma Biblia",
+      "text": "Ingia ndani ya Neno la Mungu kwa Kiingereza, Kifaransa, au Kiswahili, hapa hapa kwenye tovuti yetu.",
+      "button": "Fungua Biblia"
     }
   },
   "ministries": {
@@ -222,5 +228,16 @@
     "title": "404",
     "message": "Ukurasa unaoutafuta haupo.",
     "backHome": "Rudi Nyumbani"
+  },
+  "bible": {
+    "title": "Biblia Takatifu",
+    "subtitle": "Soma Maandiko kwa Kiingereza, Kifaransa, au Kiswahili",
+    "chapter": "Sura",
+    "prevChapter": "Sura iliyotangulia",
+    "nextChapter": "Sura inayofuata",
+    "loading": "Inapakia...",
+    "loadError": "Imeshindwa kupakia sehemu hii. Tafadhali jaribu tena.",
+    "notAvailable": "Hakuna tafsiri inayopatikana kwa lugha hii bado.",
+    "source": "Maandiko: King James Version, Louis Segond 1910, na Swahili Union Version — yote ni ya hadhara, yamejumuishwa kwenye tovuti hii."
   }
 }
