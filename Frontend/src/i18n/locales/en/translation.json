@@ -21,11 +21,11 @@
     "services": {
       "title": "Service Times",
       "sunday": "Sunday Worship",
-      "sundayTime": "9:00 AM & 11:00 AM",
-      "wednesday": "Wednesday Bible Study",
-      "wednesdayTime": "6:30 PM",
-      "friday": "Friday Prayer Meeting",
-      "fridayTime": "6:30 PM"
+      "sundayTime": "9:00 AM to 12:30 AM",
+      "tuesday": "Tuesday: Evening Service",
+      "tuesdayTime": "5:00 PM to 6:00 PM",
+      "saturday": "Saturday: Church's Prayer",
+      "saturdayTime": "9:00 AM to 12:00 AM"
     },
     "verse": {
       "text": "For where two or three gather in my name, there am I with them.",

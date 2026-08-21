@@ -10,12 +10,12 @@ const Hero = () => {
       time: t("hero.services.sundayTime"),
     },
     {
-      title: t("hero.services.wednesday"),
-      time: t("hero.services.wednesdayTime"),
+      title: t("hero.services.tuesday"),
+      time: t("hero.services.tuesdayTime"),
     },
     {
-      title: t("hero.services.friday"),
-      time: t("hero.services.fridayTime"),
+      title: t("hero.services.saturday"),
+      time: t("hero.services.saturdayTime"),
     },
   ];
 
@@ -67,18 +67,18 @@ const Hero = () => {
 
           {/* Weekly Services */}
 
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 lg:p-8 max-w-md mx-auto w-full">
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 lg:p-6 max-w-md mx-auto w-full">
 
-            <h2 className="text-xl lg:text-2xl font-bold text-white text-center mb-8">
+            <h2 className="text-xl lg:text-xl font-bold text-white text-center mb-8 lg:mb-6">
               {t("hero.services.title")}
             </h2>
 
-            <div className="space-y-6">
+            <div className="space-y-6 lg:space-y-4">
 
               {services.map((service) => (
                 <div
                   key={service.title}
-                  className="flex justify-between items-center border-b border-white/10 pb-4"
+                  className="flex justify-between items-center border-b border-white/10 pb-4 lg:pb-3"
                 >
                   <div>
 
@@ -99,7 +99,7 @@ const Hero = () => {
 
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/20">
+            <div className="mt-8 lg:mt-6 pt-6 lg:pt-4 border-t border-white/20">
 
               <p className="italic text-slate-300 text-sm leading-7 text-center">
                 "{t("hero.verse.text")}"

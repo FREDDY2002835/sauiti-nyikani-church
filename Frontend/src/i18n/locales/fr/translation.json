@@ -21,11 +21,11 @@
     "services": {
       "title": "Horaires des Cultes",
       "sunday": "Culte du Dimanche",
-      "sundayTime": "9h00 et 11h00",
-      "wednesday": "Étude Biblique du Mercredi",
-      "wednesdayTime": "18h30",
-      "friday": "Réunion de Prière du Vendredi",
-      "fridayTime": "18h30"
+      "sundayTime": "9h00 à 12h30",
+      "tuesday": "Mardi: Culte du Soir",
+      "tuesdayTime": "17h00 à 18h00",
+      "saturday": "Samedi: Prière de l'église",
+      "saturdayTime": "9h00 à 12h00"
     },
     "verse": {
       "text": "Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d'eux.",
