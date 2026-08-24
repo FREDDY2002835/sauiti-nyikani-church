@@ -22,9 +22,9 @@
       "title": "Horaires des Cultes",
       "sunday": "Culte du Dimanche",
       "sundayTime": "9h00 à 12h30",
-      "tuesday": "Mardi: Culte du Soir",
+      "tuesday": "Culte du Soir",
       "tuesdayTime": "17h00 à 18h00",
-      "saturday": "Samedi: Prière de l'église",
+      "saturday": "Prière de l'église",
       "saturdayTime": "9h00 à 12h00"
     },
     "verse": {

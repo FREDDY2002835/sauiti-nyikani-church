@@ -57,6 +57,18 @@ export const initDb = async () => {
     );
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS gallery_images (
+      id SERIAL PRIMARY KEY,
+      image_url TEXT NOT NULL,
+      caption_en TEXT DEFAULT '',
+      caption_fr TEXT DEFAULT '',
+      caption_sw TEXT DEFAULT '',
+      sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   // --- Migration for anyone who already ran the OLD single-language
   // version of this table (just "name" and "description" columns).
   // We check if that old column still exists, and if so, upgrade the

@@ -20,12 +20,12 @@
     "watch": "Tazama Mahubiri",
     "services": {
       "title": "Nyakati za Ibada",
-      "sunday": "Siku ya Mungu: Ibada ya Jumapili",
+      "sunday": "Ibada ya Jumapili",
       "sundayTime": "Saa 9:00 hadi Saa 12:30 Asubuhi",
-      "tuesday": "Siku ya Pili: Ibada ya Jioni",
-      "tuesdayTime": "Saa 17:00 hadi 18h00 Jioni",
-      "saturday": "Siku ya Sita: Mkutano wa Maombi",
-      "saturdayTime": "Saa 9:00 hadi Saa 12:30 Asubuhi"
+      "tuesday": "Ibada ya Jioni",
+      "tuesdayTime": "Saa 12:30 Jioni",
+      "saturday": "Mkutano wa Maombi wa Ijumaa",
+      "saturdayTime": "Saa 12:30 Jioni"
     },
     "verse": {
       "text": "Kwa maana walipo wawili au watatu wamekusanyika kwa jina langu, nami nipo papo hapo katikati yao.",

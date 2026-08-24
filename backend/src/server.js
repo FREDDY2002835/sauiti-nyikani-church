@@ -9,6 +9,7 @@ import { initDb } from "./config/db.js";
 import contactRoutes from "./routes/contact.js";
 import prayerRoutes from "./routes/prayer.js";
 import ministriesRoutes from "./routes/ministries.js";
+import galleryRoutes from "./routes/gallery.js";
 
 dotenv.config();
 
@@ -34,6 +35,11 @@ app.use(express.json());
 app.use("/api/contact", contactRoutes);
 app.use("/api/prayer", prayerRoutes);
 app.use("/api/ministries", ministriesRoutes);
+app.use("/api/gallery", galleryRoutes);
+
+// Uploaded photos live on disk in /uploads - this makes them reachable
+// at http://localhost:5000/uploads/whatever-the-filename-is.jpg
+app.use("/uploads", express.static("uploads"));
 
 // Simple health check - visiting this URL confirms the server is alive.
 app.get("/", (req, res) => {

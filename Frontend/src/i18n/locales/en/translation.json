@@ -22,9 +22,9 @@
       "title": "Service Times",
       "sunday": "Sunday Worship",
       "sundayTime": "9:00 AM to 12:30 AM",
-      "tuesday": "Tuesday: Evening Service",
+      "tuesday": "Evening Service",
       "tuesdayTime": "5:00 PM to 6:00 PM",
-      "saturday": "Saturday: Church's Prayer",
+      "saturday": "Church's Prayer",
       "saturdayTime": "9:00 AM to 12:00 AM"
     },
     "verse": {
