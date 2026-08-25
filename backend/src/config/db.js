@@ -69,6 +69,72 @@ export const initDb = async () => {
     );
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS members (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      whatsapp TEXT DEFAULT '',
+      email TEXT DEFAULT '',
+      address TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS communion_sessions (
+      id SERIAL PRIMARY KEY,
+      session_date DATE NOT NULL,
+      notes TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS communion_attendance (
+      id SERIAL PRIMARY KEY,
+      session_id INTEGER NOT NULL REFERENCES communion_sessions(id) ON DELETE CASCADE,
+      member_name TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS choir_members (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      whatsapp TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS choir_practice_sessions (
+      id SERIAL PRIMARY KEY,
+      session_date DATE NOT NULL,
+      notes TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS choir_attendance (
+      id SERIAL PRIMARY KEY,
+      session_id INTEGER NOT NULL REFERENCES choir_practice_sessions(id) ON DELETE CASCADE,
+      choir_member_id INTEGER NOT NULL REFERENCES choir_members(id) ON DELETE CASCADE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS tithes (
+      id SERIAL PRIMARY KEY,
+      member_name TEXT NOT NULL,
+      amount NUMERIC NOT NULL,
+      payment_date DATE NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   // --- Migration for anyone who already ran the OLD single-language
   // version of this table (just "name" and "description" columns).
   // We check if that old column still exists, and if so, upgrade the

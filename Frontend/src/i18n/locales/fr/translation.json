@@ -239,5 +239,83 @@
     "loadError": "Impossible de charger ce passage. Veuillez réessayer.",
     "notAvailable": "Aucune traduction n'est encore disponible pour cette langue.",
     "source": "Texte biblique : King James Version, Louis Segond 1910 et version swahilie — domaine public, intégré à ce site."
+  },
+  "management": {
+    "title": "Gestion de l'Église",
+    "subtitle": "Gérez les membres, la Sainte Cène, la chorale et les dîmes.",
+    "tabs": {
+      "members": "Membres",
+      "communion": "Sainte Cène",
+      "choir": "Chorale",
+      "tithe": "Dîme"
+    },
+    "members": {
+      "heading": "Membres de l'Église",
+      "addNew": "Ajouter un Membre",
+      "name": "Nom Complet",
+      "whatsapp": "Numéro WhatsApp",
+      "email": "E-mail",
+      "address": "Adresse",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "empty": "Aucun membre ajouté pour le moment.",
+      "confirmDelete": "Supprimer ce membre ?",
+      "chatOnWhatsapp": "Discuter sur WhatsApp"
+    },
+    "communion": {
+      "heading": "Sessions de Sainte Cène",
+      "newSession": "Programmer une Nouvelle Session",
+      "date": "Date",
+      "notes": "Notes (facultatif)",
+      "addSession": "Ajouter la Session",
+      "sessions": "Sessions",
+      "selectSession": "Sélectionnez une session pour gérer la présence",
+      "attendance": "Présence",
+      "addAttendee": "Ajouter un nom",
+      "addPerson": "Ajouter",
+      "noSessions": "Aucune session programmée pour le moment.",
+      "noAttendees": "Personne n'est encore enregistré pour cette session.",
+      "deleteSession": "Supprimer la Session",
+      "confirmDeleteSession": "Supprimer cette session et ses présences ?",
+      "remove": "Retirer"
+    },
+    "choir": {
+      "heading": "Gestion de la Chorale",
+      "rosterTitle": "Liste de la Chorale",
+      "addSinger": "Ajouter un Choriste",
+      "name": "Nom Complet",
+      "whatsapp": "Numéro WhatsApp (facultatif)",
+      "noSingers": "Aucun choriste ajouté pour le moment.",
+      "practicesTitle": "Sessions de Répétition",
+      "newPractice": "Programmer une Nouvelle Répétition",
+      "date": "Date",
+      "notes": "Notes (facultatif)",
+      "addPractice": "Ajouter la Répétition",
+      "noPractices": "Aucune répétition programmée pour le moment.",
+      "selectPractice": "Sélectionnez une répétition pour marquer la présence",
+      "attendance": "Présence",
+      "markPresent": "Marquer Présent",
+      "choose": "Choisissez un choriste...",
+      "noAttendance": "Aucune présence enregistrée pour cette répétition.",
+      "confirmDeleteSinger": "Retirer ce choriste de la liste ?",
+      "confirmDeletePractice": "Supprimer cette répétition et ses présences ?",
+      "remove": "Retirer"
+    },
+    "tithe": {
+      "heading": "Registre des Dîmes",
+      "name": "Nom Complet",
+      "amount": "Montant",
+      "date": "Date",
+      "addRecord": "Ajouter un Enregistrement",
+      "filterMonth": "Mois",
+      "filterYear": "Année",
+      "allMonths": "Tous les Mois",
+      "total": "Total",
+      "noRecords": "Aucun enregistrement de dîme pour cette période.",
+      "confirmDelete": "Supprimer cet enregistrement ?",
+      "delete": "Supprimer"
+    }
   }
 }

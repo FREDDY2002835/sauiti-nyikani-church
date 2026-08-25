@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logo.png";
 
 const Footer = () => {
@@ -11,6 +12,12 @@ const Footer = () => {
       <p className="text-sm text-slate-400">
         © 2026 Sauti Nyikani Church. All rights reserved.
       </p>
+      <Link
+        to="/admin/manage"
+        className="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition"
+      >
+        Manage
+      </Link>
     </footer>
   );
 };

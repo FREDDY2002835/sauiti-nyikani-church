@@ -239,5 +239,83 @@
     "loadError": "Couldn't load this passage. Please try again.",
     "notAvailable": "No translation is available for this language yet.",
     "source": "Scripture text: King James Version, Louis Segond 1910, and Swahili Union Version — all public domain, bundled with this site."
+  },
+  "management": {
+    "title": "Church Management",
+    "subtitle": "Manage members, Holy Communion, choir, and tithes.",
+    "tabs": {
+      "members": "Members",
+      "communion": "Holy Communion",
+      "choir": "Choir",
+      "tithe": "Tithe"
+    },
+    "members": {
+      "heading": "Church Members",
+      "addNew": "Add Member",
+      "name": "Full Name",
+      "whatsapp": "WhatsApp Number",
+      "email": "Email",
+      "address": "Address",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No members added yet.",
+      "confirmDelete": "Delete this member?",
+      "chatOnWhatsapp": "Chat on WhatsApp"
+    },
+    "communion": {
+      "heading": "Holy Communion Sessions",
+      "newSession": "Schedule New Session",
+      "date": "Date",
+      "notes": "Notes (optional)",
+      "addSession": "Add Session",
+      "sessions": "Sessions",
+      "selectSession": "Select a session to manage attendance",
+      "attendance": "Attendance",
+      "addAttendee": "Add a name",
+      "addPerson": "Add",
+      "noSessions": "No sessions scheduled yet.",
+      "noAttendees": "No one recorded yet for this session.",
+      "deleteSession": "Delete Session",
+      "confirmDeleteSession": "Delete this session and its attendance records?",
+      "remove": "Remove"
+    },
+    "choir": {
+      "heading": "Choir Management",
+      "rosterTitle": "Choir Roster",
+      "addSinger": "Add Singer",
+      "name": "Full Name",
+      "whatsapp": "WhatsApp Number (optional)",
+      "noSingers": "No choir members added yet.",
+      "practicesTitle": "Practice Sessions",
+      "newPractice": "Schedule New Practice",
+      "date": "Date",
+      "notes": "Notes (optional)",
+      "addPractice": "Add Practice",
+      "noPractices": "No practices scheduled yet.",
+      "selectPractice": "Select a practice to mark attendance",
+      "attendance": "Attendance",
+      "markPresent": "Mark Present",
+      "choose": "Choose a singer...",
+      "noAttendance": "No attendance recorded for this practice yet.",
+      "confirmDeleteSinger": "Remove this singer from the roster?",
+      "confirmDeletePractice": "Delete this practice and its attendance records?",
+      "remove": "Remove"
+    },
+    "tithe": {
+      "heading": "Tithe Records",
+      "name": "Full Name",
+      "amount": "Amount",
+      "date": "Date",
+      "addRecord": "Add Record",
+      "filterMonth": "Month",
+      "filterYear": "Year",
+      "allMonths": "All Months",
+      "total": "Total",
+      "noRecords": "No tithe records for this period.",
+      "confirmDelete": "Delete this record?",
+      "delete": "Delete"
+    }
   }
 }

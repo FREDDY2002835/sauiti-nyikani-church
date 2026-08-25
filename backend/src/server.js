@@ -10,6 +10,10 @@ import contactRoutes from "./routes/contact.js";
 import prayerRoutes from "./routes/prayer.js";
 import ministriesRoutes from "./routes/ministries.js";
 import galleryRoutes from "./routes/gallery.js";
+import membersRoutes from "./routes/members.js";
+import communionRoutes from "./routes/communion.js";
+import choirRoutes from "./routes/choir.js";
+import tithesRoutes from "./routes/tithes.js";
 
 dotenv.config();
 
@@ -36,6 +40,10 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/prayer", prayerRoutes);
 app.use("/api/ministries", ministriesRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/members", membersRoutes);
+app.use("/api/communion", communionRoutes);
+app.use("/api/choir", choirRoutes);
+app.use("/api/tithes", tithesRoutes);
 
 // Uploaded photos live on disk in /uploads - this makes them reachable
 // at http://localhost:5000/uploads/whatever-the-filename-is.jpg

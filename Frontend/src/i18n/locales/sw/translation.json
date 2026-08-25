@@ -239,5 +239,83 @@
     "loadError": "Imeshindwa kupakia sehemu hii. Tafadhali jaribu tena.",
     "notAvailable": "Hakuna tafsiri inayopatikana kwa lugha hii bado.",
     "source": "Maandiko: King James Version, Louis Segond 1910, na Swahili Union Version — yote ni ya hadhara, yamejumuishwa kwenye tovuti hii."
+  },
+  "management": {
+    "title": "Usimamizi wa Kanisa",
+    "subtitle": "Simamia wanachama, Meza ya Bwana, kwaya, na zaka.",
+    "tabs": {
+      "members": "Wanachama",
+      "communion": "Meza ya Bwana",
+      "choir": "Kwaya",
+      "tithe": "Chakumi"
+    },
+    "members": {
+      "heading": "Wanachama wa Kanisa",
+      "addNew": "Ongeza Mwanachama",
+      "name": "Jina Kamili",
+      "whatsapp": "Namba ya WhatsApp",
+      "email": "Barua Pepe",
+      "address": "Anwani",
+      "save": "Hifadhi",
+      "cancel": "Ghairi",
+      "edit": "Hariri",
+      "delete": "Futa",
+      "empty": "Hakuna mwanachama aliyeongezwa bado.",
+      "confirmDelete": "Futa mwanachama huyu?",
+      "chatOnWhatsapp": "Ongea kwenye WhatsApp"
+    },
+    "communion": {
+      "heading": "Vipindi vya Meza ya Bwana",
+      "newSession": "Panga Kipindi Kipya",
+      "date": "Tarehe",
+      "notes": "Maelezo (si lazima)",
+      "addSession": "Ongeza Kipindi",
+      "sessions": "Vipindi",
+      "selectSession": "Chagua kipindi kusimamia mahudhurio",
+      "attendance": "Mahudhurio",
+      "addAttendee": "Ongeza jina",
+      "addPerson": "Ongeza",
+      "noSessions": "Hakuna kipindi kilichopangwa bado.",
+      "noAttendees": "Hakuna aliyeandikwa bado kwa kipindi hiki.",
+      "deleteSession": "Futa Kipindi",
+      "confirmDeleteSession": "Futa kipindi hiki na mahudhurio yake?",
+      "remove": "Ondoa"
+    },
+    "choir": {
+      "heading": "Usimamizi wa Kwaya",
+      "rosterTitle": "Orodha ya Kwaya",
+      "addSinger": "Ongeza Mwimbaji",
+      "name": "Jina Kamili",
+      "whatsapp": "Namba ya WhatsApp (si lazima)",
+      "noSingers": "Hakuna mwimbaji aliyeongezwa bado.",
+      "practicesTitle": "Vipindi vya Mazoezi",
+      "newPractice": "Panga Zoezi Jipya",
+      "date": "Tarehe",
+      "notes": "Maelezo (si lazima)",
+      "addPractice": "Ongeza Zoezi",
+      "noPractices": "Hakuna zoezi lililopangwa bado.",
+      "selectPractice": "Chagua zoezi kuweka mahudhurio",
+      "attendance": "Mahudhurio",
+      "markPresent": "Weka Aliyehudhuria",
+      "choose": "Chagua mwimbaji...",
+      "noAttendance": "Hakuna mahudhurio yaliyoandikwa kwa zoezi hili bado.",
+      "confirmDeleteSinger": "Ondoa mwimbaji huyu kwenye orodha?",
+      "confirmDeletePractice": "Futa zoezi hili na mahudhurio yake?",
+      "remove": "Ondoa"
+    },
+    "tithe": {
+      "heading": "Kumbukumbu za Zaka",
+      "name": "Jina Kamili",
+      "amount": "Kiasi",
+      "date": "Tarehe",
+      "addRecord": "Ongeza Kumbukumbu",
+      "filterMonth": "Mwezi",
+      "filterYear": "Mwaka",
+      "allMonths": "Miezi Yote",
+      "total": "Jumla",
+      "noRecords": "Hakuna kumbukumbu za zaka kwa kipindi hiki.",
+      "confirmDelete": "Futa kumbukumbu hii?",
+      "delete": "Futa"
+    }
   }
 }
