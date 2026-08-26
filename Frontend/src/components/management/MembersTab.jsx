@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const API_URL = "http://127.0.0.1:5000/api/members";
-const emptyForm = { name: "", whatsapp: "", email: "", address: "" };
+const emptyForm = { name: "", whatsapp: "", email: "", address: "", status: "" };
 
 const MembersTab = () => {
   const { t } = useTranslation();
@@ -62,6 +62,7 @@ const MembersTab = () => {
       whatsapp: member.whatsapp || "",
       email: member.email || "",
       address: member.address || "",
+      status: member.status || "",
     });
     setEditingId(member.id);
   };
@@ -119,6 +120,14 @@ const MembersTab = () => {
               className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
             />
           </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">{t("management.members.status")}</label>
+            <input
+              type="text" name="status" value={form.status} onChange={handleChange}
+              placeholder={t("management.members.statusPlaceholder")}
+              className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+            />
+          </div>
         </div>
 
         <div className="flex gap-3">
@@ -142,7 +151,14 @@ const MembersTab = () => {
           {members.map((m) => (
             <div key={m.id} className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-wrap items-center gap-4">
               <div className="flex-1 min-w-[160px]">
-                <h3 className="text-white font-semibold">{m.name}</h3>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-white font-semibold">{m.name}</h3>
+                  {m.status && (
+                    <span className="bg-blue-600/30 text-blue-200 text-[11px] px-2 py-0.5 rounded-full">
+                      {m.status}
+                    </span>
+                  )}
+                </div>
                 <p className="text-slate-400 text-xs mt-1">{m.email}</p>
                 <p className="text-slate-400 text-xs">{m.address}</p>
               </div>

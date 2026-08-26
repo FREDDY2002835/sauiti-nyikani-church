@@ -262,7 +262,9 @@
       "delete": "Delete",
       "empty": "No members added yet.",
       "confirmDelete": "Delete this member?",
-      "chatOnWhatsapp": "Chat on WhatsApp"
+      "chatOnWhatsapp": "Chat on WhatsApp",
+      "status": "Status / Role",
+      "statusPlaceholder": "e.g. Evangelist, Deacon, Member"
     },
     "communion": {
       "heading": "Holy Communion Sessions",
@@ -301,7 +303,12 @@
       "noAttendance": "No attendance recorded for this practice yet.",
       "confirmDeleteSinger": "Remove this singer from the roster?",
       "confirmDeletePractice": "Delete this practice and its attendance records?",
-      "remove": "Remove"
+      "remove": "Remove",
+      "groups": {
+        "central": "Central Choir",
+        "youth": "Youth Choir",
+        "children": "Children's Choir"
+      }
     },
     "tithe": {
       "heading": "Tithe Records",

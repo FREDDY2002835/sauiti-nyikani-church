@@ -15,7 +15,7 @@ export const getMembers = async (req, res) => {
 };
 
 export const createMember = async (req, res) => {
-  const { name, whatsapp, email, address } = req.body;
+  const { name, whatsapp, email, address, status } = req.body;
 
   if (!name) {
     return res.status(400).json({ error: "Name is required." });
@@ -23,9 +23,9 @@ export const createMember = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO members (name, whatsapp, email, address)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [name, whatsapp || "", email || "", address || ""]
+      `INSERT INTO members (name, whatsapp, email, address, status)
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [name, whatsapp || "", email || "", address || "", status || ""]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -36,13 +36,13 @@ export const createMember = async (req, res) => {
 
 export const updateMember = async (req, res) => {
   const { id } = req.params;
-  const { name, whatsapp, email, address } = req.body;
+  const { name, whatsapp, email, address, status } = req.body;
 
   try {
     const result = await pool.query(
-      `UPDATE members SET name = $1, whatsapp = $2, email = $3, address = $4
-       WHERE id = $5 RETURNING *`,
-      [name, whatsapp || "", email || "", address || "", id]
+      `UPDATE members SET name = $1, whatsapp = $2, email = $3, address = $4, status = $5
+       WHERE id = $6 RETURNING *`,
+      [name, whatsapp || "", email || "", address || "", status || "", id]
     );
 
     if (result.rows.length === 0) {

@@ -76,9 +76,13 @@ export const initDb = async () => {
       whatsapp TEXT DEFAULT '',
       email TEXT DEFAULT '',
       address TEXT DEFAULT '',
+      status TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  // Covers anyone who already had the "members" table from before this
+  // column existed - adds it in place without touching existing rows.
+  await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS status TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_sessions (
@@ -103,18 +107,22 @@ export const initDb = async () => {
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       whatsapp TEXT DEFAULT '',
+      group_name TEXT NOT NULL DEFAULT 'central',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  await pool.query(`ALTER TABLE choir_members ADD COLUMN IF NOT EXISTS group_name TEXT NOT NULL DEFAULT 'central'`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS choir_practice_sessions (
       id SERIAL PRIMARY KEY,
       session_date DATE NOT NULL,
       notes TEXT DEFAULT '',
+      group_name TEXT NOT NULL DEFAULT 'central',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  await pool.query(`ALTER TABLE choir_practice_sessions ADD COLUMN IF NOT EXISTS group_name TEXT NOT NULL DEFAULT 'central'`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS choir_attendance (

@@ -262,7 +262,9 @@
       "delete": "Supprimer",
       "empty": "Aucun membre ajouté pour le moment.",
       "confirmDelete": "Supprimer ce membre ?",
-      "chatOnWhatsapp": "Discuter sur WhatsApp"
+      "chatOnWhatsapp": "Discuter sur WhatsApp",
+      "status": "Statut / Rôle",
+      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre"
     },
     "communion": {
       "heading": "Sessions de Sainte Cène",
@@ -301,7 +303,12 @@
       "noAttendance": "Aucune présence enregistrée pour cette répétition.",
       "confirmDeleteSinger": "Retirer ce choriste de la liste ?",
       "confirmDeletePractice": "Supprimer cette répétition et ses présences ?",
-      "remove": "Retirer"
+      "remove": "Retirer",
+      "groups": {
+        "central": "Chorale Centrale",
+        "youth": "Chorale des Jeunes",
+        "children": "Chorale des Enfants"
+      }
     },
     "tithe": {
       "heading": "Registre des Dîmes",

@@ -6,10 +6,15 @@ import { pool } from "../config/db.js";
 // --- Choir roster ---
 
 export const getChoirMembers = async (req, res) => {
+  const { group } = req.query;
+
   try {
-    const result = await pool.query(
-      "SELECT * FROM choir_members ORDER BY name ASC"
-    );
+    const result = group
+      ? await pool.query(
+          "SELECT * FROM choir_members WHERE group_name = $1 ORDER BY name ASC",
+          [group]
+        )
+      : await pool.query("SELECT * FROM choir_members ORDER BY name ASC");
     res.json(result.rows);
   } catch (err) {
     console.error("Failed to fetch choir members:", err.message);
@@ -18,7 +23,7 @@ export const getChoirMembers = async (req, res) => {
 };
 
 export const createChoirMember = async (req, res) => {
-  const { name, whatsapp } = req.body;
+  const { name, whatsapp, group_name } = req.body;
 
   if (!name) {
     return res.status(400).json({ error: "Name is required." });
@@ -26,8 +31,8 @@ export const createChoirMember = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO choir_members (name, whatsapp) VALUES ($1, $2) RETURNING *`,
-      [name, whatsapp || ""]
+      `INSERT INTO choir_members (name, whatsapp, group_name) VALUES ($1, $2, $3) RETURNING *`,
+      [name, whatsapp || "", group_name || "central"]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -59,10 +64,17 @@ export const deleteChoirMember = async (req, res) => {
 // --- Practice sessions ---
 
 export const getSessions = async (req, res) => {
+  const { group } = req.query;
+
   try {
-    const result = await pool.query(
-      "SELECT * FROM choir_practice_sessions ORDER BY session_date DESC"
-    );
+    const result = group
+      ? await pool.query(
+          "SELECT * FROM choir_practice_sessions WHERE group_name = $1 ORDER BY session_date DESC",
+          [group]
+        )
+      : await pool.query(
+          "SELECT * FROM choir_practice_sessions ORDER BY session_date DESC"
+        );
     res.json(result.rows);
   } catch (err) {
     console.error("Failed to fetch practice sessions:", err.message);
@@ -71,7 +83,7 @@ export const getSessions = async (req, res) => {
 };
 
 export const createSession = async (req, res) => {
-  const { session_date, notes } = req.body;
+  const { session_date, notes, group_name } = req.body;
 
   if (!session_date) {
     return res.status(400).json({ error: "A date is required." });
@@ -79,9 +91,9 @@ export const createSession = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO choir_practice_sessions (session_date, notes)
-       VALUES ($1, $2) RETURNING *`,
-      [session_date, notes || ""]
+      `INSERT INTO choir_practice_sessions (session_date, notes, group_name)
+       VALUES ($1, $2, $3) RETURNING *`,
+      [session_date, notes || "", group_name || "central"]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {

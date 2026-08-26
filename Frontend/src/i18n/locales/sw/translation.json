@@ -247,7 +247,7 @@
       "members": "Wanachama",
       "communion": "Meza ya Bwana",
       "choir": "Kwaya",
-      "tithe": "Chakumi"
+      "tithe": "Zaka"
     },
     "members": {
       "heading": "Wanachama wa Kanisa",
@@ -262,7 +262,9 @@
       "delete": "Futa",
       "empty": "Hakuna mwanachama aliyeongezwa bado.",
       "confirmDelete": "Futa mwanachama huyu?",
-      "chatOnWhatsapp": "Ongea kwenye WhatsApp"
+      "chatOnWhatsapp": "Ongea kwenye WhatsApp",
+      "status": "Hadhi / Wadhifa",
+      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama"
     },
     "communion": {
       "heading": "Vipindi vya Meza ya Bwana",
@@ -301,7 +303,12 @@
       "noAttendance": "Hakuna mahudhurio yaliyoandikwa kwa zoezi hili bado.",
       "confirmDeleteSinger": "Ondoa mwimbaji huyu kwenye orodha?",
       "confirmDeletePractice": "Futa zoezi hili na mahudhurio yake?",
-      "remove": "Ondoa"
+      "remove": "Ondoa",
+      "groups": {
+        "central": "Kwaya Kuu",
+        "youth": "Kwaya ya Vijana",
+        "children": "Kwaya ya Watoto"
+      }
     },
     "tithe": {
       "heading": "Kumbukumbu za Zaka",

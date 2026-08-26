@@ -3,8 +3,12 @@ import { useTranslation } from "react-i18next";
 
 const API_URL = "http://127.0.0.1:5000/api/choir";
 
+const CHOIR_GROUPS = ["central", "youth", "children"];
+
 const ChoirTab = () => {
   const { t } = useTranslation();
+
+  const [selectedGroup, setSelectedGroup] = useState("central");
 
   const [members, setMembers] = useState([]);
   const [newMemberName, setNewMemberName] = useState("");
@@ -17,20 +21,24 @@ const ChoirTab = () => {
   const [newNotes, setNewNotes] = useState("");
   const [chosenMemberId, setChosenMemberId] = useState("");
 
-  const fetchMembers = async () => {
-    const res = await fetch(`${API_URL}/members`);
+  const fetchMembers = async (group) => {
+    const res = await fetch(`${API_URL}/members?group=${group}`);
     setMembers(await res.json());
   };
 
-  const fetchSessions = async () => {
-    const res = await fetch(`${API_URL}/sessions`);
+  const fetchSessions = async (group) => {
+    const res = await fetch(`${API_URL}/sessions?group=${group}`);
     setSessions(await res.json());
   };
 
+  // Whenever the selected choir changes, reload its roster/sessions and
+  // clear whatever practice/attendance was open for the previous choir.
   useEffect(() => {
-    fetchMembers();
-    fetchSessions();
-  }, []);
+    fetchMembers(selectedGroup);
+    fetchSessions(selectedGroup);
+    setSelectedSession(null);
+    setAttendance([]);
+  }, [selectedGroup]);
 
   const fetchAttendance = async (sessionId) => {
     const res = await fetch(`${API_URL}/sessions/${sessionId}/attendance`);
@@ -49,18 +57,22 @@ const ChoirTab = () => {
     await fetch(`${API_URL}/members`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: newMemberName, whatsapp: newMemberWhatsapp }),
+      body: JSON.stringify({
+        name: newMemberName,
+        whatsapp: newMemberWhatsapp,
+        group_name: selectedGroup,
+      }),
     });
 
     setNewMemberName("");
     setNewMemberWhatsapp("");
-    fetchMembers();
+    fetchMembers(selectedGroup);
   };
 
   const handleDeleteMember = async (id) => {
     if (!window.confirm(t("management.choir.confirmDeleteSinger"))) return;
     await fetch(`${API_URL}/members/${id}`, { method: "DELETE" });
-    fetchMembers();
+    fetchMembers(selectedGroup);
   };
 
   const handleAddSession = async (e) => {
@@ -70,12 +82,16 @@ const ChoirTab = () => {
     await fetch(`${API_URL}/sessions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ session_date: newDate, notes: newNotes }),
+      body: JSON.stringify({
+        session_date: newDate,
+        notes: newNotes,
+        group_name: selectedGroup,
+      }),
     });
 
     setNewDate("");
     setNewNotes("");
-    fetchSessions();
+    fetchSessions(selectedGroup);
   };
 
   const handleDeleteSession = async (id) => {
@@ -85,7 +101,7 @@ const ChoirTab = () => {
       setSelectedSession(null);
       setAttendance([]);
     }
-    fetchSessions();
+    fetchSessions(selectedGroup);
   };
 
   const handleMarkPresent = async (e) => {
@@ -109,9 +125,28 @@ const ChoirTab = () => {
 
   return (
     <div className="space-y-10">
+      {/* --- Choir group switcher --- */}
+      <div className="flex flex-wrap gap-2">
+        {CHOIR_GROUPS.map((group) => (
+          <button
+            key={group}
+            onClick={() => setSelectedGroup(group)}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
+              selectedGroup === group
+                ? "bg-blue-600 text-white"
+                : "bg-white/5 text-slate-300 hover:bg-white/10"
+            }`}
+          >
+            {t(`management.choir.groups.${group}`)}
+          </button>
+        ))}
+      </div>
+
       {/* --- Roster --- */}
       <div>
-        <h2 className="text-white font-bold text-lg mb-4">{t("management.choir.rosterTitle")}</h2>
+        <h2 className="text-white font-bold text-lg mb-4">
+          {t("management.choir.rosterTitle")} — {t(`management.choir.groups.${selectedGroup}`)}
+        </h2>
 
         <form onSubmit={handleAddMember} className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 space-y-4 mb-6">
           <div className="grid sm:grid-cols-2 gap-4">
