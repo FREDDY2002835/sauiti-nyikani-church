@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Ministries from "../pages/Ministries";
 import MinistryDetail from "../pages/MinistryDetail";
+import AdminMinistryDetail from "../pages/AdminMinistryDetail";
 import AdminMinistries from "../pages/AdminMinistries";
 import Sermons from "../pages/Sermons";
 import Events from "../pages/Events";
@@ -25,6 +26,7 @@ const AppRoutes = () => {
       <Route path="/ministries" element={<Ministries />} />
       <Route path="/ministries/:id" element={<MinistryDetail />} />
       <Route path="/admin/ministries" element={<AdminMinistries />} />
+      <Route path="/admin/ministries/:id" element={<AdminMinistryDetail />} />
       <Route path="/sermons" element={<Sermons />} />
       <Route path="/events" element={<Events />} />
       <Route path="/gallery" element={<Gallery />} />

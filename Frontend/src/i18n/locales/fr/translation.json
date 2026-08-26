@@ -105,7 +105,16 @@
         "name": "Évangélisation et Missions",
         "desc": "Partager l'amour de Christ par le service dans notre communauté et au-delà."
       }
-    ]
+    ],
+    "detail": {
+      "leader": "Responsable",
+      "members": "Membres",
+      "activities": "Activités",
+      "plans": "Projets",
+      "noMembers": "Aucun membre répertorié pour le moment.",
+      "noActivities": "Aucune activité répertoriée pour le moment.",
+      "noPlans": "Aucun projet répertorié pour le moment."
+    }
   },
   "sermons": {
     "badge": "Prédications",

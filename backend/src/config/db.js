@@ -52,7 +52,37 @@ export const initDb = async () => {
       description_fr TEXT NOT NULL,
       name_sw TEXT NOT NULL,
       description_sw TEXT NOT NULL,
+      leader_name TEXT DEFAULT '',
       sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+  // Covers ministries tables created before this column existed.
+  await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS leader_name TEXT DEFAULT ''`);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_members (
+      id SERIAL PRIMARY KEY,
+      ministry_id INTEGER NOT NULL REFERENCES ministries(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_activities (
+      id SERIAL PRIMARY KEY,
+      ministry_id INTEGER NOT NULL REFERENCES ministries(id) ON DELETE CASCADE,
+      description TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_plans (
+      id SERIAL PRIMARY KEY,
+      ministry_id INTEGER NOT NULL REFERENCES ministries(id) ON DELETE CASCADE,
+      description TEXT NOT NULL,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);

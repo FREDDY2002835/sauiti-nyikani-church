@@ -105,7 +105,16 @@
         "name": "Outreach & Missions",
         "desc": "Sharing Christ's love through service in our community and beyond."
       }
-    ]
+    ],
+    "detail": {
+      "leader": "Leader",
+      "members": "Members",
+      "activities": "Activities",
+      "plans": "Plans",
+      "noMembers": "No members listed yet.",
+      "noActivities": "No activities listed yet.",
+      "noPlans": "No plans listed yet."
+    }
   },
   "sermons": {
     "badge": "Sermons",

@@ -45,7 +45,7 @@ export const createMinistry = async (req, res) => {
     name_en, description_en,
     name_fr, description_fr,
     name_sw, description_sw,
-    sort_order,
+    leader_name, sort_order,
   } = req.body;
 
   if (!name_en || !description_en || !name_fr || !description_fr || !name_sw || !description_sw) {
@@ -55,10 +55,10 @@ export const createMinistry = async (req, res) => {
   try {
     const result = await pool.query(
       `INSERT INTO ministries
-        (name_en, description_en, name_fr, description_fr, name_sw, description_sw, sort_order)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
+        (name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name, sort_order)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING *`,
-      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, sort_order || 0]
+      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name || "", sort_order || 0]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -74,7 +74,7 @@ export const updateMinistry = async (req, res) => {
     name_en, description_en,
     name_fr, description_fr,
     name_sw, description_sw,
-    sort_order,
+    leader_name, sort_order,
   } = req.body;
 
   if (!name_en || !description_en || !name_fr || !description_fr || !name_sw || !description_sw) {
@@ -87,10 +87,10 @@ export const updateMinistry = async (req, res) => {
        SET name_en = $1, description_en = $2,
            name_fr = $3, description_fr = $4,
            name_sw = $5, description_sw = $6,
-           sort_order = $7
-       WHERE id = $8
+           leader_name = $7, sort_order = $8
+       WHERE id = $9
        RETURNING *`,
-      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, sort_order || 0, id]
+      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name || "", sort_order || 0, id]
     );
 
     if (result.rows.length === 0) {

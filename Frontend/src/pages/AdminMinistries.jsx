@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 
 const API_URL = "http://127.0.0.1:5000/api/ministries";
@@ -7,6 +8,7 @@ const emptyForm = {
   name_en: "", description_en: "",
   name_fr: "", description_fr: "",
   name_sw: "", description_sw: "",
+  leader_name: "",
   sort_order: 0,
 };
 
@@ -80,6 +82,7 @@ const AdminMinistries = () => {
       description_fr: ministry.description_fr,
       name_sw: ministry.name_sw,
       description_sw: ministry.description_sw,
+      leader_name: ministry.leader_name || "",
       sort_order: ministry.sort_order,
     });
     setEditingId(ministry.id);
@@ -158,6 +161,18 @@ const AdminMinistries = () => {
           <LanguageFields label="Kiswahili" nameField="name_sw" descField="description_sw" />
 
           <div>
+            <label className="block text-sm text-slate-300 mb-2">Ministry Leader</label>
+            <input
+              type="text"
+              name="leader_name"
+              value={form.leader_name}
+              onChange={handleChange}
+              placeholder="e.g. John Mwangi"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-400"
+            />
+          </div>
+
+          <div>
             <label className="block text-sm text-slate-300 mb-2">
               Display Order (lower numbers show first)
             </label>
@@ -204,9 +219,18 @@ const AdminMinistries = () => {
                 <div>
                   <h3 className="text-white font-semibold">{m.name_en}</h3>
                   <p className="text-slate-400 text-sm mt-1">{m.description_en}</p>
-                  <p className="text-slate-500 text-xs mt-2">Order: {m.sort_order}</p>
+                  {m.leader_name && (
+                    <p className="text-blue-300 text-xs mt-2">Leader: {m.leader_name}</p>
+                  )}
+                  <p className="text-slate-500 text-xs mt-1">Order: {m.sort_order}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
+                  <Link
+                    to={`/admin/ministries/${m.id}`}
+                    className="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition"
+                  >
+                    Manage Details
+                  </Link>
                   <button
                     onClick={() => handleEdit(m)}
                     className="bg-blue-600/30 text-blue-200 px-4 py-2 rounded-lg text-sm hover:bg-blue-600/50 transition"

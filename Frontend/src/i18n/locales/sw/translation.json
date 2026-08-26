@@ -105,7 +105,16 @@
         "name": "Uinjilisti na Utume",
         "desc": "Kushiriki upendo wa Kristo kwa huduma katika jamii yetu na kwingineko."
       }
-    ]
+    ],
+    "detail": {
+      "leader": "Kiongozi",
+      "members": "Wanachama",
+      "activities": "Shughuli",
+      "plans": "Mipango",
+      "noMembers": "Hakuna mwanachama aliyeorodheshwa bado.",
+      "noActivities": "Hakuna shughuli iliyoorodheshwa bado.",
+      "noPlans": "Hakuna mpango uliyoorodheshwa bado."
+    }
   },
   "sermons": {
     "badge": "Mahubiri",
