@@ -340,7 +340,7 @@
       "subtitle": "Changes here update instantly on the public Ministries page, in all three languages.",
       "addNew": "Add New Ministry",
       "editTitle": "Edit Ministry",
-      "fillHint": "Fill in the name and description in all three languages below.",
+      "fillHint": "Fill in the name and description for the language shown below (matches the site's current language). Switch the site language and edit this ministry again to add its translation in another language.",
       "name": "Name",
       "description": "Description",
       "leader": "Ministry Leader",

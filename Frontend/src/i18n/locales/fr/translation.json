@@ -340,7 +340,7 @@
       "subtitle": "Les modifications ici se mettent à jour instantanément sur la page publique des Ministères, dans les trois langues.",
       "addNew": "Ajouter un Nouveau Ministère",
       "editTitle": "Modifier le Ministère",
-      "fillHint": "Renseignez le nom et la description dans les trois langues ci-dessous.",
+      "fillHint": "Renseignez le nom et la description pour la langue affichée ci-dessous (correspond à la langue actuelle du site). Changez la langue du site et modifiez à nouveau ce ministère pour ajouter sa traduction dans une autre langue.",
       "name": "Nom",
       "description": "Description",
       "leader": "Responsable du Ministère",

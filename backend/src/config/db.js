@@ -46,12 +46,12 @@ export const initDb = async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS ministries (
       id SERIAL PRIMARY KEY,
-      name_en TEXT NOT NULL,
-      description_en TEXT NOT NULL,
-      name_fr TEXT NOT NULL,
-      description_fr TEXT NOT NULL,
-      name_sw TEXT NOT NULL,
-      description_sw TEXT NOT NULL,
+      name_en TEXT NOT NULL DEFAULT '',
+      description_en TEXT NOT NULL DEFAULT '',
+      name_fr TEXT NOT NULL DEFAULT '',
+      description_fr TEXT NOT NULL DEFAULT '',
+      name_sw TEXT NOT NULL DEFAULT '',
+      description_sw TEXT NOT NULL DEFAULT '',
       leader_name TEXT DEFAULT '',
       sort_order INTEGER DEFAULT 0,
       created_at TIMESTAMPTZ DEFAULT NOW()
@@ -59,6 +59,17 @@ export const initDb = async () => {
   `);
   // Covers ministries tables created before this column existed.
   await pool.query(`ALTER TABLE ministries ADD COLUMN IF NOT EXISTS leader_name TEXT DEFAULT ''`);
+  // Lets a ministry be created/edited one language at a time - the other
+  // two language columns fall back to '' instead of requiring a value.
+  await pool.query(`
+    ALTER TABLE ministries
+      ALTER COLUMN name_en SET DEFAULT '',
+      ALTER COLUMN description_en SET DEFAULT '',
+      ALTER COLUMN name_fr SET DEFAULT '',
+      ALTER COLUMN description_fr SET DEFAULT '',
+      ALTER COLUMN name_sw SET DEFAULT '',
+      ALTER COLUMN description_sw SET DEFAULT ''
+  `);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS ministry_members (

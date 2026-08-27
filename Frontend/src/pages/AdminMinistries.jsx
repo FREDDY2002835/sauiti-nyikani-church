@@ -5,13 +5,9 @@ import MainLayout from "../layouts/MainLayout";
 
 const API_URL = "http://127.0.0.1:5000/api/ministries";
 
-const emptyForm = {
-  name_en: "", description_en: "",
-  name_fr: "", description_fr: "",
-  name_sw: "", description_sw: "",
-  leader_name: "",
-  sort_order: 0,
-};
+const emptyForm = { name: "", description: "", leader_name: "", sort_order: 0 };
+
+const LANGUAGE_LABELS = { en: "English", fr: "Français", sw: "Kiswahili" };
 
 const AdminMinistries = () => {
   const { t, i18n } = useTranslation();
@@ -23,7 +19,11 @@ const AdminMinistries = () => {
 
   // Form state - used for BOTH adding a new ministry and editing an
   // existing one. editingId tells us which mode we're in: null means
-  // "adding new", any other value means "editing that ministry".
+  // "adding new", any other value means "editing that ministry". The
+  // form only ever holds ONE language's text at a time - whichever
+  // language the site is currently set to (see the language switcher
+  // in the navbar). Switching the site's language and editing the same
+  // ministry again lets you fill in that language's translation.
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
 
@@ -65,7 +65,7 @@ const AdminMinistries = () => {
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, language: lang }),
       });
 
       if (!response.ok) {
@@ -79,14 +79,14 @@ const AdminMinistries = () => {
     }
   };
 
+  // Loads this ministry's text for whichever language is currently
+  // active - not always English - so editing in French shows the
+  // existing French text (which may still be blank if nobody has
+  // translated it yet).
   const handleEdit = (ministry) => {
     setForm({
-      name_en: ministry.name_en,
-      description_en: ministry.description_en,
-      name_fr: ministry.name_fr,
-      description_fr: ministry.description_fr,
-      name_sw: ministry.name_sw,
-      description_sw: ministry.description_sw,
+      name: ministry[`name_${lang}`] || "",
+      description: ministry[`description_${lang}`] || "",
       leader_name: ministry.leader_name || "",
       sort_order: ministry.sort_order,
     });
@@ -106,38 +106,6 @@ const AdminMinistries = () => {
       setError(t("management.ministriesAdmin.deleteError"));
     }
   };
-
-  // A small reusable pair of inputs for one language - keeps the form
-  // below from repeating the same six lines of JSX three times.
-  const LanguageFields = ({ label, nameField, descField }) => (
-    <div className="border border-white/10 rounded-2xl p-4">
-      <p className="text-blue-300 text-xs font-semibold uppercase tracking-wide mb-3">{label}</p>
-      <div className="space-y-3">
-        <div>
-          <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.name")}</label>
-          <input
-            type="text"
-            name={nameField}
-            value={form[nameField]}
-            onChange={handleChange}
-            required
-            className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <div>
-          <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.description")}</label>
-          <textarea
-            name={descField}
-            value={form[descField]}
-            onChange={handleChange}
-            required
-            rows={2}
-            className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <MainLayout>
@@ -161,9 +129,35 @@ const AdminMinistries = () => {
             {t("management.ministriesAdmin.fillHint")}
           </p>
 
-          <LanguageFields label="English" nameField="name_en" descField="description_en" />
-          <LanguageFields label="Français" nameField="name_fr" descField="description_fr" />
-          <LanguageFields label="Kiswahili" nameField="name_sw" descField="description_sw" />
+          <div className="border border-white/10 rounded-2xl p-4">
+            <p className="text-blue-300 text-xs font-semibold uppercase tracking-wide mb-3">
+              {LANGUAGE_LABELS[lang] || LANGUAGE_LABELS.en}
+            </p>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.name")}</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-400"
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.description")}</label>
+                <textarea
+                  name="description"
+                  value={form.description}
+                  onChange={handleChange}
+                  required
+                  rows={2}
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-400"
+                />
+              </div>
+            </div>
+          </div>
 
           <div>
             <label className="block text-sm text-slate-300 mb-2">{t("management.ministriesAdmin.leader")}</label>

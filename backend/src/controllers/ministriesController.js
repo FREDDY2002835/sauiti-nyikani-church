@@ -39,26 +39,34 @@ export const getMinistryById = async (req, res) => {
   }
 };
 
-// POST /api/ministries - add a new ministry
-export const createMinistry = async (req, res) => {
-  const {
-    name_en, description_en,
-    name_fr, description_fr,
-    name_sw, description_sw,
-    leader_name, sort_order,
-  } = req.body;
+// A ministry's name/description come in one language at a time from the
+// admin form now (whichever language the site is currently set to), so
+// this maps that language to the pair of columns it actually belongs to.
+const LANGUAGE_COLUMNS = {
+  en: ["name_en", "description_en"],
+  fr: ["name_fr", "description_fr"],
+  sw: ["name_sw", "description_sw"],
+};
 
-  if (!name_en || !description_en || !name_fr || !description_fr || !name_sw || !description_sw) {
-    return res.status(400).json({ error: "Name and description are required in all three languages." });
+// POST /api/ministries - add a new ministry (in whichever ONE language
+// the admin was using at the time - the other two languages are left
+// blank until someone fills them in later, from the same form after
+// switching the site's language)
+export const createMinistry = async (req, res) => {
+  const { language, name, description, leader_name, sort_order } = req.body;
+  const columns = LANGUAGE_COLUMNS[language] || LANGUAGE_COLUMNS.en;
+  const [nameColumn, descriptionColumn] = columns;
+
+  if (!name || !description) {
+    return res.status(400).json({ error: "Name and description are required." });
   }
 
   try {
     const result = await pool.query(
-      `INSERT INTO ministries
-        (name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name, sort_order)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO ministries (${nameColumn}, ${descriptionColumn}, leader_name, sort_order)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name || "", sort_order || 0]
+      [name, description, leader_name || "", sort_order || 0]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -67,30 +75,28 @@ export const createMinistry = async (req, res) => {
   }
 };
 
-// PUT /api/ministries/:id - edit an existing ministry
+// PUT /api/ministries/:id - edit an existing ministry. Only the name/
+// description for the ONE language sent gets updated - the other two
+// languages' text is left exactly as it was, so switching the site to
+// French and editing there doesn't erase the English or Swahili text.
 export const updateMinistry = async (req, res) => {
   const { id } = req.params;
-  const {
-    name_en, description_en,
-    name_fr, description_fr,
-    name_sw, description_sw,
-    leader_name, sort_order,
-  } = req.body;
+  const { language, name, description, leader_name, sort_order } = req.body;
+  const columns = LANGUAGE_COLUMNS[language] || LANGUAGE_COLUMNS.en;
+  const [nameColumn, descriptionColumn] = columns;
 
-  if (!name_en || !description_en || !name_fr || !description_fr || !name_sw || !description_sw) {
-    return res.status(400).json({ error: "Name and description are required in all three languages." });
+  if (!name || !description) {
+    return res.status(400).json({ error: "Name and description are required." });
   }
 
   try {
     const result = await pool.query(
       `UPDATE ministries
-       SET name_en = $1, description_en = $2,
-           name_fr = $3, description_fr = $4,
-           name_sw = $5, description_sw = $6,
-           leader_name = $7, sort_order = $8
-       WHERE id = $9
+       SET ${nameColumn} = $1, ${descriptionColumn} = $2,
+           leader_name = $3, sort_order = $4
+       WHERE id = $5
        RETURNING *`,
-      [name_en, description_en, name_fr, description_fr, name_sw, description_sw, leader_name || "", sort_order || 0, id]
+      [name, description, leader_name || "", sort_order || 0, id]
     );
 
     if (result.rows.length === 0) {
