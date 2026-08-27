@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import MembersTab from "../components/management/MembersTab";
 import CommunionTab from "../components/management/CommunionTab";
@@ -25,7 +26,23 @@ const ChurchManagement = () => {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
           {t("management.title")}
         </h1>
-        <p className="text-slate-400 text-sm mb-8">{t("management.subtitle")}</p>
+        <p className="text-slate-400 text-sm mb-6">{t("management.subtitle")}</p>
+
+        {/* --- Links to the other admin areas, so nothing requires typing a URL --- */}
+        <div className="flex flex-wrap gap-3 mb-8">
+          <Link
+            to="/admin/ministries"
+            className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition"
+          >
+            Manage Ministries
+          </Link>
+          <Link
+            to="/admin/gallery"
+            className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition"
+          >
+            Manage Gallery
+          </Link>
+        </div>
 
         {/* --- Tab switcher --- */}
         <div className="flex flex-wrap gap-2 mb-10 border-b border-white/10 pb-4">
