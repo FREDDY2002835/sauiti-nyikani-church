@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -8,7 +9,7 @@ const BASE_URL = "http://127.0.0.1:5000/api/ministries";
 // A small reusable "named list" manager - Members, Activities, and Plans
 // all work the same way (add an item, see the list, remove an item), so
 // this one component handles all three instead of writing it three times.
-const ListSection = ({ title, items, fieldName, placeholder, onAdd, onDelete }) => {
+const ListSection = ({ title, items, fieldName, placeholder, addLabel, emptyLabel, removeLabel, onAdd, onDelete }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -31,19 +32,19 @@ const ListSection = ({ title, items, fieldName, placeholder, onAdd, onDelete }) 
           className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
         />
         <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
-          Add
+          {addLabel}
         </button>
       </form>
 
       {items.length === 0 ? (
-        <p className="text-slate-400 text-sm">Nothing added yet.</p>
+        <p className="text-slate-400 text-sm">{emptyLabel}</p>
       ) : (
         <div className="space-y-2">
           {items.map((item) => (
             <div key={item.id} className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex justify-between items-center gap-3">
               <span className="text-white text-sm">{item[fieldName]}</span>
               <button onClick={() => onDelete(item.id)} className="text-red-300 hover:text-red-200 text-xs shrink-0">
-                Remove
+                {removeLabel}
               </button>
             </div>
           ))}
@@ -55,6 +56,9 @@ const ListSection = ({ title, items, fieldName, placeholder, onAdd, onDelete }) 
 
 const AdminMinistryDetail = () => {
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   const [ministryName, setMinistryName] = useState("");
   const [members, setMembers] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -69,7 +73,7 @@ const AdminMinistryDetail = () => {
     ]);
 
     const ministry = await ministryRes.json();
-    setMinistryName(ministry.name_en || "");
+    setMinistryName(ministry[`name_${lang}`] || ministry.name_en || "");
     setMembers(await membersRes.json());
     setActivities(await activitiesRes.json());
     setPlans(await plansRes.json());
@@ -78,7 +82,7 @@ const AdminMinistryDetail = () => {
   useEffect(() => {
     fetchAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, lang]);
 
   const addMember = async (name) => {
     await fetch(`${BASE_URL}/${id}/members`, {
@@ -129,40 +133,49 @@ const AdminMinistryDetail = () => {
           to="/admin/ministries"
           className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 text-sm mb-6 transition"
         >
-          <FaArrowLeft /> Back to Ministries
+          <FaArrowLeft /> {t("management.ministriesAdmin.detail.backToMinistries")}
         </Link>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
-          {ministryName || "Ministry"}
+          {ministryName || t("management.ministriesAdmin.detail.defaultTitle")}
         </h1>
         <p className="text-slate-400 text-sm mb-10">
-          Manage members, activities, and plans for this ministry. The ministry's leader name is set from the main Ministries admin page.
+          {t("management.ministriesAdmin.detail.subtitle")}
         </p>
 
         <div className="space-y-8">
           <ListSection
-            title="Members"
+            title={t("management.ministriesAdmin.detail.members")}
             items={members}
             fieldName="name"
-            placeholder="Full name"
+            placeholder={t("management.ministriesAdmin.detail.memberPlaceholder")}
+            addLabel={t("management.ministriesAdmin.detail.add")}
+            emptyLabel={t("management.ministriesAdmin.detail.empty")}
+            removeLabel={t("management.ministriesAdmin.detail.remove")}
             onAdd={addMember}
             onDelete={deleteMember}
           />
 
           <ListSection
-            title="Activities"
+            title={t("management.ministriesAdmin.detail.activities")}
             items={activities}
             fieldName="description"
-            placeholder="e.g. Weekly Bible study on Tuesdays"
+            placeholder={t("management.ministriesAdmin.detail.activityPlaceholder")}
+            addLabel={t("management.ministriesAdmin.detail.add")}
+            emptyLabel={t("management.ministriesAdmin.detail.empty")}
+            removeLabel={t("management.ministriesAdmin.detail.remove")}
             onAdd={addActivity}
             onDelete={deleteActivity}
           />
 
           <ListSection
-            title="Plans"
+            title={t("management.ministriesAdmin.detail.plans")}
             items={plans}
             fieldName="description"
-            placeholder="e.g. Youth camp in December"
+            placeholder={t("management.ministriesAdmin.detail.planPlaceholder")}
+            addLabel={t("management.ministriesAdmin.detail.add")}
+            emptyLabel={t("management.ministriesAdmin.detail.empty")}
+            removeLabel={t("management.ministriesAdmin.detail.remove")}
             onAdd={addPlan}
             onDelete={deletePlan}
           />

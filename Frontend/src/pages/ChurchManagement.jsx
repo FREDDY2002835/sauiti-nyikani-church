@@ -34,13 +34,13 @@ const ChurchManagement = () => {
             to="/admin/ministries"
             className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition"
           >
-            Manage Ministries
+            {t("management.manageMinistries")}
           </Link>
           <Link
             to="/admin/gallery"
             className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition"
           >
-            Manage Gallery
+            {t("management.manageGallery")}
           </Link>
         </div>
 

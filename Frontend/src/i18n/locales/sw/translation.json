@@ -332,6 +332,47 @@
       "noRecords": "Hakuna kumbukumbu za zaka kwa kipindi hiki.",
       "confirmDelete": "Futa kumbukumbu hii?",
       "delete": "Futa"
+    },
+    "manageMinistries": "Simamia Huduma",
+    "manageGallery": "Simamia Picha",
+    "ministriesAdmin": {
+      "title": "Simamia Huduma",
+      "subtitle": "Mabadiliko hapa yanaonekana papo hapo kwenye ukurasa wa umma wa Huduma, katika lugha zote tatu.",
+      "addNew": "Ongeza Huduma Mpya",
+      "editTitle": "Hariri Huduma",
+      "fillHint": "Jaza jina na maelezo katika lugha zote tatu hapa chini.",
+      "name": "Jina",
+      "description": "Maelezo",
+      "leader": "Kiongozi wa Huduma",
+      "leaderPlaceholder": "mfano: John Mwangi",
+      "displayOrder": "Mpangilio wa Kuonyesha (namba ndogo huonyeshwa kwanza)",
+      "save": "Hifadhi Mabadiliko",
+      "add": "Ongeza Huduma",
+      "cancel": "Ghairi",
+      "loading": "Inapakia...",
+      "loadError": "Imeshindwa kupakia huduma.",
+      "saveError": "Hitilafu imetokea wakati wa kuhifadhi. Hakikisha kila sehemu ya lugha imejazwa.",
+      "deleteError": "Imeshindwa kufuta huduma hiyo.",
+      "confirmDelete": "Futa huduma hii? Hatua hii haiwezi kutenduliwa.",
+      "leaderLabel": "Kiongozi",
+      "order": "Mpangilio",
+      "manageDetails": "Simamia Maelezo",
+      "edit": "Hariri",
+      "delete": "Futa",
+      "detail": {
+        "backToMinistries": "Rudi kwenye Huduma",
+        "defaultTitle": "Huduma",
+        "subtitle": "Simamia wanachama, shughuli, na mipango ya huduma hii. Jina la kiongozi wa huduma huwekwa kutoka ukurasa mkuu wa usimamizi wa Huduma.",
+        "members": "Wanachama",
+        "activities": "Shughuli",
+        "plans": "Mipango",
+        "memberPlaceholder": "Jina kamili",
+        "activityPlaceholder": "mfano: Funzo la Biblia kila Jumanne",
+        "planPlaceholder": "mfano: Kambi ya vijana Desemba",
+        "add": "Ongeza",
+        "empty": "Hakuna kilichoongezwa bado.",
+        "remove": "Ondoa"
+      }
     }
   }
 }

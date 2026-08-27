@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 
 const API_URL = "http://127.0.0.1:5000/api/ministries";
@@ -13,6 +14,9 @@ const emptyForm = {
 };
 
 const AdminMinistries = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
   const [ministries, setMinistries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +34,7 @@ const AdminMinistries = () => {
       const data = await response.json();
       setMinistries(data);
     } catch (err) {
-      setError("Could not load ministries.");
+      setError(t("management.ministriesAdmin.loadError"));
     } finally {
       setLoading(false);
     }
@@ -38,6 +42,7 @@ const AdminMinistries = () => {
 
   useEffect(() => {
     fetchMinistries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
@@ -70,7 +75,7 @@ const AdminMinistries = () => {
       resetForm();
       fetchMinistries(); // reload the list to show the change
     } catch (err) {
-      setError("Something went wrong while saving. Make sure every language field is filled in.");
+      setError(t("management.ministriesAdmin.saveError"));
     }
   };
 
@@ -90,7 +95,7 @@ const AdminMinistries = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Delete this ministry? This cannot be undone.");
+    const confirmed = window.confirm(t("management.ministriesAdmin.confirmDelete"));
     if (!confirmed) return;
 
     try {
@@ -98,7 +103,7 @@ const AdminMinistries = () => {
       if (!response.ok) throw new Error("Delete failed");
       fetchMinistries();
     } catch (err) {
-      setError("Could not delete that ministry.");
+      setError(t("management.ministriesAdmin.deleteError"));
     }
   };
 
@@ -109,7 +114,7 @@ const AdminMinistries = () => {
       <p className="text-blue-300 text-xs font-semibold uppercase tracking-wide mb-3">{label}</p>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs text-slate-400 mb-1">Name</label>
+          <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.name")}</label>
           <input
             type="text"
             name={nameField}
@@ -120,7 +125,7 @@ const AdminMinistries = () => {
           />
         </div>
         <div>
-          <label className="block text-xs text-slate-400 mb-1">Description</label>
+          <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.description")}</label>
           <textarea
             name={descField}
             value={form[descField]}
@@ -138,10 +143,10 @@ const AdminMinistries = () => {
     <MainLayout>
       <div className="max-w-4xl mx-auto px-5 py-16 md:py-24">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
-          Manage Ministries
+          {t("management.ministriesAdmin.title")}
         </h1>
         <p className="text-slate-400 text-sm mb-10">
-          Changes here update instantly on the public Ministries page, in all three languages.
+          {t("management.ministriesAdmin.subtitle")}
         </p>
 
         {/* --- Add / Edit form --- */}
@@ -150,10 +155,10 @@ const AdminMinistries = () => {
           className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 space-y-5 mb-12"
         >
           <h2 className="text-white font-bold text-lg">
-            {editingId ? "Edit Ministry" : "Add New Ministry"}
+            {editingId ? t("management.ministriesAdmin.editTitle") : t("management.ministriesAdmin.addNew")}
           </h2>
           <p className="text-slate-400 text-xs">
-            Fill in the name and description in all three languages below.
+            {t("management.ministriesAdmin.fillHint")}
           </p>
 
           <LanguageFields label="English" nameField="name_en" descField="description_en" />
@@ -161,20 +166,20 @@ const AdminMinistries = () => {
           <LanguageFields label="Kiswahili" nameField="name_sw" descField="description_sw" />
 
           <div>
-            <label className="block text-sm text-slate-300 mb-2">Ministry Leader</label>
+            <label className="block text-sm text-slate-300 mb-2">{t("management.ministriesAdmin.leader")}</label>
             <input
               type="text"
               name="leader_name"
               value={form.leader_name}
               onChange={handleChange}
-              placeholder="e.g. John Mwangi"
+              placeholder={t("management.ministriesAdmin.leaderPlaceholder")}
               className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-400"
             />
           </div>
 
           <div>
             <label className="block text-sm text-slate-300 mb-2">
-              Display Order (lower numbers show first)
+              {t("management.ministriesAdmin.displayOrder")}
             </label>
             <input
               type="number"
@@ -190,7 +195,7 @@ const AdminMinistries = () => {
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition"
             >
-              {editingId ? "Save Changes" : "Add Ministry"}
+              {editingId ? t("management.ministriesAdmin.save") : t("management.ministriesAdmin.add")}
             </button>
             {editingId && (
               <button
@@ -198,7 +203,7 @@ const AdminMinistries = () => {
                 onClick={resetForm}
                 className="bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-semibold transition hover:bg-white/20"
               >
-                Cancel
+                {t("management.ministriesAdmin.cancel")}
               </button>
             )}
           </div>
@@ -208,7 +213,7 @@ const AdminMinistries = () => {
 
         {/* --- Existing ministries list --- */}
         {loading ? (
-          <p className="text-slate-400">Loading...</p>
+          <p className="text-slate-400">{t("management.ministriesAdmin.loading")}</p>
         ) : (
           <div className="space-y-4">
             {ministries.map((m) => (
@@ -217,31 +222,33 @@ const AdminMinistries = () => {
                 className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-start justify-between gap-4"
               >
                 <div>
-                  <h3 className="text-white font-semibold">{m.name_en}</h3>
-                  <p className="text-slate-400 text-sm mt-1">{m.description_en}</p>
+                  <h3 className="text-white font-semibold">{m[`name_${lang}`] || m.name_en}</h3>
+                  <p className="text-slate-400 text-sm mt-1">{m[`description_${lang}`] || m.description_en}</p>
                   {m.leader_name && (
-                    <p className="text-blue-300 text-xs mt-2">Leader: {m.leader_name}</p>
+                    <p className="text-blue-300 text-xs mt-2">
+                      {t("management.ministriesAdmin.leaderLabel")}: {m.leader_name}
+                    </p>
                   )}
-                  <p className="text-slate-500 text-xs mt-1">Order: {m.sort_order}</p>
+                  <p className="text-slate-500 text-xs mt-1">{t("management.ministriesAdmin.order")}: {m.sort_order}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <Link
                     to={`/admin/ministries/${m.id}`}
                     className="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition"
                   >
-                    Manage Details
+                    {t("management.ministriesAdmin.manageDetails")}
                   </Link>
                   <button
                     onClick={() => handleEdit(m)}
                     className="bg-blue-600/30 text-blue-200 px-4 py-2 rounded-lg text-sm hover:bg-blue-600/50 transition"
                   >
-                    Edit
+                    {t("management.ministriesAdmin.edit")}
                   </button>
                   <button
                     onClick={() => handleDelete(m.id)}
                     className="bg-red-600/30 text-red-200 px-4 py-2 rounded-lg text-sm hover:bg-red-600/50 transition"
                   >
-                    Delete
+                    {t("management.ministriesAdmin.delete")}
                   </button>
                 </div>
               </div>

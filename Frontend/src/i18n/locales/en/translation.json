@@ -332,6 +332,47 @@
       "noRecords": "No tithe records for this period.",
       "confirmDelete": "Delete this record?",
       "delete": "Delete"
+    },
+    "manageMinistries": "Manage Ministries",
+    "manageGallery": "Manage Gallery",
+    "ministriesAdmin": {
+      "title": "Manage Ministries",
+      "subtitle": "Changes here update instantly on the public Ministries page, in all three languages.",
+      "addNew": "Add New Ministry",
+      "editTitle": "Edit Ministry",
+      "fillHint": "Fill in the name and description in all three languages below.",
+      "name": "Name",
+      "description": "Description",
+      "leader": "Ministry Leader",
+      "leaderPlaceholder": "e.g. John Mwangi",
+      "displayOrder": "Display Order (lower numbers show first)",
+      "save": "Save Changes",
+      "add": "Add Ministry",
+      "cancel": "Cancel",
+      "loading": "Loading...",
+      "loadError": "Could not load ministries.",
+      "saveError": "Something went wrong while saving. Make sure every language field is filled in.",
+      "deleteError": "Could not delete that ministry.",
+      "confirmDelete": "Delete this ministry? This cannot be undone.",
+      "leaderLabel": "Leader",
+      "order": "Order",
+      "manageDetails": "Manage Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "detail": {
+        "backToMinistries": "Back to Ministries",
+        "defaultTitle": "Ministry",
+        "subtitle": "Manage members, activities, and plans for this ministry. The ministry's leader name is set from the main Ministries admin page.",
+        "members": "Members",
+        "activities": "Activities",
+        "plans": "Plans",
+        "memberPlaceholder": "Full name",
+        "activityPlaceholder": "e.g. Weekly Bible study on Tuesdays",
+        "planPlaceholder": "e.g. Youth camp in December",
+        "add": "Add",
+        "empty": "Nothing added yet.",
+        "remove": "Remove"
+      }
     }
   }
 }

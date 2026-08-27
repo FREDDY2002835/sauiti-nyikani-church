@@ -332,6 +332,47 @@
       "noRecords": "Aucun enregistrement de dîme pour cette période.",
       "confirmDelete": "Supprimer cet enregistrement ?",
       "delete": "Supprimer"
+    },
+    "manageMinistries": "Gérer les Ministères",
+    "manageGallery": "Gérer la Galerie",
+    "ministriesAdmin": {
+      "title": "Gérer les Ministères",
+      "subtitle": "Les modifications ici se mettent à jour instantanément sur la page publique des Ministères, dans les trois langues.",
+      "addNew": "Ajouter un Nouveau Ministère",
+      "editTitle": "Modifier le Ministère",
+      "fillHint": "Renseignez le nom et la description dans les trois langues ci-dessous.",
+      "name": "Nom",
+      "description": "Description",
+      "leader": "Responsable du Ministère",
+      "leaderPlaceholder": "ex. John Mwangi",
+      "displayOrder": "Ordre d'Affichage (les nombres les plus bas s'affichent en premier)",
+      "save": "Enregistrer les Modifications",
+      "add": "Ajouter le Ministère",
+      "cancel": "Annuler",
+      "loading": "Chargement...",
+      "loadError": "Impossible de charger les ministères.",
+      "saveError": "Une erreur s'est produite lors de l'enregistrement. Assurez-vous que chaque champ linguistique est rempli.",
+      "deleteError": "Impossible de supprimer ce ministère.",
+      "confirmDelete": "Supprimer ce ministère ? Cette action est irréversible.",
+      "leaderLabel": "Responsable",
+      "order": "Ordre",
+      "manageDetails": "Gérer les Détails",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "detail": {
+        "backToMinistries": "Retour aux Ministères",
+        "defaultTitle": "Ministère",
+        "subtitle": "Gérez les membres, activités et projets de ce ministère. Le nom du responsable est défini depuis la page principale de gestion des Ministères.",
+        "members": "Membres",
+        "activities": "Activités",
+        "plans": "Projets",
+        "memberPlaceholder": "Nom complet",
+        "activityPlaceholder": "ex. Étude biblique hebdomadaire le mardi",
+        "planPlaceholder": "ex. Camp des jeunes en décembre",
+        "add": "Ajouter",
+        "empty": "Rien n'a encore été ajouté.",
+        "remove": "Retirer"
+      }
     }
   }
 }
