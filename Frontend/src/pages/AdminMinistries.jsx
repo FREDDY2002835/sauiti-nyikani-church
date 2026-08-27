@@ -7,8 +7,6 @@ const API_URL = "http://127.0.0.1:5000/api/ministries";
 
 const emptyForm = { name: "", description: "", leader_name: "", sort_order: 0 };
 
-const LANGUAGE_LABELS = { en: "English", fr: "Français", sw: "Kiswahili" };
-
 const AdminMinistries = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -130,9 +128,6 @@ const AdminMinistries = () => {
           </p>
 
           <div className="border border-white/10 rounded-2xl p-4">
-            <p className="text-blue-300 text-xs font-semibold uppercase tracking-wide mb-3">
-              {LANGUAGE_LABELS[lang] || LANGUAGE_LABELS.en}
-            </p>
             <div className="space-y-3">
               <div>
                 <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.name")}</label>
