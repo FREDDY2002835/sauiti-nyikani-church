@@ -138,12 +138,12 @@ const changeLanguage = (lang) => {
 
           {/* Theme */}
 
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="text-xl text-slate-200 hover:text-yellow-300 transition"
           >
             {theme === "dark" ? <FaSun /> : <FaMoon />}
-          </button>
+          </button> */}
 
         </div>
 
