@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -19,26 +19,29 @@ import Bible from "../pages/Bible";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
+  const location = useLocation();
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/ministries" element={<Ministries />} />
-      <Route path="/ministries/:id" element={<MinistryDetail />} />
-      <Route path="/admin/ministries" element={<AdminMinistries />} />
-      <Route path="/admin/ministries/:id" element={<AdminMinistryDetail />} />
-      <Route path="/sermons" element={<Sermons />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/gallery" element={<Gallery />} />
-      <Route path="/admin/gallery" element={<AdminGallery />} />
-      <Route path="/admin/manage" element={<ChurchManagement />} />
-      <Route path="/giving" element={<Giving />} />
-      <Route path="/prayer" element={<Prayer />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/bible" element={<Bible />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <div key={location.pathname} className="page-transition">
+      <Routes location={location}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/ministries" element={<Ministries />} />
+        <Route path="/ministries/:id" element={<MinistryDetail />} />
+        <Route path="/admin/ministries" element={<AdminMinistries />} />
+        <Route path="/admin/ministries/:id" element={<AdminMinistryDetail />} />
+        <Route path="/sermons" element={<Sermons />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/admin/gallery" element={<AdminGallery />} />
+        <Route path="/admin/manage" element={<ChurchManagement />} />
+        <Route path="/giving" element={<Giving />} />
+        <Route path="/prayer" element={<Prayer />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/bible" element={<Bible />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 };
 
