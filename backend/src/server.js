@@ -14,6 +14,8 @@ import membersRoutes from "./routes/members.js";
 import communionRoutes from "./routes/communion.js";
 import choirRoutes from "./routes/choir.js";
 import tithesRoutes from "./routes/tithes.js";
+import eldersRoutes from "./routes/elders.js";
+import financeRoutes from "./routes/finance.js";
 
 dotenv.config();
 
@@ -44,6 +46,8 @@ app.use("/api/members", membersRoutes);
 app.use("/api/communion", communionRoutes);
 app.use("/api/choir", choirRoutes);
 app.use("/api/tithes", tithesRoutes);
+app.use("/api/elders", eldersRoutes);
+app.use("/api/finance", financeRoutes);
 
 // Uploaded photos live on disk in /uploads - this makes them reachable
 // at http://localhost:5000/uploads/whatever-the-filename-is.jpg

@@ -256,7 +256,9 @@
       "members": "Members",
       "communion": "Holy Communion",
       "choir": "Choir",
-      "tithe": "Tithe"
+      "tithe": "Tithe",
+      "elders": "Church Elders' Council",
+      "finance": "Finance"
     },
     "members": {
       "heading": "Church Members",
@@ -373,6 +375,56 @@
         "empty": "Nothing added yet.",
         "remove": "Remove"
       }
+    },
+    "elders": {
+      "tabLabel": "Church Elders' Council",
+      "rosterTitle": "Elders Roster",
+      "addElder": "Add Elder",
+      "name": "Full Name",
+      "whatsapp": "WhatsApp Number (optional)",
+      "noElders": "No elders added yet.",
+      "meetingsTitle": "Meetings",
+      "newMeeting": "Schedule New Meeting",
+      "date": "Date",
+      "notes": "Notes (optional)",
+      "addMeeting": "Add Meeting",
+      "noMeetings": "No meetings scheduled yet.",
+      "selectMeeting": "Select a meeting to manage attendance",
+      "attendance": "Attendance",
+      "markPresent": "Mark Present",
+      "choose": "Choose an elder...",
+      "noAttendance": "No attendance recorded for this meeting yet.",
+      "confirmDeleteElder": "Remove this elder from the roster?",
+      "confirmDeleteMeeting": "Delete this meeting and its attendance records?",
+      "remove": "Remove",
+      "plansTitle": "Plans",
+      "addPlan": "Add Plan",
+      "planPlaceholder": "e.g. Organize an elders' retreat in November",
+      "noPlans": "No plans added yet.",
+      "confirmDeletePlan": "Delete this plan?",
+      "minutes": "Minutes",
+      "minutesPlaceholder": "Write everything discussed in this meeting...",
+      "saveMinutes": "Save Minutes",
+      "minutesSaved": "Minutes saved."
+    },
+    "finance": {
+      "tabLabel": "Finance",
+      "addRecord": "Add Transaction",
+      "type": "Type",
+      "typeIn": "Money In",
+      "typeOut": "Money Out",
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description (optional)",
+      "filterMonth": "Month",
+      "filterYear": "Year",
+      "allMonths": "All Months",
+      "totalIn": "Total In",
+      "totalOut": "Total Out",
+      "balance": "Balance",
+      "noRecords": "No transactions for this period.",
+      "confirmDelete": "Delete this record?",
+      "delete": "Delete"
     }
   }
 }

@@ -35,7 +35,7 @@
   "about": {
     "badge": "À Propos de Notre Église",
     "title": "Notre Histoire",
-    "intro": "L'Église Sauti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu selon Mathieu 28:20 et engagée à bâtir une communauté centrée sur Christ enregistrée sous Boniface Muhimuzi Ministries en Uganda et au-delà.",
+    "intro": "L'Église Sauti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu et engagée à bâtir une communauté centrée sur Christ à Mubende et au-delà.",
     "mission": {
       "title": "Notre Mission",
       "text": "Proclamer l'Évangile de Jésus-Christ, faire des disciples et servir notre communauté avec amour et compassion."
@@ -217,8 +217,8 @@
     "info": {
       "title": "Informations de Contact",
       "address": "B.P. 210347, Mubende, Ouganda",
-      "phone": "Téléphone : +256784492857/ +256755004560",
-      "email": "E-mail : bonifacemuhimuzi503@gmail.com"
+      "phone": "Téléphone : disponible au bureau de l'église",
+      "email": "E-mail : disponible au bureau de l'église"
     },
     "form": {
       "name": "Nom Complet",
@@ -256,7 +256,9 @@
       "members": "Membres",
       "communion": "Sainte Cène",
       "choir": "Chorale",
-      "tithe": "Dîme"
+      "tithe": "Dîme",
+      "elders": "Comité des Anciens de l'Église",
+      "finance": "Caisse"
     },
     "members": {
       "heading": "Membres de l'Église",
@@ -373,6 +375,56 @@
         "empty": "Rien n'a encore été ajouté.",
         "remove": "Retirer"
       }
+    },
+    "elders": {
+      "tabLabel": "Comité des Anciens de l'Église",
+      "rosterTitle": "Liste des Anciens",
+      "addElder": "Ajouter un Ancien",
+      "name": "Nom Complet",
+      "whatsapp": "Numéro WhatsApp (facultatif)",
+      "noElders": "Aucun ancien ajouté pour le moment.",
+      "meetingsTitle": "Réunions",
+      "newMeeting": "Programmer une Nouvelle Réunion",
+      "date": "Date",
+      "notes": "Notes (facultatif)",
+      "addMeeting": "Ajouter la Réunion",
+      "noMeetings": "Aucune réunion programmée pour le moment.",
+      "selectMeeting": "Sélectionnez une réunion pour gérer la présence",
+      "attendance": "Présence",
+      "markPresent": "Marquer Présent",
+      "choose": "Choisissez un ancien...",
+      "noAttendance": "Aucune présence enregistrée pour cette réunion.",
+      "confirmDeleteElder": "Retirer cet ancien de la liste ?",
+      "confirmDeleteMeeting": "Supprimer cette réunion et ses présences ?",
+      "remove": "Retirer",
+      "plansTitle": "Projets",
+      "addPlan": "Ajouter un Projet",
+      "planPlaceholder": "ex. Organiser une retraite des anciens en novembre",
+      "noPlans": "Aucun projet ajouté pour le moment.",
+      "confirmDeletePlan": "Supprimer ce projet ?",
+      "minutes": "Procès-Verbal",
+      "minutesPlaceholder": "Écrivez tout ce qui a été discuté lors de cette réunion...",
+      "saveMinutes": "Enregistrer le Procès-Verbal",
+      "minutesSaved": "Procès-verbal enregistré."
+    },
+    "finance": {
+      "tabLabel": "Caisse",
+      "addRecord": "Ajouter une Transaction",
+      "type": "Type",
+      "typeIn": "Entrée d'Argent",
+      "typeOut": "Sortie d'Argent",
+      "amount": "Montant",
+      "date": "Date",
+      "description": "Description (facultatif)",
+      "filterMonth": "Mois",
+      "filterYear": "Année",
+      "allMonths": "Tous les Mois",
+      "totalIn": "Total des Entrées",
+      "totalOut": "Total des Sorties",
+      "balance": "Solde",
+      "noRecords": "Aucune transaction pour cette période.",
+      "confirmDelete": "Supprimer cet enregistrement ?",
+      "delete": "Supprimer"
     }
   }
 }

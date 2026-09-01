@@ -256,7 +256,9 @@
       "members": "Wanachama",
       "communion": "Meza ya Bwana",
       "choir": "Kwaya",
-      "tithe": "Zaka"
+      "tithe": "Chakumi",
+      "elders": "Baraza",
+      "finance": "Hazina"
     },
     "members": {
       "heading": "Wanachama wa Kanisa",
@@ -373,6 +375,56 @@
         "empty": "Hakuna kilichoongezwa bado.",
         "remove": "Ondoa"
       }
+    },
+    "elders": {
+      "tabLabel": "Baraza",
+      "rosterTitle": "Orodha ya Wazee",
+      "addElder": "Ongeza Mzee",
+      "name": "Jina Kamili",
+      "whatsapp": "Namba ya WhatsApp (si lazima)",
+      "noElders": "Hakuna mzee aliyeongezwa bado.",
+      "meetingsTitle": "Mikutano",
+      "newMeeting": "Panga Mkutano Mpya",
+      "date": "Tarehe",
+      "notes": "Maelezo (si lazima)",
+      "addMeeting": "Ongeza Mkutano",
+      "noMeetings": "Hakuna mkutano uliopangwa bado.",
+      "selectMeeting": "Chagua mkutano kusimamia mahudhurio",
+      "attendance": "Mahudhurio",
+      "markPresent": "Weka Aliyehudhuria",
+      "choose": "Chagua mzee...",
+      "noAttendance": "Hakuna mahudhurio yaliyoandikwa kwa mkutano huu bado.",
+      "confirmDeleteElder": "Ondoa mzee huyu kwenye orodha?",
+      "confirmDeleteMeeting": "Futa mkutano huu na mahudhurio yake?",
+      "remove": "Ondoa",
+      "plansTitle": "Mipango",
+      "addPlan": "Ongeza Mpango",
+      "planPlaceholder": "mfano: Panga mafungo ya wazee mwezi wa Novemba",
+      "noPlans": "Hakuna mpango ulioongezwa bado.",
+      "confirmDeletePlan": "Futa mpango huu?",
+      "minutes": "Kumbukumbu",
+      "minutesPlaceholder": "Andika kila kilichozungumzwa kwenye mkutano huu...",
+      "saveMinutes": "Hifadhi Kumbukumbu",
+      "minutesSaved": "Kumbukumbu zimehifadhiwa."
+    },
+    "finance": {
+      "tabLabel": "Hazina",
+      "addRecord": "Ongeza Muamala",
+      "type": "Aina",
+      "typeIn": "Fedha Zilizoingia",
+      "typeOut": "Fedha Zilizotoka",
+      "amount": "Kiasi",
+      "date": "Tarehe",
+      "description": "Maelezo (si lazima)",
+      "filterMonth": "Mwezi",
+      "filterYear": "Mwaka",
+      "allMonths": "Miezi Yote",
+      "totalIn": "Jumla ya Ilivyoingia",
+      "totalOut": "Jumla ya Ilivyotoka",
+      "balance": "Salio",
+      "noRecords": "Hakuna muamala kwa kipindi hiki.",
+      "confirmDelete": "Futa kumbukumbu hii?",
+      "delete": "Futa"
     }
   }
 }

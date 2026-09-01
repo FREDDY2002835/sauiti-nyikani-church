@@ -184,6 +184,59 @@ export const initDb = async () => {
     );
   `);
 
+  // --- Church Elders' Council (Baraza / Comité des Anciens) ---
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS elders (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      whatsapp TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS elder_meetings (
+      id SERIAL PRIMARY KEY,
+      meeting_date DATE NOT NULL,
+      notes TEXT DEFAULT '',
+      minutes TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+  // Covers elder_meetings tables created before this column existed.
+  await pool.query(`ALTER TABLE elder_meetings ADD COLUMN IF NOT EXISTS minutes TEXT DEFAULT ''`);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS elder_meeting_attendance (
+      id SERIAL PRIMARY KEY,
+      meeting_id INTEGER NOT NULL REFERENCES elder_meetings(id) ON DELETE CASCADE,
+      elder_id INTEGER NOT NULL REFERENCES elders(id) ON DELETE CASCADE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS elder_plans (
+      id SERIAL PRIMARY KEY,
+      description TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  // --- Finance / Caisse: every entrance (income) and exit (expense) of money ---
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS finance_transactions (
+      id SERIAL PRIMARY KEY,
+      type TEXT NOT NULL CHECK (type IN ('in', 'out')),
+      amount NUMERIC NOT NULL,
+      description TEXT DEFAULT '',
+      transaction_date DATE NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   // --- Migration for anyone who already ran the OLD single-language
   // version of this table (just "name" and "description" columns).
   // We check if that old column still exists, and if so, upgrade the
