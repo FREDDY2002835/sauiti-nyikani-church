@@ -258,7 +258,8 @@
       "choir": "Chorale",
       "tithe": "Dîme",
       "elders": "Comité des Anciens de l'Église",
-      "finance": "Caisse"
+      "finance": "Caisse",
+      "baptism": "Registre de Baptême"
     },
     "members": {
       "heading": "Membres de l'Église",
@@ -423,6 +424,19 @@
       "totalOut": "Total des Sorties",
       "balance": "Solde",
       "noRecords": "Aucune transaction pour cette période.",
+      "confirmDelete": "Supprimer cet enregistrement ?",
+      "delete": "Supprimer"
+    },
+    "baptism": {
+      "tabLabel": "Registre de Baptême",
+      "addRecord": "Ajouter un Baptême",
+      "name": "Nom Complet",
+      "method": "Comment (méthode)",
+      "methodPlaceholder": "ex. Immersion complète",
+      "date": "Date",
+      "filterYear": "Année",
+      "allYears": "Toutes les Années",
+      "noRecords": "Aucun baptême enregistré pour cette période.",
       "confirmDelete": "Supprimer cet enregistrement ?",
       "delete": "Supprimer"
     }

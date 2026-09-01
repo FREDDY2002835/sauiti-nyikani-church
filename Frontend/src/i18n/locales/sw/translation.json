@@ -258,7 +258,8 @@
       "choir": "Kwaya",
       "tithe": "Chakumi",
       "elders": "Baraza",
-      "finance": "Hazina"
+      "finance": "Hazina",
+      "baptism": "Kitabu cha Ubatizo"
     },
     "members": {
       "heading": "Wanachama wa Kanisa",
@@ -423,6 +424,19 @@
       "totalOut": "Jumla ya Ilivyotoka",
       "balance": "Salio",
       "noRecords": "Hakuna muamala kwa kipindi hiki.",
+      "confirmDelete": "Futa kumbukumbu hii?",
+      "delete": "Futa"
+    },
+    "baptism": {
+      "tabLabel": "Kitabu cha Ubatizo",
+      "addRecord": "Ongeza Ubatizo",
+      "name": "Jina Kamili",
+      "method": "Jinsi (namna)",
+      "methodPlaceholder": "mfano: Kuzamishwa kabisa majini",
+      "date": "Tarehe",
+      "filterYear": "Mwaka",
+      "allYears": "Miaka Yote",
+      "noRecords": "Hakuna ubatizo uliorekodiwa kwa kipindi hiki.",
       "confirmDelete": "Futa kumbukumbu hii?",
       "delete": "Futa"
     }

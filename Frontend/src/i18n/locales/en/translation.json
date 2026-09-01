@@ -258,7 +258,8 @@
       "choir": "Choir",
       "tithe": "Tithe",
       "elders": "Church Elders' Council",
-      "finance": "Finance"
+      "finance": "Finance",
+      "baptism": "Baptism Register"
     },
     "members": {
       "heading": "Church Members",
@@ -423,6 +424,19 @@
       "totalOut": "Total Out",
       "balance": "Balance",
       "noRecords": "No transactions for this period.",
+      "confirmDelete": "Delete this record?",
+      "delete": "Delete"
+    },
+    "baptism": {
+      "tabLabel": "Baptism Register",
+      "addRecord": "Add Baptism Record",
+      "name": "Full Name",
+      "method": "How (method)",
+      "methodPlaceholder": "e.g. Full immersion",
+      "date": "Date",
+      "filterYear": "Year",
+      "allYears": "All Years",
+      "noRecords": "No baptism records for this period.",
       "confirmDelete": "Delete this record?",
       "delete": "Delete"
     }

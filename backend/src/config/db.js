@@ -237,6 +237,18 @@ export const initDb = async () => {
     );
   `);
 
+  // --- Baptism Register (Kitabu cha Ubatizo / Registre de Baptême) ---
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS baptisms (
+      id SERIAL PRIMARY KEY,
+      member_name TEXT NOT NULL,
+      method TEXT DEFAULT '',
+      baptism_date DATE NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   // --- Migration for anyone who already ran the OLD single-language
   // version of this table (just "name" and "description" columns).
   // We check if that old column still exists, and if so, upgrade the

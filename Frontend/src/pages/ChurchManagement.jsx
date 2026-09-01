@@ -8,6 +8,7 @@ import ChoirTab from "../components/management/ChoirTab";
 import TitheTab from "../components/management/TitheTab";
 import EldersTab from "../components/management/EldersTab";
 import FinanceTab from "../components/management/FinanceTab";
+import BaptismTab from "../components/management/BaptismTab";
 
 const TABS = [
   { key: "members", Component: MembersTab },
@@ -16,6 +17,7 @@ const TABS = [
   { key: "tithe", Component: TitheTab },
   { key: "elders", Component: EldersTab },
   { key: "finance", Component: FinanceTab },
+  { key: "baptism", Component: BaptismTab },
 ];
 
 const ChurchManagement = () => {
