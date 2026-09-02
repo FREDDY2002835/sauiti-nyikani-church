@@ -256,7 +256,7 @@
       "members": "Wanachama",
       "communion": "Meza ya Bwana",
       "choir": "Kwaya",
-      "tithe": "Chakumi",
+      "tithe": "Zaka",
       "elders": "Baraza",
       "finance": "Hazina",
       "baptism": "Kitabu cha Ubatizo"
@@ -276,7 +276,17 @@
       "confirmDelete": "Futa mwanachama huyu?",
       "chatOnWhatsapp": "Ongea kwenye WhatsApp",
       "status": "Hadhi / Wadhifa",
-      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama"
+      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama",
+      "testimony": "Ushuhuda",
+      "testimonyPlaceholder": "Andika ushuhuda wake...",
+      "lifeStory": "Maisha Yake",
+      "lifeStoryPlaceholder": "Andika kuhusu maisha yake...",
+      "saveTestimony": "Hifadhi",
+      "testimonySaved": "Imehifadhiwa.",
+      "search": "Tafuta mwanachama kwa jina...",
+      "addTestimony": "Ongeza Ushuhuda",
+      "viewEditTestimony": "Ona / Hariri Ushuhuda",
+      "noResults": "Hakuna mwanachama anayelingana na utafutaji huo."
     },
     "communion": {
       "heading": "Vipindi vya Meza ya Bwana",

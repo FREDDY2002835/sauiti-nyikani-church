@@ -118,12 +118,16 @@ export const initDb = async () => {
       email TEXT DEFAULT '',
       address TEXT DEFAULT '',
       status TEXT DEFAULT '',
+      testimony TEXT DEFAULT '',
+      life_story TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
-  // Covers anyone who already had the "members" table from before this
-  // column existed - adds it in place without touching existing rows.
+  // Covers anyone who already had the "members" table from before these
+  // columns existed - adds them in place without touching existing rows.
   await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS status TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS testimony TEXT DEFAULT ''`);
+  await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS life_story TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_sessions (

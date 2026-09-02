@@ -75,3 +75,27 @@ export const deleteMember = async (req, res) => {
     res.status(500).json({ error: "Something went wrong." });
   }
 };
+
+// PUT /api/members/:id/testimony - save a member's testimony (ushuhuda)
+// and life story. Kept separate from the main updateMember endpoint so
+// the everyday "edit contact info" form doesn't need to touch this.
+export const updateTestimony = async (req, res) => {
+  const { id } = req.params;
+  const { testimony, life_story } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE members SET testimony = $1, life_story = $2 WHERE id = $3 RETURNING *`,
+      [testimony || "", life_story || "", id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Member not found." });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Failed to save testimony:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};

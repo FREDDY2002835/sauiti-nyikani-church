@@ -276,7 +276,17 @@
       "confirmDelete": "Supprimer ce membre ?",
       "chatOnWhatsapp": "Discuter sur WhatsApp",
       "status": "Statut / Rôle",
-      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre"
+      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre",
+      "testimony": "Témoignage",
+      "testimonyPlaceholder": "Écrivez son témoignage (ushuhuda)...",
+      "lifeStory": "Histoire de Vie",
+      "lifeStoryPlaceholder": "Écrivez à propos de sa vie...",
+      "saveTestimony": "Enregistrer",
+      "testimonySaved": "Enregistré.",
+      "search": "Rechercher un membre par nom...",
+      "addTestimony": "Ajouter un Témoignage",
+      "viewEditTestimony": "Voir / Modifier le Témoignage",
+      "noResults": "Aucun membre ne correspond à cette recherche."
     },
     "communion": {
       "heading": "Sessions de Sainte Cène",

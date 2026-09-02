@@ -276,7 +276,17 @@
       "confirmDelete": "Delete this member?",
       "chatOnWhatsapp": "Chat on WhatsApp",
       "status": "Status / Role",
-      "statusPlaceholder": "e.g. Evangelist, Deacon, Member"
+      "statusPlaceholder": "e.g. Evangelist, Deacon, Member",
+      "testimony": "Testimony",
+      "testimonyPlaceholder": "Write their testimony (ushuhuda)...",
+      "lifeStory": "Life Story",
+      "lifeStoryPlaceholder": "Write about their life...",
+      "saveTestimony": "Save",
+      "testimonySaved": "Saved.",
+      "search": "Search members by name...",
+      "addTestimony": "Add Testimony",
+      "viewEditTestimony": "View / Edit Testimony",
+      "noResults": "No members match that search."
     },
     "communion": {
       "heading": "Holy Communion Sessions",
