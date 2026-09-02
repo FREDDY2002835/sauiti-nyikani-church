@@ -303,7 +303,9 @@
       "noAttendees": "Hakuna aliyeandikwa bado kwa kipindi hiki.",
       "deleteSession": "Futa Kipindi",
       "confirmDeleteSession": "Futa kipindi hiki na mahudhurio yake?",
-      "remove": "Ondoa"
+      "remove": "Ondoa",
+      "verseRead": "Aya Iliyosomwa",
+      "verseReadPlaceholder": "mfano: Mathayo 26:26-28"
     },
     "choir": {
       "heading": "Usimamizi wa Kwaya",

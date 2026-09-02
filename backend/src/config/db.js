@@ -134,9 +134,12 @@ export const initDb = async () => {
       id SERIAL PRIMARY KEY,
       session_date DATE NOT NULL,
       notes TEXT DEFAULT '',
+      verse_read TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  // Covers communion_sessions tables created before this column existed.
+  await pool.query(`ALTER TABLE communion_sessions ADD COLUMN IF NOT EXISTS verse_read TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_attendance (

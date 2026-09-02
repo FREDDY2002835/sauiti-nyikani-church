@@ -303,7 +303,9 @@
       "noAttendees": "No one recorded yet for this session.",
       "deleteSession": "Delete Session",
       "confirmDeleteSession": "Delete this session and its attendance records?",
-      "remove": "Remove"
+      "remove": "Remove",
+      "verseRead": "Verse Read",
+      "verseReadPlaceholder": "e.g. Matthew 26:26-28"
     },
     "choir": {
       "heading": "Choir Management",

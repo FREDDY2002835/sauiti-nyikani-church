@@ -303,7 +303,9 @@
       "noAttendees": "Personne n'est encore enregistré pour cette session.",
       "deleteSession": "Supprimer la Session",
       "confirmDeleteSession": "Supprimer cette session et ses présences ?",
-      "remove": "Retirer"
+      "remove": "Retirer",
+      "verseRead": "Verset Lu",
+      "verseReadPlaceholder": "ex. Matthieu 26:26-28"
     },
     "choir": {
       "heading": "Gestion de la Chorale",

@@ -10,6 +10,7 @@ const CommunionTab = () => {
   const [attendance, setAttendance] = useState([]);
   const [newDate, setNewDate] = useState("");
   const [newNotes, setNewNotes] = useState("");
+  const [newVerse, setNewVerse] = useState("");
   const [newAttendeeName, setNewAttendeeName] = useState("");
 
   const fetchSessions = async () => {
@@ -38,11 +39,12 @@ const CommunionTab = () => {
     await fetch(`${API_URL}/sessions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ session_date: newDate, notes: newNotes }),
+      body: JSON.stringify({ session_date: newDate, notes: newNotes, verse_read: newVerse }),
     });
 
     setNewDate("");
     setNewNotes("");
+    setNewVerse("");
     fetchSessions();
   };
 
@@ -101,6 +103,15 @@ const CommunionTab = () => {
             />
           </div>
 
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">{t("management.communion.verseRead")}</label>
+            <input
+              type="text" value={newVerse} onChange={(e) => setNewVerse(e.target.value)}
+              placeholder={t("management.communion.verseReadPlaceholder")}
+              className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+            />
+          </div>
+
           <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition">
             {t("management.communion.addSession")}
           </button>
@@ -124,6 +135,9 @@ const CommunionTab = () => {
               >
                 <div>
                   <p className="text-white font-semibold text-sm">{s.session_date?.slice(0, 10)}</p>
+                  {s.verse_read && (
+                    <p className="text-blue-300 text-xs mt-1 italic">{s.verse_read}</p>
+                  )}
                   {s.notes && <p className="text-slate-400 text-xs mt-1">{s.notes}</p>}
                 </div>
                 <button
