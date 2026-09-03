@@ -74,6 +74,15 @@
       "title": "Read The Bible",
       "text": "Dive into God's Word in English, French, or Kiswahili, right here on our website.",
       "button": "Open The Bible"
+    },
+    "trinity": {
+      "sectionTag": "What We Believe",
+      "sectionTitle": "The Holy Trinity",
+      "father": "God the Father",
+      "son": "God the Son",
+      "spirit": "God the Holy Spirit",
+      "tapToLearn": "Tap to learn more",
+      "close": "Close"
     }
   },
   "ministries": {

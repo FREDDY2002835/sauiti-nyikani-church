@@ -74,6 +74,15 @@
       "title": "Lire La Bible",
       "text": "Plongez dans la Parole de Dieu en anglais, français ou kiswahili, directement sur notre site.",
       "button": "Ouvrir La Bible"
+    },
+    "trinity": {
+      "sectionTag": "Ce Que Nous Croyons",
+      "sectionTitle": "La Sainte Trinité",
+      "father": "Dieu le Père",
+      "son": "Dieu le Fils",
+      "spirit": "Dieu le Saint-Esprit",
+      "tapToLearn": "Appuyez pour en savoir plus",
+      "close": "Fermer"
     }
   },
   "ministries": {

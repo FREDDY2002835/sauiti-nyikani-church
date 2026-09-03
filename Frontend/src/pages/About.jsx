@@ -1,9 +1,38 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaCrown, FaCross, FaDove, FaTimes } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout";
+import { TRINITY_CONTENT } from "../data/trinityContent";
+
+const TRINITY_PERSONS = [
+  {
+    key: "father",
+    icon: <FaCrown />,
+    hoverBorder: "hover:border-amber-400/50",
+    iconBg: "bg-amber-500/20",
+    iconText: "text-amber-300",
+  },
+  {
+    key: "son",
+    icon: <FaCross />,
+    hoverBorder: "hover:border-rose-400/50",
+    iconBg: "bg-rose-500/20",
+    iconText: "text-rose-300",
+  },
+  {
+    key: "spirit",
+    icon: <FaDove />,
+    hoverBorder: "hover:border-emerald-400/50",
+    iconBg: "bg-emerald-500/20",
+    iconText: "text-emerald-300",
+  },
+];
 
 const About = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.slice(0, 2) || "en";
   const values = t("about.values.items", { returnObjects: true });
+  const [openPerson, setOpenPerson] = useState(null);
 
   return (
     <MainLayout>
@@ -50,6 +79,59 @@ const About = () => {
           ))}
         </div>
       </div>
+
+      <div className="mt-16">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <span className="inline-block bg-blue-600/30 text-blue-100 px-4 py-2 rounded-full text-xs sm:text-sm">
+            {t("about.trinity.sectionTag")}
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold text-white">
+            {t("about.trinity.sectionTitle")}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {TRINITY_PERSONS.map((person) => (
+            <button
+              key={person.key}
+              onClick={() => setOpenPerson(person.key)}
+              className={`bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 ${person.hoverBorder} transition`}
+            >
+              <div className={`w-14 h-14 mx-auto mb-4 rounded-2xl ${person.iconBg} ${person.iconText} flex items-center justify-center text-2xl`}>
+                {person.icon}
+              </div>
+              <h3 className="text-white font-semibold">{t(`about.trinity.${person.key}`)}</h3>
+              <p className="text-slate-500 text-xs mt-2">{t("about.trinity.tapToLearn")}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {openPerson && (
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-5"
+          onClick={() => setOpenPerson(null)}
+        >
+          <div
+            className="bg-[#0c223f] border border-white/20 rounded-3xl p-6 sm:p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setOpenPerson(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white"
+              aria-label={t("about.trinity.close")}
+            >
+              <FaTimes />
+            </button>
+
+            <h2 className="text-xl font-extrabold text-white mb-6 pr-8">
+              {t(`about.trinity.${openPerson}`)}
+            </h2>
+
+            {TRINITY_CONTENT[openPerson][lang] || TRINITY_CONTENT[openPerson].en}
+          </div>
+        </div>
+      )}
 
       <div className="mt-16 bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-8 text-center max-w-3xl mx-auto">
         <h2 className="text-xl font-bold text-white mb-3">{t("about.leadership.title")}</h2>

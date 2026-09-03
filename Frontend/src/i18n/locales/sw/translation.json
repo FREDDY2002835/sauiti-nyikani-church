@@ -74,6 +74,15 @@
       "title": "Soma Biblia",
       "text": "Ingia ndani ya Neno la Mungu kwa Kiingereza, Kifaransa, au Kiswahili, hapa hapa kwenye tovuti yetu.",
       "button": "Fungua Biblia"
+    },
+    "trinity": {
+      "sectionTag": "Tunachoamini",
+      "sectionTitle": "Utatu Utakatifu",
+      "father": "Mungu Baba",
+      "son": "Mungu Mwana",
+      "spirit": "Mungu Roho Mtakatifu",
+      "tapToLearn": "Gusa kujifunza zaidi",
+      "close": "Funga"
     }
   },
   "ministries": {
