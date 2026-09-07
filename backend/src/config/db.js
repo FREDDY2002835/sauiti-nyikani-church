@@ -111,6 +111,19 @@ export const initDb = async () => {
   `);
 
   await pool.query(`
+    CREATE TABLE IF NOT EXISTS sermons (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      speaker TEXT NOT NULL,
+      description TEXT DEFAULT '',
+      sermon_date DATE,
+      file_url TEXT NOT NULL,
+      file_type TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS members (
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
@@ -118,28 +131,21 @@ export const initDb = async () => {
       email TEXT DEFAULT '',
       address TEXT DEFAULT '',
       status TEXT DEFAULT '',
-      testimony TEXT DEFAULT '',
-      life_story TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
-  // Covers anyone who already had the "members" table from before these
-  // columns existed - adds them in place without touching existing rows.
+  // Covers anyone who already had the "members" table from before this
+  // column existed - adds it in place without touching existing rows.
   await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS status TEXT DEFAULT ''`);
-  await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS testimony TEXT DEFAULT ''`);
-  await pool.query(`ALTER TABLE members ADD COLUMN IF NOT EXISTS life_story TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_sessions (
       id SERIAL PRIMARY KEY,
       session_date DATE NOT NULL,
       notes TEXT DEFAULT '',
-      verse_read TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
-  // Covers communion_sessions tables created before this column existed.
-  await pool.query(`ALTER TABLE communion_sessions ADD COLUMN IF NOT EXISTS verse_read TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_attendance (

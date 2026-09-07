@@ -74,15 +74,6 @@
       "title": "Soma Biblia",
       "text": "Ingia ndani ya Neno la Mungu kwa Kiingereza, Kifaransa, au Kiswahili, hapa hapa kwenye tovuti yetu.",
       "button": "Fungua Biblia"
-    },
-    "trinity": {
-      "sectionTag": "Tunachoamini",
-      "sectionTitle": "Utatu Utakatifu",
-      "father": "Mungu Baba",
-      "son": "Mungu Mwana",
-      "spirit": "Mungu Roho Mtakatifu",
-      "tapToLearn": "Gusa kujifunza zaidi",
-      "close": "Funga"
     }
   },
   "ministries": {
@@ -265,7 +256,7 @@
       "members": "Wanachama",
       "communion": "Meza ya Bwana",
       "choir": "Kwaya",
-      "tithe": "Zaka",
+      "tithe": "Chakumi",
       "elders": "Baraza",
       "finance": "Hazina",
       "baptism": "Kitabu cha Ubatizo"
@@ -285,17 +276,7 @@
       "confirmDelete": "Futa mwanachama huyu?",
       "chatOnWhatsapp": "Ongea kwenye WhatsApp",
       "status": "Hadhi / Wadhifa",
-      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama",
-      "testimony": "Ushuhuda",
-      "testimonyPlaceholder": "Andika ushuhuda wake...",
-      "lifeStory": "Maisha Yake",
-      "lifeStoryPlaceholder": "Andika kuhusu maisha yake...",
-      "saveTestimony": "Hifadhi",
-      "testimonySaved": "Imehifadhiwa.",
-      "search": "Tafuta mwanachama kwa jina...",
-      "addTestimony": "Ongeza Ushuhuda",
-      "viewEditTestimony": "Ona / Hariri Ushuhuda",
-      "noResults": "Hakuna mwanachama anayelingana na utafutaji huo."
+      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama"
     },
     "communion": {
       "heading": "Vipindi vya Meza ya Bwana",
@@ -312,9 +293,7 @@
       "noAttendees": "Hakuna aliyeandikwa bado kwa kipindi hiki.",
       "deleteSession": "Futa Kipindi",
       "confirmDeleteSession": "Futa kipindi hiki na mahudhurio yake?",
-      "remove": "Ondoa",
-      "verseRead": "Aya Iliyosomwa",
-      "verseReadPlaceholder": "mfano: Mathayo 26:26-28"
+      "remove": "Ondoa"
     },
     "choir": {
       "heading": "Usimamizi wa Kwaya",
@@ -460,6 +439,7 @@
       "noRecords": "Hakuna ubatizo uliorekodiwa kwa kipindi hiki.",
       "confirmDelete": "Futa kumbukumbu hii?",
       "delete": "Futa"
-    }
+    },
+    "manageSermons": "Simamia Mahubiri"
   }
 }

@@ -74,15 +74,6 @@
       "title": "Lire La Bible",
       "text": "Plongez dans la Parole de Dieu en anglais, français ou kiswahili, directement sur notre site.",
       "button": "Ouvrir La Bible"
-    },
-    "trinity": {
-      "sectionTag": "Ce Que Nous Croyons",
-      "sectionTitle": "La Sainte Trinité",
-      "father": "Dieu le Père",
-      "son": "Dieu le Fils",
-      "spirit": "Dieu le Saint-Esprit",
-      "tapToLearn": "Appuyez pour en savoir plus",
-      "close": "Fermer"
     }
   },
   "ministries": {
@@ -285,17 +276,7 @@
       "confirmDelete": "Supprimer ce membre ?",
       "chatOnWhatsapp": "Discuter sur WhatsApp",
       "status": "Statut / Rôle",
-      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre",
-      "testimony": "Témoignage",
-      "testimonyPlaceholder": "Écrivez son témoignage (ushuhuda)...",
-      "lifeStory": "Histoire de Vie",
-      "lifeStoryPlaceholder": "Écrivez à propos de sa vie...",
-      "saveTestimony": "Enregistrer",
-      "testimonySaved": "Enregistré.",
-      "search": "Rechercher un membre par nom...",
-      "addTestimony": "Ajouter un Témoignage",
-      "viewEditTestimony": "Voir / Modifier le Témoignage",
-      "noResults": "Aucun membre ne correspond à cette recherche."
+      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre"
     },
     "communion": {
       "heading": "Sessions de Sainte Cène",
@@ -312,9 +293,7 @@
       "noAttendees": "Personne n'est encore enregistré pour cette session.",
       "deleteSession": "Supprimer la Session",
       "confirmDeleteSession": "Supprimer cette session et ses présences ?",
-      "remove": "Retirer",
-      "verseRead": "Verset Lu",
-      "verseReadPlaceholder": "ex. Matthieu 26:26-28"
+      "remove": "Retirer"
     },
     "choir": {
       "heading": "Gestion de la Chorale",
@@ -460,6 +439,7 @@
       "noRecords": "Aucun baptême enregistré pour cette période.",
       "confirmDelete": "Supprimer cet enregistrement ?",
       "delete": "Supprimer"
-    }
+    },
+    "manageSermons": "Gérer les Prédications"
   }
 }

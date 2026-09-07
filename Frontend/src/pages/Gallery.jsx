@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 
 const BASE_URL = "http://127.0.0.1:5000";
@@ -48,13 +47,6 @@ const Gallery = () => {
         <p className="mt-5 text-sm sm:text-base text-slate-300 leading-7">
           {t("gallery.subtitle")}
         </p>
-
-        <Link
-          to="/admin/gallery"
-          className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition"
-        >
-          Upload Photos
-        </Link>
       </div>
 
       {loading && (
