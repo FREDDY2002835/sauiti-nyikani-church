@@ -113,15 +113,52 @@ export const initDb = async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS sermons (
       id SERIAL PRIMARY KEY,
-      title TEXT NOT NULL,
+      title_en TEXT NOT NULL,
+      title_fr TEXT NOT NULL,
+      title_sw TEXT NOT NULL,
       speaker TEXT NOT NULL,
-      description TEXT DEFAULT '',
+      description_en TEXT DEFAULT '',
+      description_fr TEXT DEFAULT '',
+      description_sw TEXT DEFAULT '',
       sermon_date DATE,
       file_url TEXT NOT NULL,
       file_type TEXT NOT NULL,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+
+  // --- Migration for anyone who already ran the OLD single-language
+  // version of this table (just "title" and "description" columns).
+  const oldSermonsColumn = await pool.query(`
+    SELECT column_name FROM information_schema.columns
+    WHERE table_name = 'sermons' AND column_name = 'title'
+  `);
+
+  if (oldSermonsColumn.rows.length > 0) {
+    console.log("Upgrading sermons table for multi-language support...");
+
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS title_en TEXT`);
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS title_fr TEXT`);
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS title_sw TEXT`);
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS description_en TEXT`);
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS description_fr TEXT`);
+    await pool.query(`ALTER TABLE sermons ADD COLUMN IF NOT EXISTS description_sw TEXT`);
+
+    // Copy the old single-language text into the "en" columns, and use
+    // the same text as a placeholder for fr/sw so nothing is blank -
+    // you'll want to edit these sermons afterward to add real translations.
+    await pool.query(`
+      UPDATE sermons SET
+        title_en = title, title_fr = title, title_sw = title,
+        description_en = description, description_fr = description, description_sw = description
+      WHERE title_en IS NULL
+    `);
+
+    await pool.query(`ALTER TABLE sermons DROP COLUMN IF EXISTS title`);
+    await pool.query(`ALTER TABLE sermons DROP COLUMN IF EXISTS description`);
+
+    console.log("Sermons table upgraded.");
+  }
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS members (

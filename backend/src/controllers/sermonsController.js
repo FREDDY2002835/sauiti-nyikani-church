@@ -26,12 +26,17 @@ export const uploadSermon = async (req, res) => {
     return res.status(400).json({ error: "An audio or video file is required." });
   }
 
-  const { title, speaker, description, sermon_date } = req.body;
+  const {
+    title_en, title_fr, title_sw,
+    speaker,
+    description_en, description_fr, description_sw,
+    sermon_date,
+  } = req.body;
 
-  if (!title || !speaker) {
+  if (!title_en || !title_fr || !title_sw || !speaker) {
     // Clean up the file we already saved, since we're rejecting this upload.
     fs.unlink(req.file.path, () => {});
-    return res.status(400).json({ error: "Title and speaker are required." });
+    return res.status(400).json({ error: "Title (in all three languages) and speaker are required." });
   }
 
   const fileUrl = `/uploads/${req.file.filename}`;
@@ -39,10 +44,17 @@ export const uploadSermon = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO sermons (title, speaker, description, sermon_date, file_url, file_type)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO sermons
+        (title_en, title_fr, title_sw, speaker, description_en, description_fr, description_sw, sermon_date, file_url, file_type)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
        RETURNING *`,
-      [title, speaker, description || "", sermon_date || null, fileUrl, fileType]
+      [
+        title_en, title_fr, title_sw,
+        speaker,
+        description_en || "", description_fr || "", description_sw || "",
+        sermon_date || null,
+        fileUrl, fileType,
+      ]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {

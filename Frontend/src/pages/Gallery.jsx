@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
+import { FaTimes } from "react-icons/fa";
 
 const BASE_URL = "http://127.0.0.1:5000";
 const API_URL = `${BASE_URL}/api/gallery`;
@@ -10,6 +11,9 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Which photo (if any) is currently open full-size. null = closed.
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Same idea as the Ministries page: the current language tells us
   // which caption column to read - caption_en, caption_fr, caption_sw.
@@ -32,6 +36,15 @@ const Gallery = () => {
     };
 
     fetchImages();
+  }, []);
+
+  // Let the Escape key close the lightbox too, not just clicking away.
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
@@ -65,7 +78,8 @@ const Gallery = () => {
             return (
               <div
                 key={img.id}
-                className="group relative aspect-square rounded-2xl overflow-hidden border border-white/10"
+                onClick={() => setSelectedImage({ ...img, caption })}
+                className="group relative aspect-square rounded-2xl overflow-hidden border border-white/10 cursor-pointer"
               >
                 <img
                   src={`${BASE_URL}${img.image_url}`}
@@ -89,6 +103,38 @@ const Gallery = () => {
         </p>
       )}
     </div>
+
+    {/* --- Lightbox: shows the selected photo full-size over everything else --- */}
+    {selectedImage && (
+      <div
+        onClick={() => setSelectedImage(null)}
+        className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+      >
+        <button
+          onClick={() => setSelectedImage(null)}
+          className="absolute top-5 right-5 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 transition"
+          aria-label="Close"
+        >
+          <FaTimes size={20} />
+        </button>
+
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="max-w-5xl max-h-full flex flex-col items-center cursor-default"
+        >
+          <img
+            src={`${BASE_URL}${selectedImage.image_url}`}
+            alt={selectedImage.caption || "Sauti Nyikani Church"}
+            className="max-w-full max-h-[80vh] rounded-2xl object-contain"
+          />
+          {selectedImage.caption && (
+            <p className="text-white text-sm sm:text-base mt-4 text-center">
+              {selectedImage.caption}
+            </p>
+          )}
+        </div>
+      </div>
+    )}
       </MainLayout>
   );
 };
