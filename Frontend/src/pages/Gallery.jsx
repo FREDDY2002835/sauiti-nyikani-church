@@ -125,7 +125,8 @@ const Gallery = () => {
           <img
             src={`${BASE_URL}${selectedImage.image_url}`}
             alt={selectedImage.caption || "Sauti Nyikani Church"}
-            className="max-w-full max-h-[80vh] rounded-2xl object-contain"
+            onClick={() => setSelectedImage(null)}
+            className="max-w-full max-h-[80vh] rounded-2xl object-contain cursor-zoom-out"
           />
           {selectedImage.caption && (
             <p className="text-white text-sm sm:text-base mt-4 text-center">

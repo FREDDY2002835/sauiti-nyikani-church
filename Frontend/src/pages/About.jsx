@@ -100,6 +100,20 @@ const About = () => {
         </div>
       </div>
 
+      <div className="mt-16 bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-8">
+        <h2 className="text-xl font-bold text-white mb-6 text-center">{t("about.objectives.title")}</h2>
+        <div className="space-y-4">
+          {t("about.objectives.items", { returnObjects: true }).map((item, i) => (
+            <div key={i} className="flex gap-3">
+              <span className="text-blue-400 font-bold shrink-0">
+                {String.fromCharCode(65 + i)})
+              </span>
+              <p className="text-slate-300 leading-7 text-sm sm:text-base">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-10">
           {t("about.values.title")}

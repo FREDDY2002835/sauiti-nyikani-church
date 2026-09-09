@@ -38,11 +38,11 @@
     "intro": "Kanisa la Sauti Nyikani ni sehemu ya familia ya Evangelical Mission Church, lililojikita katika Neno la Mungu na kujitolea kujenga jamii inayomlenga Kristo huko Mubende na kwingineko.",
     "mission": {
       "title": "Dhamira Yetu",
-      "text": "Kuhubiri Injili ya Yesu Kristo, kuwafundisha waumini, na kuitumikia jamii yetu kwa upendo na huruma."
+      "text": "Mathayo 28:18-20 - Yesu alikaribia, akawaambia: \"Nimepewa mamlaka yote mbinguni na duniani. Basi, enendeni, mkawafanye mataifa yote kuwa wanafunzi, mkiwabatiza kwa jina la Baba, na la Mwana, na la Roho Mtakatifu; na kuwafundisha kuyashika yote niliyowaamuru ninyi. Na tazama, mimi nipo pamoja nanyi siku zote, hata ukamilifu wa dahari.\""
     },
     "vision": {
       "title": "Maono Yetu",
-      "text": "Kanisa ambalo kila kizazi kinakua katika imani, na kila sauti inabeba Injili kwa mataifa."
+      "text": "Kuwaonyesha watu ukweli wa Mungu kupitia Neno Lake (Biblia), kuwasaidia kuacha ujinga na kumfuata Yesu Kristo."
     },
     "values": {
       "title": "Tunachoamini",
@@ -91,6 +91,17 @@
       "community": "Jamii",
       "salvation": "Wokovu",
       "mission": "Utume"
+    },
+    "objectives": {
+      "title": "Malengo Yetu",
+      "items": [
+        "Kuhubiri injili ya Kristo Yesu ulimwenguni kote kwa waliopotea na kuokoa roho kwa ajili ya Bwana kwa kutimiza agizo kuu, hadi wote wafikie kumjua Yesu Kristo.",
+        "Kubadilisha ulimwengu na kuimarisha kanisa kupitia vikundi vya ushirika, kuandaa safari za uinjilisti, semina, na mikutano ya kuhubiri Neno la Mungu.",
+        "Kupanda na kuanzisha makanisa ya Evangelical Mission Church kulingana na mfano wa Agano Jipya - miili inayojitawala, inayojieneza, na inayojitegemea - na kuwa kifuniko kwa makanisa mengine chini ya Boniza Muhimuzi Ministries.",
+        "Kuanzisha vyuo vya theolojia ya Biblia na mikutano ya masomo kwa ajili ya kazi ya Mungu.",
+        "Kukuza afya kwa kuanzisha kambi za matibabu, vituo vya afya, na hospitali.",
+        "Kutetea haki za maskini, kukuza haki za binadamu, na kupaza sauti dhidi ya unyonyaji, unyanyasaji, ukatili wa nyumbani, uhalifu, udhalimu, na rushwa, popote itakapopatikana, dhidi ya mtu mmoja, tabaka, au jamii katika jamii."
+      ]
     }
   },
   "ministries": {
@@ -135,7 +146,7 @@
   },
   "sermons": {
     "badge": "Mahubiri",
-    "title": "Mahubiri ya Hivi Karibuni",
+    "title": "Kichwa",
     "subtitle": "Sikiliza Neno lililohubiriwa katika Kanisa la Sauti Nyikani.",
     "watchAll": "Tazama Mahubiri Yote",
     "list": [
@@ -157,7 +168,22 @@
         "date": "Julai 13, 2026",
         "summary": "Kuelewa maana ya kukaa katika upendo wa Kristo."
       }
-    ]
+    ],
+    "loading": "Inapakia mahubiri...",
+    "noneYet": "Hakuna hubiri lililopakiwa bado. Rudi baadaye.",
+    "adminTitle": "Simamia Mahubiri",
+    "adminSubtitle": "Pakia rekodi ya hubiri na itaonekana papo hapo kwenye ukurasa wa umma wa Mahubiri, katika lugha zote tatu.",
+    "uploadNew": "Pakia Hubiri Jipya",
+    "mediaFile": "Faili la Sauti au Video",
+    "maxSize": "Ukubwa wa juu: 500MB.",
+    "description": "Maelezo (si lazima)",
+    "speaker": "Mhubiri",
+    "date": "Tarehe",
+    "upload": "Pakia Hubiri",
+    "uploading": "Inapakia...",
+    "delete": "Futa",
+    "loadingList": "Inapakia...",
+    "confirmDelete": "Futa hubiri hili? Hatua hii haiwezi kutenduliwa."
   },
   "events": {
     "badge": "Kinachoendelea",
@@ -293,7 +319,15 @@
       "confirmDelete": "Futa mwanachama huyu?",
       "chatOnWhatsapp": "Ongea kwenye WhatsApp",
       "status": "Hadhi / Wadhifa",
-      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama"
+      "statusPlaceholder": "mfano: Mwinjilisti, Shemasi, Mwanachama",
+      "testimony": "Ushuhuda",
+      "testimonyPlaceholder": "Andika ushuhuda wake...",
+      "lifeStory": "Maisha Yake",
+      "lifeStoryPlaceholder": "Andika kuhusu maisha yake...",
+      "saveTestimony": "Hifadhi",
+      "testimonySaved": "Imehifadhiwa.",
+      "addTestimony": "Ongeza Ushuhuda",
+      "viewEditTestimony": "Ona / Hariri Ushuhuda"
     },
     "communion": {
       "heading": "Vipindi vya Meza ya Bwana",

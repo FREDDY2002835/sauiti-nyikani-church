@@ -1,5 +1,6 @@
 import heroImage from "../../assets/images/church.jpg";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -53,13 +54,19 @@ const Hero = () => {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 
-              <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition">
+              <Link
+                to="/contact"
+                className="w-full sm:w-auto inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition text-center"
+              >
                 {t("hero.join")}
-              </button>
+              </Link>
 
-              <button className="w-full sm:w-auto border border-blue-400 text-blue-200 hover:bg-blue-700/40 px-8 py-3 rounded-xl font-semibold transition">
+              <Link
+                to="/sermons"
+                className="w-full sm:w-auto inline-block border border-blue-400 text-blue-200 hover:bg-blue-700/40 px-8 py-3 rounded-xl font-semibold transition text-center"
+              >
                 {t("hero.watch")}
-              </button>
+              </Link>
 
             </div>
 

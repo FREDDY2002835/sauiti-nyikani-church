@@ -5,7 +5,8 @@ import MainLayout from "../layouts/MainLayout";
 const BASE_URL = "http://127.0.0.1:5000";
 
 const Sermons = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const [sermons, setSermons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,7 +44,7 @@ const Sermons = () => {
         </div>
 
         {loading && (
-          <p className="mt-16 text-center text-slate-400">Loading sermons...</p>
+          <p className="mt-16 text-center text-slate-400">{t("sermons.loading")}</p>
         )}
 
         {error && (
@@ -52,7 +53,7 @@ const Sermons = () => {
 
         {!loading && !error && sermons.length === 0 && (
           <p className="mt-16 text-center text-slate-400">
-            No sermons have been uploaded yet. Check back soon.
+            {t("sermons.noneYet")}
           </p>
         )}
 
@@ -85,10 +86,12 @@ const Sermons = () => {
                       })}
                     </p>
                   )}
-                  <h3 className="text-white font-bold text-lg mt-2">{s.title}</h3>
+                  <h3 className="text-white font-bold text-lg mt-2">{s[`title_${lang}`] || s.title_en}</h3>
                   <p className="text-slate-400 text-sm mt-1">{s.speaker}</p>
-                  {s.description && (
-                    <p className="text-slate-300 text-sm leading-6 mt-3 flex-1">{s.description}</p>
+                  {(s[`description_${lang}`] || s.description_en) && (
+                    <p className="text-slate-300 text-sm leading-6 mt-3 flex-1">
+                      {s[`description_${lang}`] || s.description_en}
+                    </p>
                   )}
                 </div>
               </div>

@@ -38,11 +38,11 @@
     "intro": "L'Église Sauti Nyikani fait partie de la famille de l'Église de Mission Évangélique, enracinée dans la Parole de Dieu et engagée à bâtir une communauté centrée sur Christ à Mubende et au-delà.",
     "mission": {
       "title": "Notre Mission",
-      "text": "Proclamer l'Évangile de Jésus-Christ, faire des disciples et servir notre communauté avec amour et compassion."
+      "text": "Matthieu 28:18-20, Jésus, s'étant approché, leur parla ainsi : tout pouvoir m'a été donné dans le ciel et sur la terre. Allez, faites de toutes les nations des disciples, les baptisant au nom du Père, du Fils et du Saint-Esprit, et enseignez-leur à observer tout ce que je vous ai prescrit. Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde."
     },
     "vision": {
       "title": "Notre Vision",
-      "text": "Une église où chaque génération grandit dans la foi, et où chaque voix porte l'Évangile aux nations."
+      "text": "Indiquer au peuple la vérité de Dieu à travers sa parole (Bible), à l'aider à quitter l'ignorance et à suivre Jésus Christ."
     },
     "values": {
       "title": "Ce Que Nous Croyons",
@@ -91,6 +91,17 @@
       "community": "La Communauté",
       "salvation": "Le Salut",
       "mission": "La Mission"
+    },
+    "objectives": {
+      "title": "Nos Objectifs",
+      "items": [
+        "Prêcher l'évangile de Christ Jésus dans le monde entier aux perdus et gagner des âmes pour le Seigneur en réponse à la grande commission, jusqu'à ce que tous viennent à la connaissance de Jésus-Christ.",
+        "Transformer le monde et fortifier l'église à travers des groupes (fellowships), organiser des sorties, séminaires, conférences pour prêcher la parole de Dieu.",
+        "Implanter et établir des églises de l'Evangelical Mission Church selon le modèle du Nouveau Testament, qui sont des corps auto-gouvernés, auto-propagés et auto-supportés, et servir de couverture à d'autres églises, sous Boniface Muhimuzi Ministries.",
+        "Établir des instituts bibliques théologiques, des conférences d'étude pour l'œuvre de Dieu.",
+        "Promouvoir la santé et ainsi établir des camps médicaux, des centres médicaux et des hôpitaux.",
+        "Faire le plaidoyer des droits des pauvres, promouvoir les droits humains et élever une voix contre l'exploitation, les abus, la violence domestique, le crime, l'injustice et la corruption, si cela se trouve, contre un individu, une classe ou une communauté dans la société."
+      ]
     }
   },
   "ministries": {
@@ -135,7 +146,7 @@
   },
   "sermons": {
     "badge": "Prédications",
-    "title": "Messages Récents",
+    "title": "Titre",
     "subtitle": "Rattrapez la Parole prêchée à l'Église Sauti Nyikani.",
     "watchAll": "Voir Toutes les Prédications",
     "list": [
@@ -157,7 +168,22 @@
         "date": "13 juillet 2026",
         "summary": "Comprendre ce que signifie demeurer dans l'amour de Christ."
       }
-    ]
+    ],
+    "loading": "Chargement des prédications...",
+    "noneYet": "Aucune prédication téléversée pour le moment. Revenez bientôt.",
+    "adminTitle": "Gérer les Prédications",
+    "adminSubtitle": "Téléversez un enregistrement et il apparaît instantanément sur la page publique des Prédications, dans les trois langues.",
+    "uploadNew": "Téléverser une Nouvelle Prédication",
+    "mediaFile": "Fichier Audio ou Vidéo",
+    "maxSize": "Taille maximale : 500 Mo.",
+    "description": "Description (facultatif)",
+    "speaker": "Orateur",
+    "date": "Date",
+    "upload": "Téléverser la Prédication",
+    "uploading": "Téléversement...",
+    "delete": "Supprimer",
+    "loadingList": "Chargement...",
+    "confirmDelete": "Supprimer cette prédication ? Cette action est irréversible."
   },
   "events": {
     "badge": "Ce Qui Se Passe",
@@ -293,7 +319,15 @@
       "confirmDelete": "Supprimer ce membre ?",
       "chatOnWhatsapp": "Discuter sur WhatsApp",
       "status": "Statut / Rôle",
-      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre"
+      "statusPlaceholder": "ex. Évangéliste, Diacre, Membre",
+      "testimony": "Témoignage",
+      "testimonyPlaceholder": "Écrivez son témoignage (ushuhuda)...",
+      "lifeStory": "Histoire de Vie",
+      "lifeStoryPlaceholder": "Écrivez à propos de sa vie...",
+      "saveTestimony": "Enregistrer",
+      "testimonySaved": "Enregistré.",
+      "addTestimony": "Ajouter un Témoignage",
+      "viewEditTestimony": "Voir / Modifier le Témoignage"
     },
     "communion": {
       "heading": "Sessions de Sainte Cène",

@@ -38,11 +38,11 @@
     "intro": "Sauti Nyikani Church is part of the Evangelical Mission Church family, rooted in the Word of God and committed to raising a Christ-centered community in Mubende and beyond.",
     "mission": {
       "title": "Our Mission",
-      "text": "To proclaim the Gospel of Jesus Christ, disciple believers, and serve our community with love and compassion."
+      "text": "Matthew 28:18-20 - Jesus came to them and said: \"All authority in heaven and on earth has been given to me. Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. And behold, I am with you always, to the very end of the age.\""
     },
     "vision": {
       "title": "Our Vision",
-      "text": "A church where every generation grows in faith, and every voice carries the Gospel to the nations."
+      "text": "To show the people the truth of God through His Word (the Bible), helping them leave ignorance behind and follow Jesus Christ."
     },
     "values": {
       "title": "What We Believe",
@@ -91,6 +91,17 @@
       "community": "Community",
       "salvation": "Salvation",
       "mission": "Mission"
+    },
+    "objectives": {
+      "title": "Our Objectives",
+      "items": [
+        "To preach the gospel of Christ Jesus to the lost throughout the world and win souls for the Lord in response to the Great Commission, until all come to the knowledge of Jesus Christ.",
+        "To transform the world and strengthen the church through fellowship groups, organizing outreaches, seminars, and conferences to preach the Word of God.",
+        "To plant and establish churches of the Evangelical Mission Church according to the New Testament model - self-governing, self-propagating, and self-supporting bodies - and to serve as a covering for other churches under Boniface Muhimuzi Ministries.",
+        "To establish Biblical theological institutes and study conferences for the work of God.",
+        "To promote health by establishing medical camps, health centers, and hospitals.",
+        "To advocate for the rights of the poor, promote human rights, and raise a voice against exploitation, abuse, domestic violence, crime, injustice, and corruption, wherever found, against any individual, class, or community in society."
+      ]
     }
   },
   "ministries": {
@@ -135,7 +146,7 @@
   },
   "sermons": {
     "badge": "Sermons",
-    "title": "Recent Messages",
+    "title": "Title",
     "subtitle": "Catch up on the Word preached at Sauti Nyikani Church.",
     "watchAll": "View All Sermons",
     "list": [
@@ -157,7 +168,22 @@
         "date": "July 13, 2026",
         "summary": "Understanding what it means to abide in Christ's love."
       }
-    ]
+    ],
+    "loading": "Loading sermons...",
+    "noneYet": "No sermons have been uploaded yet. Check back soon.",
+    "adminTitle": "Manage Sermons",
+    "adminSubtitle": "Upload a sermon recording and it appears instantly on the public Sermons page, in all three languages.",
+    "uploadNew": "Upload New Sermon",
+    "mediaFile": "Audio or Video File",
+    "maxSize": "Maximum file size: 500MB.",
+    "description": "Description (optional)",
+    "speaker": "Speaker",
+    "date": "Date",
+    "upload": "Upload Sermon",
+    "uploading": "Uploading...",
+    "delete": "Delete",
+    "loadingList": "Loading...",
+    "confirmDelete": "Delete this sermon? This cannot be undone."
   },
   "events": {
     "badge": "What's Happening",
@@ -293,7 +319,15 @@
       "confirmDelete": "Delete this member?",
       "chatOnWhatsapp": "Chat on WhatsApp",
       "status": "Status / Role",
-      "statusPlaceholder": "e.g. Evangelist, Deacon, Member"
+      "statusPlaceholder": "e.g. Evangelist, Deacon, Member",
+      "testimony": "Testimony",
+      "testimonyPlaceholder": "Write their testimony (ushuhuda)...",
+      "lifeStory": "Life Story",
+      "lifeStoryPlaceholder": "Write about their life...",
+      "saveTestimony": "Save",
+      "testimonySaved": "Saved.",
+      "addTestimony": "Add Testimony",
+      "viewEditTestimony": "View / Edit Testimony"
     },
     "communion": {
       "heading": "Holy Communion Sessions",
