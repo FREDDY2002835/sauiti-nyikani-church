@@ -381,5 +381,23 @@ export const initDb = async () => {
     console.log("Seeded default ministries.");
   }
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS events (
+      id SERIAL PRIMARY KEY,
+      title_en TEXT NOT NULL,
+      title_fr TEXT DEFAULT '',
+      title_sw TEXT DEFAULT '',
+      description_en TEXT DEFAULT '',
+      description_fr TEXT DEFAULT '',
+      description_sw TEXT DEFAULT '',
+      location_en TEXT DEFAULT '',
+      location_fr TEXT DEFAULT '',
+      location_sw TEXT DEFAULT '',
+      event_date DATE,
+      event_time TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   console.log("Database tables ready.");
 };

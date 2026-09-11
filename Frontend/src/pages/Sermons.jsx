@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
+import { FaMusic } from "react-icons/fa";
 
 const BASE_URL = "http://127.0.0.1:5000";
 
@@ -71,8 +72,17 @@ const Sermons = () => {
                     src={`${BASE_URL}${s.file_url}`}
                   />
                 ) : (
-                  <div className="p-5 bg-blue-950/40">
-                    <audio controls className="w-full" src={`${BASE_URL}${s.file_url}`} />
+                  <div className="w-full h-48 bg-blue-950/60 flex flex-col items-center justify-center gap-4 px-6">
+                    <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl">
+                      <FaMusic />
+                    </div>
+                    <audio
+                      controls
+                      preload="metadata"
+                      className="w-full"
+                      style={{ colorScheme: "light" }}
+                      src={`${BASE_URL}${s.file_url}`}
+                    />
                   </div>
                 )}
 

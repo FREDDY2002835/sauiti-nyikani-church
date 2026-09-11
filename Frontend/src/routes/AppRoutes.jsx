@@ -9,6 +9,7 @@ import AdminMinistries from "../pages/AdminMinistries";
 import Sermons from "../pages/Sermons";
 import AdminSermons from "../pages/AdminSermons";
 import Events from "../pages/Events";
+import AdminEvents from "../pages/AdminEvents";
 import Gallery from "../pages/Gallery";
 import AdminGallery from "../pages/AdminGallery";
 import ChurchManagement from "../pages/ChurchManagement";
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         <Route path="/sermons" element={<Sermons />} />
         <Route path="/admin/sermons" element={<AdminSermons />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/admin/events" element={<AdminEvents />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/admin/gallery" element={<AdminGallery />} />
         <Route path="/admin/manage" element={<ChurchManagement />} />

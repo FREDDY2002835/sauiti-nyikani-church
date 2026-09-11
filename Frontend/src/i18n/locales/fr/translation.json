@@ -211,7 +211,24 @@
         "location": "Centre-ville de Mubende",
         "desc": "Servir nos voisins par la distribution de nourriture et la prière."
       }
-    ]
+    ],
+    "loading": "Chargement des événements...",
+    "noneYet": "Aucun événement n'a encore été ajouté. Revenez bientôt.",
+    "adminTitle": "Gérer les Événements",
+    "adminSubtitle": "Ajoutez un événement et il apparaît instantanément sur la page publique des Événements, dans les trois langues.",
+    "addNew": "Ajouter un Nouvel Événement",
+    "formTitle": "Titre",
+    "formDescription": "Description (facultatif)",
+    "formLocation": "Lieu (facultatif)",
+    "formDate": "Date",
+    "formTime": "Heure (ex. 9h00 et 11h00)",
+    "add": "Ajouter l'Événement",
+    "save": "Enregistrer les Modifications",
+    "adding": "Ajout en cours...",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "confirmDelete": "Supprimer cet événement ? Cette action est irréversible."
   },
   "gallery": {
     "badge": "Moments",
@@ -491,6 +508,7 @@
       "confirmDelete": "Supprimer cet enregistrement ?",
       "delete": "Supprimer"
     },
-    "manageSermons": "Gérer les Prédications"
+    "manageSermons": "Gérer les Prédications",
+    "manageEvents": "Gérer les Événements"
   }
 }

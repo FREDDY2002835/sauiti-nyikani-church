@@ -54,6 +54,12 @@ const ChurchManagement = () => {
           >
             {t("management.manageSermons")}
           </Link>
+          <Link
+            to="/admin/events"
+            className="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition"
+          >
+            {t("management.manageEvents")}
+          </Link>
         </div>
 
         {/* --- Tab switcher --- */}

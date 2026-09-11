@@ -33,10 +33,10 @@ export const uploadSermon = async (req, res) => {
     sermon_date,
   } = req.body;
 
-  if (!title_en || !title_fr || !title_sw || !speaker) {
+  if (!title_en || !speaker) {
     // Clean up the file we already saved, since we're rejecting this upload.
     fs.unlink(req.file.path, () => {});
-    return res.status(400).json({ error: "Title (in all three languages) and speaker are required." });
+    return res.status(400).json({ error: "Title and speaker are required." });
   }
 
   const fileUrl = `/uploads/${req.file.filename}`;
@@ -49,7 +49,7 @@ export const uploadSermon = async (req, res) => {
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
        RETURNING *`,
       [
-        title_en, title_fr, title_sw,
+        title_en, title_fr || title_en, title_sw || title_en,
         speaker,
         description_en || "", description_fr || "", description_sw || "",
         sermon_date || null,

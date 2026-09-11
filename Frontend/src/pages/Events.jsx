@@ -1,50 +1,107 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout";
 
+const BASE_URL = "http://127.0.0.1:5000";
+
 const Events = () => {
-  const { t } = useTranslation();
-  const list = t("events.list", { returnObjects: true });
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/events`);
+        if (!response.ok) throw new Error("Failed to load events");
+        const data = await response.json();
+        setEvents(data);
+      } catch (err) {
+        setError("Could not load events right now. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <MainLayout>
-    <div className="max-w-7xl mx-auto px-5 py-16 md:py-24">
-      <div className="text-center max-w-2xl mx-auto">
-        <span className="inline-block bg-blue-600/30 text-blue-100 px-4 py-2 rounded-full text-xs sm:text-sm">
-          {t("events.badge")}
-        </span>
-        <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          {t("events.title")}
-        </h1>
-        <p className="mt-5 text-sm sm:text-base text-slate-300 leading-7">
-          {t("events.subtitle")}
-        </p>
-      </div>
+      <div className="max-w-7xl mx-auto px-5 py-16 md:py-24">
+        <div className="text-center max-w-2xl mx-auto">
+          <span className="inline-block bg-blue-600/30 text-blue-100 px-4 py-2 rounded-full text-xs sm:text-sm">
+            {t("events.badge")}
+          </span>
+          <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
+            {t("events.title")}
+          </h1>
+          <p className="mt-5 text-sm sm:text-base text-slate-300 leading-7">
+            {t("events.subtitle")}
+          </p>
+        </div>
 
-      <div className="mt-16 space-y-6 max-w-3xl mx-auto">
-        {list.map((e, i) => (
-          <div
-            key={i}
-            className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 hover:border-blue-400/50 transition"
-          >
-            <h3 className="text-white font-bold text-lg mb-3">{e.title}</h3>
-            <p className="text-slate-300 text-sm leading-6 mb-4">{e.desc}</p>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
-              <span className="flex items-center gap-2">
-                <FaCalendarAlt className="text-blue-400" /> {e.date}
-              </span>
-              <span className="flex items-center gap-2">
-                <FaClock className="text-blue-400" /> {e.time}
-              </span>
-              <span className="flex items-center gap-2">
-                <FaMapMarkerAlt className="text-blue-400" /> {e.location}
-              </span>
-            </div>
+        {loading && (
+          <p className="mt-16 text-center text-slate-400">{t("events.loading")}</p>
+        )}
+
+        {error && (
+          <p className="mt-16 text-center text-red-400">{error}</p>
+        )}
+
+        {!loading && !error && events.length === 0 && (
+          <p className="mt-16 text-center text-slate-400">{t("events.noneYet")}</p>
+        )}
+
+        {!loading && !error && events.length > 0 && (
+          <div className="mt-16 space-y-6 max-w-3xl mx-auto">
+            {events.map((ev) => {
+              const title = ev[`title_${lang}`] || ev.title_en;
+              const description = ev[`description_${lang}`] || ev.description_en;
+              const location = ev[`location_${lang}`] || ev.location_en;
+
+              return (
+                <div
+                  key={ev.id}
+                  className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 hover:border-blue-400/50 transition"
+                >
+                  <h3 className="text-white font-bold text-lg mb-3">{title}</h3>
+                  {description && (
+                    <p className="text-slate-300 text-sm leading-6 mb-4">{description}</p>
+                  )}
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
+                    {ev.event_date && (
+                      <span className="flex items-center gap-2">
+                        <FaCalendarAlt className="text-blue-400" />
+                        {new Date(ev.event_date).toLocaleDateString(undefined, {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    )}
+                    {ev.event_time && (
+                      <span className="flex items-center gap-2">
+                        <FaClock className="text-blue-400" /> {ev.event_time}
+                      </span>
+                    )}
+                    {location && (
+                      <span className="flex items-center gap-2">
+                        <FaMapMarkerAlt className="text-blue-400" /> {location}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        ))}
+        )}
       </div>
-    </div>
-      </MainLayout>
+    </MainLayout>
   );
 };
 

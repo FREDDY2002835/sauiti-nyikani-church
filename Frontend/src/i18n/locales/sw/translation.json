@@ -211,7 +211,24 @@
         "location": "Katikati ya Mji wa Mubende",
         "desc": "Kuwatumikia majirani wetu kupitia ugawaji wa chakula na maombi."
       }
-    ]
+    ],
+    "loading": "Inapakia matukio...",
+    "noneYet": "Hakuna tukio lililowekwa bado. Rudi tena hivi karibuni.",
+    "adminTitle": "Simamia Matukio",
+    "adminSubtitle": "Ongeza tukio na litaonekana papo hapo kwenye ukurasa wa Matukio, katika lugha zote tatu.",
+    "addNew": "Ongeza Tukio Jipya",
+    "formTitle": "Kichwa",
+    "formDescription": "Maelezo (si lazima)",
+    "formLocation": "Mahali (si lazima)",
+    "formDate": "Tarehe",
+    "formTime": "Saa (mfano: Saa 3:00 na Saa 5:00 Asubuhi)",
+    "add": "Ongeza Tukio",
+    "save": "Hifadhi Mabadiliko",
+    "adding": "Inaongeza...",
+    "edit": "Hariri",
+    "delete": "Futa",
+    "cancel": "Ghairi",
+    "confirmDelete": "Futa tukio hili? Hatua hii haiwezi kutenduliwa."
   },
   "gallery": {
     "badge": "Kumbukumbu",
@@ -491,6 +508,7 @@
       "confirmDelete": "Futa kumbukumbu hii?",
       "delete": "Futa"
     },
-    "manageSermons": "Simamia Mahubiri"
+    "manageSermons": "Simamia Mahubiri",
+    "manageEvents": "Simamia Matukio"
   }
 }

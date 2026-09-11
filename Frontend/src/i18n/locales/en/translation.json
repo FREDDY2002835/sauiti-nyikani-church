@@ -211,7 +211,24 @@
         "location": "Mubende Town Center",
         "desc": "Serving our neighbors through food distribution and prayer."
       }
-    ]
+    ],
+    "loading": "Loading events...",
+    "noneYet": "No events have been added yet. Check back soon.",
+    "adminTitle": "Manage Events",
+    "adminSubtitle": "Add an event and it appears instantly on the public Events page, in all three languages.",
+    "addNew": "Add New Event",
+    "formTitle": "Title",
+    "formDescription": "Description (optional)",
+    "formLocation": "Location (optional)",
+    "formDate": "Date",
+    "formTime": "Time (e.g. 9:00 AM & 11:00 AM)",
+    "add": "Add Event",
+    "save": "Save Changes",
+    "adding": "Adding...",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "confirmDelete": "Delete this event? This cannot be undone."
   },
   "gallery": {
     "badge": "Moments",
@@ -491,6 +508,7 @@
       "confirmDelete": "Delete this record?",
       "delete": "Delete"
     },
-    "manageSermons": "Manage Sermons"
+    "manageSermons": "Manage Sermons",
+    "manageEvents": "Manage Events"
   }
 }
