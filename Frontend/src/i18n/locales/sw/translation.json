@@ -228,7 +228,8 @@
     "edit": "Hariri",
     "delete": "Futa",
     "cancel": "Ghairi",
-    "confirmDelete": "Futa tukio hili? Hatua hii haiwezi kutenduliwa."
+    "confirmDelete": "Futa tukio hili? Hatua hii haiwezi kutenduliwa.",
+    "pastEvent": "Tukio Lililopita"
   },
   "gallery": {
     "badge": "Kumbukumbu",

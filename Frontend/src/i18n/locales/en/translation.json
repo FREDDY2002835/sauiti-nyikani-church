@@ -228,7 +228,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "confirmDelete": "Delete this event? This cannot be undone."
+    "confirmDelete": "Delete this event? This cannot be undone.",
+    "pastEvent": "Past Event"
   },
   "gallery": {
     "badge": "Moments",

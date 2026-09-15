@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout";
 
 const BASE_URL = "http://127.0.0.1:5000";
@@ -12,6 +12,7 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -64,36 +65,60 @@ const Events = () => {
               const description = ev[`description_${lang}`] || ev.description_en;
               const location = ev[`location_${lang}`] || ev.location_en;
 
+              // Compare by calendar day only (ignoring time-of-day) so an
+              // event dated today doesn't get marked "past" the moment
+              // the clock ticks past midnight local time.
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const isPast = ev.event_date && new Date(ev.event_date) < today;
+
               return (
                 <div
                   key={ev.id}
-                  className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 hover:border-blue-400/50 transition"
+                  className={`relative bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 overflow-hidden hover:border-blue-400/50 transition ${
+                    isPast ? "opacity-60" : ""
+                  }`}
                 >
-                  <h3 className="text-white font-bold text-lg mb-3">{title}</h3>
-                  {description && (
-                    <p className="text-slate-300 text-sm leading-6 mb-4">{description}</p>
+                  {isPast && (
+                    <span className="absolute top-4 left-4 z-10 bg-slate-800/90 text-slate-200 text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                      {t("events.pastEvent")}
+                    </span>
                   )}
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
-                    {ev.event_date && (
-                      <span className="flex items-center gap-2">
-                        <FaCalendarAlt className="text-blue-400" />
-                        {new Date(ev.event_date).toLocaleDateString(undefined, {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </span>
+                  {ev.image_url && (
+                    <img
+                      src={`${BASE_URL}${ev.image_url}`}
+                      alt={title}
+                      onClick={() => setLightboxImage(`${BASE_URL}${ev.image_url}`)}
+                      className="w-full max-h-[420px] object-contain bg-black/20 cursor-pointer hover:opacity-90 transition"
+                    />
+                  )}
+                  <div className="p-6 sm:p-8">
+                    <h3 className="text-white font-bold text-lg mb-3">{title}</h3>
+                    {description && (
+                      <p className="text-slate-300 text-sm leading-6 mb-4">{description}</p>
                     )}
-                    {ev.event_time && (
-                      <span className="flex items-center gap-2">
-                        <FaClock className="text-blue-400" /> {ev.event_time}
-                      </span>
-                    )}
-                    {location && (
-                      <span className="flex items-center gap-2">
-                        <FaMapMarkerAlt className="text-blue-400" /> {location}
-                      </span>
-                    )}
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
+                      {ev.event_date && (
+                        <span className="flex items-center gap-2">
+                          <FaCalendarAlt className="text-blue-400" />
+                          {new Date(ev.event_date).toLocaleDateString(undefined, {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </span>
+                      )}
+                      {ev.event_time && (
+                        <span className="flex items-center gap-2">
+                          <FaClock className="text-blue-400" /> {ev.event_time}
+                        </span>
+                      )}
+                      {location && (
+                        <span className="flex items-center gap-2">
+                          <FaMapMarkerAlt className="text-blue-400" /> {location}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
@@ -101,6 +126,27 @@ const Events = () => {
           </div>
         )}
       </div>
+
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-5"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-5 right-5 text-white/80 hover:text-white text-2xl"
+            aria-label="Close"
+          >
+            <FaTimes />
+          </button>
+          <img
+            src={lightboxImage}
+            alt=""
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+          />
+        </div>
+      )}
     </MainLayout>
   );
 };

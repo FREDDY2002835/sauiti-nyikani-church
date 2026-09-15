@@ -395,9 +395,12 @@ export const initDb = async () => {
       location_sw TEXT DEFAULT '',
       event_date DATE,
       event_time TEXT DEFAULT '',
+      image_url TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+  // Covers events tables created before this column existed.
+  await pool.query(`ALTER TABLE events ADD COLUMN IF NOT EXISTS image_url TEXT DEFAULT ''`);
 
   console.log("Database tables ready.");
 };

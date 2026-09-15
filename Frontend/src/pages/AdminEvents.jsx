@@ -13,6 +13,8 @@ const emptyForm = {
   event_time: "",
 };
 
+const BASE_URL_FOR_IMAGES = "http://127.0.0.1:5000";
+
 const AdminEvents = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -24,6 +26,8 @@ const AdminEvents = () => {
 
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
+  const [file, setFile] = useState(null);
+  const [existingImageUrl, setExistingImageUrl] = useState("");
 
   const fetchEvents = async () => {
     setLoading(true);
@@ -49,6 +53,8 @@ const AdminEvents = () => {
   const resetForm = () => {
     setForm(emptyForm);
     setEditingId(null);
+    setFile(null);
+    setExistingImageUrl("");
   };
 
   const handleSubmit = async (e) => {
@@ -60,11 +66,17 @@ const AdminEvents = () => {
       const url = editingId ? `${API_URL}/${editingId}` : API_URL;
       const method = editingId ? "PUT" : "POST";
 
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const body = new FormData();
+      body.append("title_en", form.title_en);
+      body.append("description_en", form.description_en);
+      body.append("location_en", form.location_en);
+      body.append("event_date", form.event_date);
+      body.append("event_time", form.event_time);
+      if (file) {
+        body.append("image", file);
+      }
+
+      const response = await fetch(url, { method, body });
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
@@ -89,6 +101,8 @@ const AdminEvents = () => {
       event_time: event.event_time || "",
     });
     setEditingId(event.id);
+    setFile(null);
+    setExistingImageUrl(event.image_url || "");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -180,6 +194,26 @@ const AdminEvents = () => {
             />
           </div>
 
+          <div>
+            <label className="block text-sm text-slate-300 mb-2">Event Poster / Image (optional)</label>
+            {existingImageUrl && !file && (
+              <img
+                src={`${BASE_URL_FOR_IMAGES}${existingImageUrl}`}
+                alt="Current poster"
+                className="w-32 h-32 object-cover rounded-lg mb-3 border border-white/20"
+              />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+              className="w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white file:font-semibold hover:file:bg-blue-700 file:cursor-pointer"
+            />
+            {editingId && (
+              <p className="text-slate-500 text-xs mt-2">Leave empty to keep the current image.</p>
+            )}
+          </div>
+
           <div className="flex gap-3">
             <button
               type="submit"
@@ -212,15 +246,24 @@ const AdminEvents = () => {
                 key={ev.id}
                 className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-start justify-between gap-4"
               >
-                <div className="min-w-0">
-                  <h3 className="text-white font-semibold truncate">{ev[`title_${lang}`] || ev.title_en}</h3>
-                  <p className="text-slate-400 text-sm mt-1">
-                    {ev.event_date && new Date(ev.event_date).toLocaleDateString()}
-                    {ev.event_time && ` · ${ev.event_time}`}
-                  </p>
-                  {(ev[`location_${lang}`] || ev.location_en) && (
-                    <p className="text-slate-500 text-xs mt-1">{ev[`location_${lang}`] || ev.location_en}</p>
+                <div className="flex items-start gap-4 min-w-0">
+                  {ev.image_url && (
+                    <img
+                      src={`${BASE_URL_FOR_IMAGES}${ev.image_url}`}
+                      alt=""
+                      className="w-14 h-14 object-cover rounded-lg shrink-0"
+                    />
                   )}
+                  <div className="min-w-0">
+                    <h3 className="text-white font-semibold truncate">{ev[`title_${lang}`] || ev.title_en}</h3>
+                    <p className="text-slate-400 text-sm mt-1">
+                      {ev.event_date && new Date(ev.event_date).toLocaleDateString()}
+                      {ev.event_time && ` · ${ev.event_time}`}
+                    </p>
+                    {(ev[`location_${lang}`] || ev.location_en) && (
+                      <p className="text-slate-500 text-xs mt-1">{ev[`location_${lang}`] || ev.location_en}</p>
+                    )}
+                  </div>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <button

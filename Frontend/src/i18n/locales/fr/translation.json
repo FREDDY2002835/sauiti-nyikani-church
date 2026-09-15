@@ -228,7 +228,8 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "cancel": "Annuler",
-    "confirmDelete": "Supprimer cet événement ? Cette action est irréversible."
+    "confirmDelete": "Supprimer cet événement ? Cette action est irréversible.",
+    "pastEvent": "Événement Passé"
   },
   "gallery": {
     "badge": "Moments",

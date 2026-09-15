@@ -20,13 +20,17 @@ export const getEvents = async (req, res) => {
   }
 };
 
-// POST /api/events - add a new event (English text in, auto-translated on the way in)
+// POST /api/events - add a new event (English text in, auto-translated on
+// the way in). The poster image is optional - if none is uploaded, the
+// event just has no image, that's fine.
 export const createEvent = async (req, res) => {
   const { title_en, description_en, location_en, event_date, event_time } = req.body;
 
   if (!title_en) {
     return res.status(400).json({ error: "A title is required." });
   }
+
+  const imageUrl = req.file ? `/uploads/${req.file.filename}` : "";
 
   try {
     const [titleTr, descTr, locationTr] = await Promise.all([
@@ -38,14 +42,14 @@ export const createEvent = async (req, res) => {
     const result = await pool.query(
       `INSERT INTO events
         (title_en, title_fr, title_sw, description_en, description_fr, description_sw,
-         location_en, location_fr, location_sw, event_date, event_time)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         location_en, location_fr, location_sw, event_date, event_time, image_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
        RETURNING *`,
       [
         title_en, titleTr.fr, titleTr.sw,
         description_en || "", descTr.fr, descTr.sw,
         location_en || "", locationTr.fr, locationTr.sw,
-        event_date || null, event_time || "",
+        event_date || null, event_time || "", imageUrl,
       ]
     );
     res.status(201).json(result.rows[0]);
@@ -55,7 +59,9 @@ export const createEvent = async (req, res) => {
   }
 };
 
-// PUT /api/events/:id - edit an existing event (re-translates on every save)
+// PUT /api/events/:id - edit an existing event (re-translates on every
+// save). If a new image is uploaded it replaces the old one; if not,
+// whatever image the event already had (or didn't have) stays as-is.
 export const updateEvent = async (req, res) => {
   const { id } = req.params;
   const { title_en, description_en, location_en, event_date, event_time } = req.body;
@@ -65,6 +71,17 @@ export const updateEvent = async (req, res) => {
   }
 
   try {
+    let imageUrl;
+    if (req.file) {
+      imageUrl = `/uploads/${req.file.filename}`;
+    } else {
+      const existing = await pool.query("SELECT image_url FROM events WHERE id = $1", [id]);
+      if (existing.rows.length === 0) {
+        return res.status(404).json({ error: "Event not found." });
+      }
+      imageUrl = existing.rows[0].image_url;
+    }
+
     const [titleTr, descTr, locationTr] = await Promise.all([
       translateToFrenchAndSwahili(title_en),
       translateToFrenchAndSwahili(description_en || ""),
@@ -76,14 +93,14 @@ export const updateEvent = async (req, res) => {
         title_en = $1, title_fr = $2, title_sw = $3,
         description_en = $4, description_fr = $5, description_sw = $6,
         location_en = $7, location_fr = $8, location_sw = $9,
-        event_date = $10, event_time = $11
-       WHERE id = $12
+        event_date = $10, event_time = $11, image_url = $12
+       WHERE id = $13
        RETURNING *`,
       [
         title_en, titleTr.fr, titleTr.sw,
         description_en || "", descTr.fr, descTr.sw,
         location_en || "", locationTr.fr, locationTr.sw,
-        event_date || null, event_time || "",
+        event_date || null, event_time || "", imageUrl,
         id,
       ]
     );
