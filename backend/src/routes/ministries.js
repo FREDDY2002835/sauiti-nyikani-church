@@ -10,6 +10,9 @@ import {
   getMembers, addMember, deleteMember,
   getActivities, addActivity, deleteActivity,
   getPlans, addPlan, deletePlan,
+  getCommittee, addCommitteeMember, deleteCommitteeMember,
+  getServices, addService, deleteService,
+  getServiceAttendance, addServiceAttendance, removeServiceAttendance,
 } from "../controllers/ministryDetailsController.js";
 
 const router = express.Router();
@@ -31,5 +34,17 @@ router.delete("/activities/:activityId", deleteActivity);
 router.get("/:id/plans", getPlans);
 router.post("/:id/plans", addPlan);
 router.delete("/plans/:planId", deletePlan);
+
+router.get("/:id/committee", getCommittee);
+router.post("/:id/committee", addCommitteeMember);
+router.delete("/committee/:committeeId", deleteCommitteeMember);
+
+router.get("/:id/services", getServices);
+router.post("/:id/services", addService);
+router.delete("/services/:serviceId", deleteService);
+
+router.get("/services/:serviceId/attendance", getServiceAttendance);
+router.post("/services/:serviceId/attendance", addServiceAttendance);
+router.delete("/service-attendance/:attendanceId", removeServiceAttendance);
 
 export default router;

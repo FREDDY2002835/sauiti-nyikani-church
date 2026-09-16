@@ -443,7 +443,23 @@
         "planPlaceholder": "mfano: Kambi ya vijana Desemba",
         "add": "Ongeza",
         "empty": "Hakuna kilichoongezwa bado.",
-        "remove": "Ondoa"
+        "remove": "Ondoa",
+        "committee": "Kamati",
+        "committeeNamePlaceholder": "Jina kamili",
+        "committeeRolePlaceholder": "Wadhifa (mfano: Mwenyekiti)",
+        "addCommittee": "Ongeza",
+        "servicesTitle": "Mahudhurio ya Huduma",
+        "newService": "Andika Huduma Mpya",
+        "date": "Tarehe",
+        "notes": "Maelezo (si lazima)",
+        "addService": "Ongeza Huduma",
+        "noServices": "Hakuna huduma iliyoandikwa bado.",
+        "selectService": "Chagua huduma kuweka mahudhurio",
+        "attendance": "Mahudhurio",
+        "markPresent": "Weka Aliyehudhuria",
+        "chooseMember": "Chagua mwanachama...",
+        "noAttendance": "Hakuna mahudhurio yaliyoandikwa kwa huduma hii bado.",
+        "confirmDeleteService": "Futa huduma hii na mahudhurio yake?"
       }
     },
     "elders": {

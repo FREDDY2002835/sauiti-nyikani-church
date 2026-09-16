@@ -162,3 +162,166 @@ export const deletePlan = async (req, res) => {
     res.status(500).json({ error: "Something went wrong." });
   }
 };
+
+// --- Committee ---
+
+export const getCommittee = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM ministry_committee WHERE ministry_id = $1 ORDER BY name ASC",
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Failed to fetch ministry committee:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const addCommitteeMember = async (req, res) => {
+  const { id } = req.params;
+  const { name, role } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "A name is required." });
+  }
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO ministry_committee (ministry_id, name, role) VALUES ($1, $2, $3) RETURNING *",
+      [id, name, role || ""]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Failed to add committee member:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const deleteCommitteeMember = async (req, res) => {
+  const { committeeId } = req.params;
+  try {
+    const result = await pool.query(
+      "DELETE FROM ministry_committee WHERE id = $1 RETURNING *",
+      [committeeId]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Committee member not found." });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Failed to remove committee member:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+// --- Services (each is one occasion the ministry served/met) ---
+
+export const getServices = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM ministry_services WHERE ministry_id = $1 ORDER BY service_date DESC",
+      [id]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Failed to fetch ministry services:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const addService = async (req, res) => {
+  const { id } = req.params;
+  const { service_date, notes } = req.body;
+
+  if (!service_date) {
+    return res.status(400).json({ error: "A date is required." });
+  }
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO ministry_services (ministry_id, service_date, notes) VALUES ($1, $2, $3) RETURNING *",
+      [id, service_date, notes || ""]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Failed to add ministry service:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const deleteService = async (req, res) => {
+  const { serviceId } = req.params;
+  try {
+    const result = await pool.query(
+      "DELETE FROM ministry_services WHERE id = $1 RETURNING *",
+      [serviceId]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Service not found." });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Failed to delete ministry service:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+// --- Service attendance (who from the ministry's Members list showed up) ---
+
+export const getServiceAttendance = async (req, res) => {
+  const { serviceId } = req.params;
+  try {
+    const result = await pool.query(
+      `SELECT ministry_service_attendance.id, ministry_service_attendance.member_id, ministry_members.name
+       FROM ministry_service_attendance
+       JOIN ministry_members ON ministry_members.id = ministry_service_attendance.member_id
+       WHERE ministry_service_attendance.service_id = $1
+       ORDER BY ministry_members.name ASC`,
+      [serviceId]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Failed to fetch service attendance:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const addServiceAttendance = async (req, res) => {
+  const { serviceId } = req.params;
+  const { member_id } = req.body;
+
+  if (!member_id) {
+    return res.status(400).json({ error: "A member is required." });
+  }
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO ministry_service_attendance (service_id, member_id) VALUES ($1, $2) RETURNING *",
+      [serviceId, member_id]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Failed to mark service attendance:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+export const removeServiceAttendance = async (req, res) => {
+  const { attendanceId } = req.params;
+  try {
+    const result = await pool.query(
+      "DELETE FROM ministry_service_attendance WHERE id = $1 RETURNING *",
+      [attendanceId]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Attendance record not found." });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Failed to remove attendance record:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};

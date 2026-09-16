@@ -98,6 +98,41 @@ export const initDb = async () => {
     );
   `);
 
+  // --- Ministry committee, services, and service attendance - applies
+  // to every ministry via its ministry_id ---
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_committee (
+      id SERIAL PRIMARY KEY,
+      ministry_id INTEGER NOT NULL REFERENCES ministries(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      role TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_services (
+      id SERIAL PRIMARY KEY,
+      ministry_id INTEGER NOT NULL REFERENCES ministries(id) ON DELETE CASCADE,
+      service_date DATE NOT NULL,
+      notes TEXT DEFAULT '',
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  // Attendance links back to the ministry's own "members" roster (the
+  // same list managed in the Members section), so attendance is always
+  // marked against someone already listed as part of the ministry.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS ministry_service_attendance (
+      id SERIAL PRIMARY KEY,
+      service_id INTEGER NOT NULL REFERENCES ministry_services(id) ON DELETE CASCADE,
+      member_id INTEGER NOT NULL REFERENCES ministry_members(id) ON DELETE CASCADE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS gallery_images (
       id SERIAL PRIMARY KEY,

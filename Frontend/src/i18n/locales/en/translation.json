@@ -443,7 +443,23 @@
         "planPlaceholder": "e.g. Youth camp in December",
         "add": "Add",
         "empty": "Nothing added yet.",
-        "remove": "Remove"
+        "remove": "Remove",
+        "committee": "Committee",
+        "committeeNamePlaceholder": "Full name",
+        "committeeRolePlaceholder": "Role (e.g. Chairperson)",
+        "addCommittee": "Add",
+        "servicesTitle": "Service Attendance",
+        "newService": "Log a New Service",
+        "date": "Date",
+        "notes": "Notes (optional)",
+        "addService": "Add Service",
+        "noServices": "No services logged yet.",
+        "selectService": "Select a service to mark attendance",
+        "attendance": "Attendance",
+        "markPresent": "Mark Present",
+        "chooseMember": "Choose a member...",
+        "noAttendance": "No attendance recorded for this service yet.",
+        "confirmDeleteService": "Delete this service and its attendance records?"
       }
     },
     "elders": {

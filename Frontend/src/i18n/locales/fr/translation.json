@@ -443,7 +443,23 @@
         "planPlaceholder": "ex. Camp des jeunes en décembre",
         "add": "Ajouter",
         "empty": "Rien n'a encore été ajouté.",
-        "remove": "Retirer"
+        "remove": "Retirer",
+        "committee": "Comité",
+        "committeeNamePlaceholder": "Nom complet",
+        "committeeRolePlaceholder": "Rôle (ex. Président)",
+        "addCommittee": "Ajouter",
+        "servicesTitle": "Présence aux Services",
+        "newService": "Enregistrer un Nouveau Service",
+        "date": "Date",
+        "notes": "Notes (facultatif)",
+        "addService": "Ajouter le Service",
+        "noServices": "Aucun service enregistré pour le moment.",
+        "selectService": "Sélectionnez un service pour marquer la présence",
+        "attendance": "Présence",
+        "markPresent": "Marquer Présent",
+        "chooseMember": "Choisissez un membre...",
+        "noAttendance": "Aucune présence enregistrée pour ce service.",
+        "confirmDeleteService": "Supprimer ce service et ses présences ?"
       }
     },
     "elders": {

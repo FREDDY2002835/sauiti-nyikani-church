@@ -63,13 +63,29 @@ const AdminMinistryDetail = () => {
   const [members, setMembers] = useState([]);
   const [activities, setActivities] = useState([]);
   const [plans, setPlans] = useState([]);
+  const [committee, setCommittee] = useState([]);
+
+  const [services, setServices] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
+  const [attendance, setAttendance] = useState([]);
+
+  // Committee form (name + role together)
+  const [committeeName, setCommitteeName] = useState("");
+  const [committeeRole, setCommitteeRole] = useState("");
+
+  // New-service form
+  const [newServiceDate, setNewServiceDate] = useState("");
+  const [newServiceNotes, setNewServiceNotes] = useState("");
+  const [chosenMemberId, setChosenMemberId] = useState("");
 
   const fetchAll = async () => {
-    const [ministryRes, membersRes, activitiesRes, plansRes] = await Promise.all([
+    const [ministryRes, membersRes, activitiesRes, plansRes, committeeRes, servicesRes] = await Promise.all([
       fetch(`${BASE_URL}/${id}`),
       fetch(`${BASE_URL}/${id}/members`),
       fetch(`${BASE_URL}/${id}/activities`),
       fetch(`${BASE_URL}/${id}/plans`),
+      fetch(`${BASE_URL}/${id}/committee`),
+      fetch(`${BASE_URL}/${id}/services`),
     ]);
 
     const ministry = await ministryRes.json();
@@ -77,6 +93,8 @@ const AdminMinistryDetail = () => {
     setMembers(await membersRes.json());
     setActivities(await activitiesRes.json());
     setPlans(await plansRes.json());
+    setCommittee(await committeeRes.json());
+    setServices(await servicesRes.json());
   };
 
   useEffect(() => {
@@ -126,6 +144,84 @@ const AdminMinistryDetail = () => {
     fetchAll();
   };
 
+  // --- Committee ---
+
+  const handleAddCommittee = async (e) => {
+    e.preventDefault();
+    if (!committeeName.trim()) return;
+
+    await fetch(`${BASE_URL}/${id}/committee`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: committeeName, role: committeeRole }),
+    });
+
+    setCommitteeName("");
+    setCommitteeRole("");
+    fetchAll();
+  };
+
+  const deleteCommitteeMember = async (committeeId) => {
+    await fetch(`${BASE_URL}/committee/${committeeId}`, { method: "DELETE" });
+    fetchAll();
+  };
+
+  // --- Services + attendance ---
+
+  const fetchAttendance = async (serviceId) => {
+    const res = await fetch(`${BASE_URL}/services/${serviceId}/attendance`);
+    setAttendance(await res.json());
+  };
+
+  const handleSelectService = (service) => {
+    setSelectedService(service);
+    fetchAttendance(service.id);
+  };
+
+  const handleAddService = async (e) => {
+    e.preventDefault();
+    if (!newServiceDate) return;
+
+    await fetch(`${BASE_URL}/${id}/services`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ service_date: newServiceDate, notes: newServiceNotes }),
+    });
+
+    setNewServiceDate("");
+    setNewServiceNotes("");
+    fetchAll();
+  };
+
+  const handleDeleteService = async (serviceId) => {
+    if (!window.confirm(t("management.ministriesAdmin.detail.confirmDeleteService"))) return;
+    await fetch(`${BASE_URL}/services/${serviceId}`, { method: "DELETE" });
+    if (selectedService?.id === serviceId) {
+      setSelectedService(null);
+      setAttendance([]);
+    }
+    fetchAll();
+  };
+
+  const handleMarkPresent = async (e) => {
+    e.preventDefault();
+    if (!chosenMemberId || !selectedService) return;
+
+    await fetch(`${BASE_URL}/services/${selectedService.id}/attendance`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ member_id: chosenMemberId }),
+    });
+
+    setChosenMemberId("");
+    fetchAttendance(selectedService.id);
+  };
+
+  const handleRemoveAttendance = async (attendanceId) => {
+    await fetch(`${BASE_URL}/service-attendance/${attendanceId}`, { method: "DELETE" });
+    fetchAttendance(selectedService.id);
+  };
+
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto px-5 py-16 md:py-24">
@@ -156,6 +252,49 @@ const AdminMinistryDetail = () => {
             onDelete={deleteMember}
           />
 
+          {/* --- Committee (name + role) --- */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8">
+            <h2 className="text-white font-bold text-lg mb-4">{t("management.ministriesAdmin.detail.committee")}</h2>
+
+            <form onSubmit={handleAddCommittee} className="flex flex-col sm:flex-row gap-2 mb-5">
+              <input
+                type="text"
+                value={committeeName}
+                onChange={(e) => setCommitteeName(e.target.value)}
+                placeholder={t("management.ministriesAdmin.detail.committeeNamePlaceholder")}
+                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+              />
+              <input
+                type="text"
+                value={committeeRole}
+                onChange={(e) => setCommitteeRole(e.target.value)}
+                placeholder={t("management.ministriesAdmin.detail.committeeRolePlaceholder")}
+                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+              />
+              <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition shrink-0">
+                {t("management.ministriesAdmin.detail.addCommittee")}
+              </button>
+            </form>
+
+            {committee.length === 0 ? (
+              <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.empty")}</p>
+            ) : (
+              <div className="space-y-2">
+                {committee.map((c) => (
+                  <div key={c.id} className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex justify-between items-center gap-3">
+                    <span className="text-white text-sm">
+                      {c.name}
+                      {c.role && <span className="text-slate-400"> — {c.role}</span>}
+                    </span>
+                    <button onClick={() => deleteCommitteeMember(c.id)} className="text-red-300 hover:text-red-200 text-xs shrink-0">
+                      {t("management.ministriesAdmin.detail.remove")}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           <ListSection
             title={t("management.ministriesAdmin.detail.activities")}
             items={activities}
@@ -179,6 +318,109 @@ const AdminMinistryDetail = () => {
             onAdd={addPlan}
             onDelete={deletePlan}
           />
+
+          {/* --- Service attendance --- */}
+          <div>
+            <h2 className="text-white font-bold text-lg mb-4">{t("management.ministriesAdmin.detail.servicesTitle")}</h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <form onSubmit={handleAddService} className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 space-y-4 mb-5">
+                  <h3 className="text-white font-semibold text-sm">{t("management.ministriesAdmin.detail.newService")}</h3>
+
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.detail.date")}</label>
+                    <input
+                      type="date" value={newServiceDate} onChange={(e) => setNewServiceDate(e.target.value)} required
+                      className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1">{t("management.ministriesAdmin.detail.notes")}</label>
+                    <input
+                      type="text" value={newServiceNotes} onChange={(e) => setNewServiceNotes(e.target.value)}
+                      className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+                    />
+                  </div>
+
+                  <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
+                    {t("management.ministriesAdmin.detail.addService")}
+                  </button>
+                </form>
+
+                {services.length === 0 ? (
+                  <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.noServices")}</p>
+                ) : (
+                  <div className="space-y-2">
+                    {services.map((s) => (
+                      <div
+                        key={s.id}
+                        onClick={() => handleSelectService(s)}
+                        className={`cursor-pointer rounded-xl p-4 border transition flex justify-between items-center ${
+                          selectedService?.id === s.id
+                            ? "bg-blue-600/20 border-blue-500/50"
+                            : "bg-white/5 border-white/10 hover:border-white/20"
+                        }`}
+                      >
+                        <div>
+                          <p className="text-white font-semibold text-sm">{s.service_date?.slice(0, 10)}</p>
+                          {s.notes && <p className="text-slate-400 text-xs mt-1">{s.notes}</p>}
+                        </div>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleDeleteService(s.id); }}
+                          className="text-red-300 hover:text-red-200 text-xs shrink-0"
+                        >
+                          {t("management.ministriesAdmin.detail.remove")}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <h3 className="text-white font-semibold text-sm mb-3">{t("management.ministriesAdmin.detail.attendance")}</h3>
+
+                {!selectedService ? (
+                  <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.selectService")}</p>
+                ) : (
+                  <>
+                    <form onSubmit={handleMarkPresent} className="flex gap-2 mb-5">
+                      <select
+                        value={chosenMemberId}
+                        onChange={(e) => setChosenMemberId(e.target.value)}
+                        className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+                      >
+                        <option value="" className="text-black">{t("management.ministriesAdmin.detail.chooseMember")}</option>
+                        {members.map((m) => (
+                          <option key={m.id} value={m.id} className="text-black">{m.name}</option>
+                        ))}
+                      </select>
+                      <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
+                        {t("management.ministriesAdmin.detail.markPresent")}
+                      </button>
+                    </form>
+
+                    {attendance.length === 0 ? (
+                      <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.noAttendance")}</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {attendance.map((a) => (
+                          <div key={a.id} className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex justify-between items-center">
+                            <span className="text-white text-sm">{a.name}</span>
+                            <button onClick={() => handleRemoveAttendance(a.id)} className="text-red-300 hover:text-red-200 text-xs">
+                              {t("management.ministriesAdmin.detail.remove")}
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </MainLayout>
