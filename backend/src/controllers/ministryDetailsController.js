@@ -275,9 +275,9 @@ export const getServiceAttendance = async (req, res) => {
   const { serviceId } = req.params;
   try {
     const result = await pool.query(
-      `SELECT ministry_service_attendance.id, ministry_service_attendance.member_id, ministry_members.name
+      `SELECT ministry_service_attendance.id, ministry_service_attendance.ministry_member_id AS member_id, ministry_members.name
        FROM ministry_service_attendance
-       JOIN ministry_members ON ministry_members.id = ministry_service_attendance.member_id
+       JOIN ministry_members ON ministry_members.id = ministry_service_attendance.ministry_member_id
        WHERE ministry_service_attendance.service_id = $1
        ORDER BY ministry_members.name ASC`,
       [serviceId]
@@ -299,7 +299,7 @@ export const addServiceAttendance = async (req, res) => {
 
   try {
     const result = await pool.query(
-      "INSERT INTO ministry_service_attendance (service_id, member_id) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO ministry_service_attendance (service_id, ministry_member_id) VALUES ($1, $2) RETURNING *",
       [serviceId, member_id]
     );
     res.status(201).json(result.rows[0]);

@@ -362,7 +362,9 @@
       "noAttendees": "Hakuna aliyeandikwa bado kwa kipindi hiki.",
       "deleteSession": "Futa Kipindi",
       "confirmDeleteSession": "Futa kipindi hiki na mahudhurio yake?",
-      "remove": "Ondoa"
+      "remove": "Ondoa",
+      "verseRead": "Aya Iliyosomwa",
+      "verseReadPlaceholder": "mfano: Mathayo 26:26-28"
     },
     "choir": {
       "heading": "Usimamizi wa Kwaya",
@@ -403,7 +405,10 @@
       "total": "Jumla",
       "noRecords": "Hakuna kumbukumbu za zaka kwa kipindi hiki.",
       "confirmDelete": "Futa kumbukumbu hii?",
-      "delete": "Futa"
+      "delete": "Futa",
+      "quickTitle": "Uandishi wa Haraka kwa Tarehe",
+      "quickHint": "Chagua waliolipa, ingiza kiasi chao, kisha hifadhi wote kwa pamoja.",
+      "quickSave": "Hifadhi Wote"
     },
     "manageMinistries": "Simamia Huduma",
     "manageGallery": "Simamia Picha",

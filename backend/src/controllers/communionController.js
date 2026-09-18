@@ -18,7 +18,7 @@ export const getSessions = async (req, res) => {
 
 // POST /api/communion/sessions - schedule a new Communion day
 export const createSession = async (req, res) => {
-  const { session_date, notes } = req.body;
+  const { session_date, notes, verse_read } = req.body;
 
   if (!session_date) {
     return res.status(400).json({ error: "A date is required." });
@@ -26,9 +26,9 @@ export const createSession = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO communion_sessions (session_date, notes)
-       VALUES ($1, $2) RETURNING *`,
-      [session_date, notes || ""]
+      `INSERT INTO communion_sessions (session_date, notes, verse_read)
+       VALUES ($1, $2, $3) RETURNING *`,
+      [session_date, notes || "", verse_read || ""]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {

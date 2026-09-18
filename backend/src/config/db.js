@@ -128,10 +128,28 @@ export const initDb = async () => {
     CREATE TABLE IF NOT EXISTS ministry_service_attendance (
       id SERIAL PRIMARY KEY,
       service_id INTEGER NOT NULL REFERENCES ministry_services(id) ON DELETE CASCADE,
-      member_id INTEGER NOT NULL REFERENCES ministry_members(id) ON DELETE CASCADE,
+      ministry_member_id INTEGER NOT NULL REFERENCES ministry_members(id) ON DELETE CASCADE,
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+
+  // --- Migration for anyone whose ministry_service_attendance table
+  // already existed before the ministry_member_id column was added to it.
+  const hasMinistryMemberIdColumn = await pool.query(`
+    SELECT column_name FROM information_schema.columns
+    WHERE table_name = 'ministry_service_attendance' AND column_name = 'ministry_member_id'
+  `);
+  if (hasMinistryMemberIdColumn.rows.length === 0) {
+    console.log("Adding missing ministry_member_id column to ministry_service_attendance...");
+    await pool.query(`
+      ALTER TABLE ministry_service_attendance
+      ADD COLUMN ministry_member_id INTEGER REFERENCES ministry_members(id) ON DELETE CASCADE
+    `);
+  }
+
+  // Clean-up: an earlier fix mistakenly added a "member_id" column (wrong
+  // name) alongside the real "ministry_member_id" column. Remove it if present.
+  await pool.query(`ALTER TABLE ministry_service_attendance DROP COLUMN IF EXISTS member_id`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS gallery_images (
@@ -219,9 +237,14 @@ export const initDb = async () => {
       id SERIAL PRIMARY KEY,
       session_date DATE NOT NULL,
       notes TEXT DEFAULT '',
+      verse_read TEXT DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     );
   `);
+
+  // --- Migration for anyone who already had this table without the
+  // verse_read column (added after the table was first created).
+  await pool.query(`ALTER TABLE communion_sessions ADD COLUMN IF NOT EXISTS verse_read TEXT DEFAULT ''`);
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS communion_attendance (

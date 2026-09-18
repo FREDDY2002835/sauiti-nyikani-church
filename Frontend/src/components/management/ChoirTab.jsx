@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { FaCheck } from "react-icons/fa";
 
 const API_URL = "http://127.0.0.1:5000/api/choir";
 
@@ -19,7 +20,6 @@ const ChoirTab = () => {
   const [attendance, setAttendance] = useState([]);
   const [newDate, setNewDate] = useState("");
   const [newNotes, setNewNotes] = useState("");
-  const [chosenMemberId, setChosenMemberId] = useState("");
 
   const fetchMembers = async (group) => {
     const res = await fetch(`${API_URL}/members?group=${group}`);
@@ -41,8 +41,13 @@ const ChoirTab = () => {
   }, [selectedGroup]);
 
   const fetchAttendance = async (sessionId) => {
-    const res = await fetch(`${API_URL}/sessions/${sessionId}/attendance`);
-    setAttendance(await res.json());
+    try {
+      const res = await fetch(`${API_URL}/sessions/${sessionId}/attendance`);
+      const data = await res.json();
+      setAttendance(Array.isArray(data) ? data : []);
+    } catch {
+      setAttendance([]);
+    }
   };
 
   const handleSelectSession = (session) => {
@@ -104,22 +109,16 @@ const ChoirTab = () => {
     fetchSessions(selectedGroup);
   };
 
-  const handleMarkPresent = async (e) => {
-    e.preventDefault();
-    if (!chosenMemberId || !selectedSession) return;
-
-    await fetch(`${API_URL}/sessions/${selectedSession.id}/attendance`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ choir_member_id: chosenMemberId }),
-    });
-
-    setChosenMemberId("");
-    fetchAttendance(selectedSession.id);
-  };
-
-  const handleRemoveAttendance = async (id) => {
-    await fetch(`${API_URL}/attendance/${id}`, { method: "DELETE" });
+  const handleToggleAttendance = async (member, existingRecord) => {
+    if (existingRecord) {
+      await fetch(`${API_URL}/attendance/${existingRecord.id}`, { method: "DELETE" });
+    } else {
+      await fetch(`${API_URL}/sessions/${selectedSession.id}/attendance`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ choir_member_id: member.id }),
+      });
+    }
     fetchAttendance(selectedSession.id);
   };
 
@@ -246,39 +245,37 @@ const ChoirTab = () => {
 
           {!selectedSession ? (
             <p className="text-slate-400 text-sm">{t("management.choir.selectPractice")}</p>
+          ) : members.length === 0 ? (
+            <p className="text-slate-400 text-sm">{t("management.choir.noSingers")}</p>
           ) : (
-            <>
-              <form onSubmit={handleMarkPresent} className="flex gap-2 mb-5">
-                <select
-                  value={chosenMemberId}
-                  onChange={(e) => setChosenMemberId(e.target.value)}
-                  className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
-                >
-                  <option value="" className="text-black">{t("management.choir.choose")}</option>
-                  {members.map((m) => (
-                    <option key={m.id} value={m.id} className="text-black">{m.name}</option>
-                  ))}
-                </select>
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
-                  {t("management.choir.markPresent")}
-                </button>
-              </form>
+            <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+              {members.map((m) => {
+                const record = attendance.find((a) => a.choir_member_id === m.id);
+                const isPresent = Boolean(record);
 
-              {attendance.length === 0 ? (
-                <p className="text-slate-400 text-sm">{t("management.choir.noAttendance")}</p>
-              ) : (
-                <div className="space-y-2">
-                  {attendance.map((a) => (
-                    <div key={a.id} className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex justify-between items-center">
-                      <span className="text-white text-sm">{a.name}</span>
-                      <button onClick={() => handleRemoveAttendance(a.id)} className="text-red-300 hover:text-red-200 text-xs">
-                        {t("management.choir.remove")}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
+                return (
+                  <label
+                    key={m.id}
+                    className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-white/10 transition"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isPresent}
+                      onChange={() => handleToggleAttendance(m, record)}
+                      className="sr-only"
+                    />
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition ${
+                        isPresent ? "bg-green-500" : "border-2 border-white/30"
+                      }`}
+                    >
+                      {isPresent && <FaCheck className="text-white text-[10px]" />}
+                    </span>
+                    <span className="text-white text-sm">{m.name}</span>
+                  </label>
+                );
+              })}
+            </div>
           )}
         </div>
       </div>

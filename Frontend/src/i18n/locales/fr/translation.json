@@ -362,7 +362,9 @@
       "noAttendees": "Personne n'est encore enregistré pour cette session.",
       "deleteSession": "Supprimer la Session",
       "confirmDeleteSession": "Supprimer cette session et ses présences ?",
-      "remove": "Retirer"
+      "remove": "Retirer",
+      "verseRead": "Verset Lu",
+      "verseReadPlaceholder": "ex. Matthieu 26:26-28"
     },
     "choir": {
       "heading": "Gestion de la Chorale",
@@ -403,7 +405,10 @@
       "total": "Total",
       "noRecords": "Aucun enregistrement de dîme pour cette période.",
       "confirmDelete": "Supprimer cet enregistrement ?",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "quickTitle": "Enregistrement Rapide pour une Date",
+      "quickHint": "Cochez qui a payé, entrez le montant, puis enregistrez tout en une fois.",
+      "quickSave": "Tout Enregistrer"
     },
     "manageMinistries": "Gérer les Ministères",
     "manageGallery": "Gérer la Galerie",

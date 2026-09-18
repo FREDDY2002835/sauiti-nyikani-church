@@ -362,7 +362,9 @@
       "noAttendees": "No one recorded yet for this session.",
       "deleteSession": "Delete Session",
       "confirmDeleteSession": "Delete this session and its attendance records?",
-      "remove": "Remove"
+      "remove": "Remove",
+      "verseRead": "Verse Read",
+      "verseReadPlaceholder": "e.g. Matthew 26:26-28"
     },
     "choir": {
       "heading": "Choir Management",
@@ -403,7 +405,10 @@
       "total": "Total",
       "noRecords": "No tithe records for this period.",
       "confirmDelete": "Delete this record?",
-      "delete": "Delete"
+      "delete": "Delete",
+      "quickTitle": "Quick Record for a Date",
+      "quickHint": "Tick who paid, enter their amount, then save all at once.",
+      "quickSave": "Save All"
     },
     "manageMinistries": "Manage Ministries",
     "manageGallery": "Manage Gallery",

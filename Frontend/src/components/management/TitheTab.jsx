@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { FaCheck } from "react-icons/fa";
 
 const API_URL = "http://127.0.0.1:5000/api/tithes";
+const MEMBERS_URL = "http://127.0.0.1:5000/api/members";
 
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -18,6 +20,17 @@ const TitheTab = () => {
 
   const [form, setForm] = useState({ member_name: "", amount: "", payment_date: "" });
 
+  // Quick-record panel: tick who paid on a given date, type each
+  // person's amount, save all at once instead of retyping every name.
+  const [members, setMembers] = useState([]);
+  const [quickDate, setQuickDate] = useState("");
+  const [ticked, setTicked] = useState({}); // { memberId: amountString }
+
+  const fetchMembers = async () => {
+    const res = await fetch(MEMBERS_URL);
+    setMembers(await res.json());
+  };
+
   const fetchRecords = async () => {
     const params = new URLSearchParams();
     if (year) params.set("year", year);
@@ -29,6 +42,7 @@ const TitheTab = () => {
 
   useEffect(() => {
     fetchRecords();
+    fetchMembers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [year, month]);
 
@@ -54,10 +68,123 @@ const TitheTab = () => {
     fetchRecords();
   };
 
+  // Ticking a member reveals an amount field for just them; unticking
+  // drops them from the batch entirely.
+  const toggleTicked = (memberId) => {
+    setTicked((prev) => {
+      const next = { ...prev };
+      if (memberId in next) {
+        delete next[memberId];
+      } else {
+        next[memberId] = "";
+      }
+      return next;
+    });
+  };
+
+  const setTickedAmount = (memberId, amount) => {
+    setTicked((prev) => ({ ...prev, [memberId]: amount }));
+  };
+
+  const handleSaveAll = async () => {
+    if (!quickDate) return;
+
+    const entries = Object.entries(ticked).filter(([, amount]) => amount && Number(amount) > 0);
+    if (entries.length === 0) return;
+
+    await Promise.all(
+      entries.map(([memberId, amount]) => {
+        const member = members.find((m) => String(m.id) === memberId);
+        return fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            member_name: member?.name || "",
+            amount,
+            payment_date: quickDate,
+          }),
+        });
+      })
+    );
+
+    setTicked({});
+    fetchRecords();
+  };
+
   const total = records.reduce((sum, r) => sum + Number(r.amount), 0);
 
   return (
     <div>
+      {/* --- Quick record: tick who paid, type each amount, save together --- */}
+      <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 space-y-4 mb-8">
+        <h2 className="text-white font-bold text-lg">{t("management.tithe.quickTitle")}</h2>
+        <p className="text-slate-400 text-xs">{t("management.tithe.quickHint")}</p>
+
+        <div>
+          <label className="block text-xs text-slate-400 mb-1">{t("management.tithe.date")}</label>
+          <input
+            type="date"
+            value={quickDate}
+            onChange={(e) => setQuickDate(e.target.value)}
+            required
+            className="w-full sm:w-64 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
+          />
+        </div>
+
+        {members.length === 0 ? (
+          <p className="text-slate-400 text-sm">{t("management.tithe.noRecords")}</p>
+        ) : (
+          <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+            {members.map((m) => {
+              const isTicked = m.id in ticked;
+
+              return (
+                <div
+                  key={m.id}
+                  className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5"
+                >
+                  <label className="flex items-center gap-3 flex-1 cursor-pointer min-w-0">
+                    <input
+                      type="checkbox"
+                      checked={isTicked}
+                      onChange={() => toggleTicked(m.id)}
+                      className="sr-only"
+                    />
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition ${
+                        isTicked ? "bg-green-500" : "border-2 border-white/30"
+                      }`}
+                    >
+                      {isTicked && <FaCheck className="text-white text-[10px]" />}
+                    </span>
+                    <span className="text-white text-sm truncate">{m.name}</span>
+                  </label>
+
+                  {isTicked && (
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder={t("management.tithe.amount")}
+                      value={ticked[m.id]}
+                      onChange={(e) => setTickedAmount(m.id, e.target.value)}
+                      className="w-28 bg-white/10 border border-white/20 rounded-lg px-3 py-1.5 text-white text-sm focus:outline-none focus:border-blue-400 shrink-0"
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <button
+          onClick={handleSaveAll}
+          disabled={!quickDate || Object.keys(ticked).length === 0}
+          className="bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-semibold text-sm transition"
+        >
+          {t("management.tithe.quickSave")}
+        </button>
+      </div>
+
       <form
         onSubmit={handleSubmit}
         className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 sm:p-8 space-y-4 mb-8"

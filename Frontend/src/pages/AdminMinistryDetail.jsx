@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaCheck } from "react-icons/fa";
 
 const BASE_URL = "http://127.0.0.1:5000/api/ministries";
 
@@ -68,6 +68,7 @@ const AdminMinistryDetail = () => {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [attendance, setAttendance] = useState([]);
+  const [attendanceError, setAttendanceError] = useState(null);
 
   // Committee form (name + role together)
   const [committeeName, setCommitteeName] = useState("");
@@ -76,7 +77,6 @@ const AdminMinistryDetail = () => {
   // New-service form
   const [newServiceDate, setNewServiceDate] = useState("");
   const [newServiceNotes, setNewServiceNotes] = useState("");
-  const [chosenMemberId, setChosenMemberId] = useState("");
 
   const fetchAll = async () => {
     const [ministryRes, membersRes, activitiesRes, plansRes, committeeRes, servicesRes] = await Promise.all([
@@ -169,8 +169,13 @@ const AdminMinistryDetail = () => {
   // --- Services + attendance ---
 
   const fetchAttendance = async (serviceId) => {
-    const res = await fetch(`${BASE_URL}/services/${serviceId}/attendance`);
-    setAttendance(await res.json());
+    try {
+      const res = await fetch(`${BASE_URL}/services/${serviceId}/attendance`);
+      const data = await res.json();
+      setAttendance(Array.isArray(data) ? data : []);
+    } catch (err) {
+      setAttendance([]);
+    }
   };
 
   const handleSelectService = (service) => {
@@ -203,23 +208,31 @@ const AdminMinistryDetail = () => {
     fetchAll();
   };
 
-  const handleMarkPresent = async (e) => {
-    e.preventDefault();
-    if (!chosenMemberId || !selectedService) return;
+  const handleToggleAttendance = async (memberId, existingRecord) => {
+    setAttendanceError(null);
+    try {
+      let response;
+      if (existingRecord) {
+        // Already ticked - untick by removing that attendance record.
+        response = await fetch(`${BASE_URL}/service-attendance/${existingRecord.id}`, { method: "DELETE" });
+      } else {
+        // Not ticked yet - mark them present.
+        response = await fetch(`${BASE_URL}/services/${selectedService.id}/attendance`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ member_id: memberId }),
+        });
+      }
 
-    await fetch(`${BASE_URL}/services/${selectedService.id}/attendance`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ member_id: chosenMemberId }),
-    });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "The server rejected that request.");
+      }
 
-    setChosenMemberId("");
-    fetchAttendance(selectedService.id);
-  };
-
-  const handleRemoveAttendance = async (attendanceId) => {
-    await fetch(`${BASE_URL}/service-attendance/${attendanceId}`, { method: "DELETE" });
-    fetchAttendance(selectedService.id);
+      fetchAttendance(selectedService.id);
+    } catch (err) {
+      setAttendanceError(err.message || "Could not update attendance. Check that the backend is running.");
+    }
   };
 
   return (
@@ -380,43 +393,54 @@ const AdminMinistryDetail = () => {
               </div>
 
               <div>
-                <h3 className="text-white font-semibold text-sm mb-3">{t("management.ministriesAdmin.detail.attendance")}</h3>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-white font-semibold text-sm">{t("management.ministriesAdmin.detail.attendance")}</h3>
+                  {selectedService && (
+                    <span className="text-green-400 text-xs font-semibold bg-green-500/10 px-3 py-1 rounded-full">
+                      {attendance.length} / {members.length} present
+                    </span>
+                  )}
+                </div>
+
+                {attendanceError && (
+                  <p className="text-red-400 text-xs mb-3 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                    {attendanceError}
+                  </p>
+                )}
 
                 {!selectedService ? (
                   <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.selectService")}</p>
+                ) : members.length === 0 ? (
+                  <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.empty")}</p>
                 ) : (
-                  <>
-                    <form onSubmit={handleMarkPresent} className="flex gap-2 mb-5">
-                      <select
-                        value={chosenMemberId}
-                        onChange={(e) => setChosenMemberId(e.target.value)}
-                        className="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-400"
-                      >
-                        <option value="" className="text-black">{t("management.ministriesAdmin.detail.chooseMember")}</option>
-                        {members.map((m) => (
-                          <option key={m.id} value={m.id} className="text-black">{m.name}</option>
-                        ))}
-                      </select>
-                      <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
-                        {t("management.ministriesAdmin.detail.markPresent")}
-                      </button>
-                    </form>
+                  <div className="space-y-2">
+                    {members.map((m) => {
+                      const record = attendance.find((a) => a.member_id === m.id);
+                      const isPresent = Boolean(record);
 
-                    {attendance.length === 0 ? (
-                      <p className="text-slate-400 text-sm">{t("management.ministriesAdmin.detail.noAttendance")}</p>
-                    ) : (
-                      <div className="space-y-2">
-                        {attendance.map((a) => (
-                          <div key={a.id} className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex justify-between items-center">
-                            <span className="text-white text-sm">{a.name}</span>
-                            <button onClick={() => handleRemoveAttendance(a.id)} className="text-red-300 hover:text-red-200 text-xs">
-                              {t("management.ministriesAdmin.detail.remove")}
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </>
+                      return (
+                        <label
+                          key={m.id}
+                          className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-white/10 transition"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isPresent}
+                            onChange={() => handleToggleAttendance(m.id, record)}
+                            className="sr-only"
+                          />
+                          <span
+                            className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition ${
+                              isPresent ? "bg-green-500" : "border-2 border-white/30"
+                            }`}
+                          >
+                            {isPresent && <FaCheck className="text-white text-[10px]" />}
+                          </span>
+                          <span className="text-white text-sm">{m.name}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
             </div>
