@@ -421,7 +421,7 @@ const AdminMinistryDetail = () => {
                       return (
                         <label
                           key={m.id}
-                          className="relative flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-white/10 transition"
+                          className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 cursor-pointer hover:bg-white/10 transition"
                         >
                           <input
                             type="checkbox"
