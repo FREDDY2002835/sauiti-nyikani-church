@@ -4,12 +4,15 @@ import { FaCheck } from "react-icons/fa";
 
 const API_URL = "http://127.0.0.1:5000/api/choir";
 
-const CHOIR_GROUPS = ["central", "youth", "children"];
-
 const ChoirTab = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
-  const [selectedGroup, setSelectedGroup] = useState("central");
+  const [groups, setGroups] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [newGroupName, setNewGroupName] = useState("");
+  const [addingGroup, setAddingGroup] = useState(false);
+  const [groupError, setGroupError] = useState(null);
 
   const [members, setMembers] = useState([]);
   const [newMemberName, setNewMemberName] = useState("");
@@ -20,6 +23,56 @@ const ChoirTab = () => {
   const [attendance, setAttendance] = useState([]);
   const [newDate, setNewDate] = useState("");
   const [newNotes, setNewNotes] = useState("");
+
+  const fetchGroups = async () => {
+    const res = await fetch(`${API_URL}/groups`);
+    const data = await res.json();
+    setGroups(data);
+    // Keep whatever choir is currently selected if it still exists;
+    // otherwise default to the first one in the list.
+    setSelectedGroup((current) => {
+      if (current && data.some((g) => g.slug === current)) return current;
+      return data[0]?.slug || null;
+    });
+  };
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
+
+  const handleAddGroup = async (e) => {
+    e.preventDefault();
+    if (!newGroupName.trim()) return;
+
+    setGroupError(null);
+    setAddingGroup(true);
+    try {
+      const res = await fetch(`${API_URL}/groups`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name_en: newGroupName }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Could not add that choir.");
+      }
+      const created = await res.json();
+      setNewGroupName("");
+      await fetchGroups();
+      setSelectedGroup(created.slug); // jump straight to the new choir
+    } catch (err) {
+      setGroupError(err.message);
+    } finally {
+      setAddingGroup(false);
+    }
+  };
+
+  const handleDeleteGroup = async (group) => {
+    if (!window.confirm(`Remove "${group.name_en}"? Its members and practice records are kept but won't be visible until it's re-added.`)) return;
+    await fetch(`${API_URL}/groups/${group.id}`, { method: "DELETE" });
+    fetchGroups();
+  };
+
 
   const fetchMembers = async (group) => {
     const res = await fetch(`${API_URL}/members?group=${group}`);
@@ -34,6 +87,7 @@ const ChoirTab = () => {
   // Whenever the selected choir changes, reload its roster/sessions and
   // clear whatever practice/attendance was open for the previous choir.
   useEffect(() => {
+    if (!selectedGroup) return;
     fetchMembers(selectedGroup);
     fetchSessions(selectedGroup);
     setSelectedSession(null);
@@ -125,26 +179,54 @@ const ChoirTab = () => {
   return (
     <div className="space-y-10">
       {/* --- Choir group switcher --- */}
-      <div className="flex flex-wrap gap-2">
-        {CHOIR_GROUPS.map((group) => (
+      <div>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {groups.map((group) => (
+            <div key={group.id} className="relative group/tab">
+              <button
+                onClick={() => setSelectedGroup(group.slug)}
+                className={`px-4 py-2 pr-7 rounded-xl text-sm font-semibold transition ${
+                  selectedGroup === group.slug
+                    ? "bg-blue-600 text-white"
+                    : "bg-white/5 text-slate-300 hover:bg-white/10"
+                }`}
+              >
+                {group[`name_${lang}`] || group.name_en}
+              </button>
+              <button
+                onClick={() => handleDeleteGroup(group)}
+                title="Remove this choir"
+                className="absolute top-1/2 -translate-y-1/2 right-2 text-xs opacity-0 group-hover/tab:opacity-70 hover:!opacity-100 transition"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <form onSubmit={handleAddGroup} className="flex flex-wrap items-center gap-2">
+          <input
+            type="text"
+            value={newGroupName}
+            onChange={(e) => setNewGroupName(e.target.value)}
+            placeholder="e.g. Cathedral Choir"
+            className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-400"
+          />
           <button
-            key={group}
-            onClick={() => setSelectedGroup(group)}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
-              selectedGroup === group
-                ? "bg-blue-600 text-white"
-                : "bg-white/5 text-slate-300 hover:bg-white/10"
-            }`}
+            type="submit"
+            disabled={addingGroup}
+            className="bg-white/10 border border-white/20 hover:bg-white/20 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
           >
-            {t(`management.choir.groups.${group}`)}
+            {addingGroup ? "Adding..." : "+ Add Choir"}
           </button>
-        ))}
+        </form>
+        {groupError && <p className="text-red-400 text-xs mt-2">{groupError}</p>}
       </div>
 
       {/* --- Roster --- */}
       <div>
         <h2 className="text-white font-bold text-lg mb-4">
-          {t("management.choir.rosterTitle")} — {t(`management.choir.groups.${selectedGroup}`)}
+          {t("management.choir.rosterTitle")} — {groups.find((g) => g.slug === selectedGroup)?.[`name_${lang}`] || ""}
         </h2>
 
         <form onSubmit={handleAddMember} className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 space-y-4 mb-6">

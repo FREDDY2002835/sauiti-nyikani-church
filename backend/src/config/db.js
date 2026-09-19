@@ -286,6 +286,34 @@ export const initDb = async () => {
     );
   `);
 
+  // The list of choirs itself used to be a fixed list of 3 in the code.
+  // It's now a real table, so a new choir can be added from the admin
+  // page instead of needing a code change. "slug" is the plain-text
+  // identifier stored on each member/session's existing group_name
+  // column, so this stays fully compatible with data already saved
+  // under the old hardcoded "central" / "youth" / "children" system.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS choir_groups (
+      id SERIAL PRIMARY KEY,
+      slug TEXT UNIQUE NOT NULL,
+      name_en TEXT NOT NULL,
+      name_fr TEXT NOT NULL,
+      name_sw TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  const { rows: choirGroupCount } = await pool.query("SELECT COUNT(*) FROM choir_groups");
+  if (parseInt(choirGroupCount[0].count, 10) === 0) {
+    await pool.query(`
+      INSERT INTO choir_groups (slug, name_en, name_fr, name_sw) VALUES
+      ('central', 'Central Choir', 'Chorale Centrale', 'Kwaya Kuu'),
+      ('youth', 'Youth Choir', 'Chorale des Jeunes', 'Kwaya ya Vijana'),
+      ('children', 'Children''s Choir', 'Chorale des Enfants', 'Kwaya ya Watoto')
+    `);
+    console.log("Seeded default choir groups.");
+  }
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS tithes (
       id SERIAL PRIMARY KEY,

@@ -1,5 +1,8 @@
 import express from "express";
 import {
+  getChoirGroups,
+  createChoirGroup,
+  deleteChoirGroup,
   getChoirMembers,
   createChoirMember,
   deleteChoirMember,
@@ -12,6 +15,10 @@ import {
 } from "../controllers/choirController.js";
 
 const router = express.Router();
+
+router.get("/groups", getChoirGroups);
+router.post("/groups", createChoirGroup);
+router.delete("/groups/:id", deleteChoirGroup);
 
 router.get("/members", getChoirMembers);
 router.post("/members", createChoirMember);

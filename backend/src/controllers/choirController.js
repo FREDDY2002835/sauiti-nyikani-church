@@ -2,6 +2,81 @@
 // scheduled, and who actually showed up to each practice.
 
 import { pool } from "../config/db.js";
+import { translateToFrenchAndSwahili } from "../utils/translate.js";
+
+// --- Choir groups (e.g. "Central Choir", "Youth Choir" - the church
+// can have any number of these, not just a fixed set) ---
+
+export const getChoirGroups = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM choir_groups ORDER BY id ASC");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Failed to fetch choir groups:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+// Turns "Cathedral Choir" into a safe, unique slug like "cathedral-choir".
+// If that slug is already taken, adds "-2", "-3", etc.
+const makeUniqueSlug = async (name) => {
+  const base = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  let slug = base || "choir";
+  let suffix = 2;
+  while (true) {
+    const existing = await pool.query("SELECT id FROM choir_groups WHERE slug = $1", [slug]);
+    if (existing.rows.length === 0) return slug;
+    slug = `${base}-${suffix}`;
+    suffix += 1;
+  }
+};
+
+export const createChoirGroup = async (req, res) => {
+  const { name_en } = req.body;
+
+  if (!name_en || !name_en.trim()) {
+    return res.status(400).json({ error: "A name is required." });
+  }
+
+  try {
+    const slug = await makeUniqueSlug(name_en);
+    const { fr, sw } = await translateToFrenchAndSwahili(name_en);
+
+    const result = await pool.query(
+      `INSERT INTO choir_groups (slug, name_en, name_fr, name_sw)
+       VALUES ($1, $2, $3, $4) RETURNING *`,
+      [slug, name_en.trim(), fr, sw]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Failed to create choir group:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
+
+// Deletes a choir group. Any members/practice sessions already saved
+// under that choir are left as-is (not deleted) - they just won't have
+// a matching tab to show under anymore unless a new choir with the same
+// slug is created.
+export const deleteChoirGroup = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query(
+      "DELETE FROM choir_groups WHERE id = $1 RETURNING *",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Choir group not found." });
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Failed to delete choir group:", err.message);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+};
 
 // --- Choir roster ---
 
