@@ -389,6 +389,86 @@ export const initDb = async () => {
     );
   `);
 
+  // --- Contributions: who contributed, what kind, how much, and when ---
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS contributions (
+      id SERIAL PRIMARY KEY,
+      contributor_name TEXT NOT NULL,
+      kind TEXT DEFAULT '',
+      amount NUMERIC NOT NULL,
+      contribution_date DATE NOT NULL,
+      fulfilled BOOLEAN DEFAULT FALSE,
+      fulfilled_date DATE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`ALTER TABLE contributions ADD COLUMN IF NOT EXISTS project_id INTEGER`);
+
+  // Migration for existing contribution records. Old contribution
+  // records are treated as already given so the new status feature
+  // does not incorrectly mark historical records as unpaid.
+  const contributionFulfilledColumn = await pool.query(`
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name = 'contributions'
+      AND column_name = 'fulfilled'
+  `);
+
+  if (contributionFulfilledColumn.rows.length === 0) {
+    await pool.query(`
+      ALTER TABLE contributions
+      ADD COLUMN fulfilled BOOLEAN DEFAULT TRUE
+    `);
+    await pool.query(`
+      ALTER TABLE contributions
+      ADD COLUMN fulfilled_date DATE
+    `);
+  } else {
+    await pool.query(`
+      ALTER TABLE contributions
+      ADD COLUMN IF NOT EXISTS fulfilled_date DATE
+    `);
+  }
+
+  // New contribution records start as not yet given.
+  await pool.query(`
+    ALTER TABLE contributions
+    ALTER COLUMN fulfilled SET DEFAULT FALSE
+  `);
+
+  // --- Projects (e.g. "Church Building Project") that pledges can be
+  // raised toward, each with a fundraising goal.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS contribution_projects (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      goal_amount NUMERIC DEFAULT 0,
+      project_year INTEGER DEFAULT EXTRACT(YEAR FROM CURRENT_DATE)::INTEGER,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  await pool.query(`ALTER TABLE contribution_projects ADD COLUMN IF NOT EXISTS project_year INTEGER DEFAULT EXTRACT(YEAR FROM CURRENT_DATE)::INTEGER`);
+  await pool.query(`ALTER TABLE contributions ADD COLUMN IF NOT EXISTS project_id INTEGER REFERENCES contribution_projects(id) ON DELETE SET NULL`);
+
+  // --- Pledges: a promise from someone to give a certain amount
+  // (optionally toward a specific project), which starts as
+  // unfulfilled and gets ticked once the money actually comes in.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS pledges (
+      id SERIAL PRIMARY KEY,
+      contributor_name TEXT NOT NULL,
+      project_id INTEGER REFERENCES contribution_projects(id) ON DELETE SET NULL,
+      amount NUMERIC NOT NULL,
+      pledge_date DATE,
+      fulfilled BOOLEAN DEFAULT FALSE,
+      fulfilled_date DATE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   // --- Migration for anyone who already ran the OLD single-language
   // version of this table (just "name" and "description" columns).
   // We check if that old column still exists, and if so, upgrade the

@@ -320,7 +320,9 @@
       "tithe": "Chakumi",
       "elders": "Baraza",
       "finance": "Hazina",
-      "baptism": "Kitabu cha Ubatizo"
+      "baptism": "Kitabu cha Ubatizo",
+      "contributions": "Michango",
+      "projects": "Miradi"
     },
     "members": {
       "heading": "Wanachama wa Kanisa",
@@ -531,6 +533,41 @@
       "delete": "Futa"
     },
     "manageSermons": "Simamia Mahubiri",
-    "manageEvents": "Simamia Matukio"
+    "manageEvents": "Simamia Matukio",
+    "contributions": {
+      "addRecord": "Ongeza Mchango",
+      "name": "Jina la Mchangiaji",
+      "kind": "Aina ya Mchango",
+      "kindPlaceholder": "mfano: Mfuko wa Ujenzi, Mavuno, Sadaka Maalum",
+      "amount": "Kiasi",
+      "date": "Tarehe",
+      "filterMonth": "Mwezi",
+      "filterYear": "Mwaka",
+      "allMonths": "Miezi Yote",
+      "total": "Jumla",
+      "given": "Imetolewa",
+      "noRecords": "Hakuna mchango kwa kipindi hiki.",
+      "confirmDelete": "Futa kumbukumbu hii?",
+      "delete": "Futa",
+      "fulfilled": "Imetolewa",
+      "unfulfilled": "Bado haijatolewa",
+      "markFulfilled": "Weka alama imetolewa",
+      "markUnfulfilled": "Weka alama bado haijatolewa",
+      "project": "Mradi",
+      "noProject": "Hakuna mradi"
+    },
+    "projects": {
+      "title": "Miradi",
+      "addProject": "Ongeza Mradi",
+      "name": "Jina la Mradi",
+      "goal": "Kiasi Kinacholengwa",
+      "noProjects": "Hakuna mradi bado.",
+      "delete": "Futa",
+      "confirmDelete": "Futa mradi huu?",
+      "year": "Mwaka",
+      "progress": "Maendeleo",
+      "raised": "Kilichokusanywa",
+      "remaining": "Kilichobaki"
+    }
   }
 }

@@ -320,7 +320,9 @@
       "tithe": "Tithe",
       "elders": "Church Elders' Council",
       "finance": "Finance",
-      "baptism": "Baptism Register"
+      "baptism": "Baptism Register",
+      "contributions": "Contributions",
+      "projects": "Projects"
     },
     "members": {
       "heading": "Church Members",
@@ -531,6 +533,41 @@
       "delete": "Delete"
     },
     "manageSermons": "Manage Sermons",
-    "manageEvents": "Manage Events"
+    "manageEvents": "Manage Events",
+    "contributions": {
+      "addRecord": "Add Contribution",
+      "name": "Contributor Name",
+      "kind": "Kind of Contribution",
+      "kindPlaceholder": "e.g. Building Fund, Harvest, Special Offering",
+      "amount": "Amount",
+      "date": "Date",
+      "filterMonth": "Month",
+      "filterYear": "Year",
+      "allMonths": "All Months",
+      "total": "Total",
+      "given": "Given",
+      "noRecords": "No contributions for this period.",
+      "confirmDelete": "Delete this record?",
+      "delete": "Delete",
+      "fulfilled": "Given",
+      "unfulfilled": "Not yet given",
+      "markFulfilled": "Mark as given",
+      "markUnfulfilled": "Mark as not yet given",
+      "project": "Project",
+      "noProject": "No project"
+    },
+    "projects": {
+      "title": "Projects",
+      "addProject": "Add Project",
+      "name": "Project Name",
+      "goal": "Goal Amount",
+      "noProjects": "No projects yet.",
+      "delete": "Delete",
+      "confirmDelete": "Delete this project?",
+      "year": "Year",
+      "progress": "Progress",
+      "raised": "Raised",
+      "remaining": "Remaining"
+    }
   }
 }

@@ -19,6 +19,7 @@ import tithesRoutes from "./routes/tithes.js";
 import eldersRoutes from "./routes/elders.js";
 import financeRoutes from "./routes/finance.js";
 import baptismRoutes from "./routes/baptisms.js";
+import contributionsRoutes from "./routes/contributions.js";
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/tithes", tithesRoutes);
 app.use("/api/elders", eldersRoutes);
 app.use("/api/finance", financeRoutes);
 app.use("/api/baptisms", baptismRoutes);
+app.use("/api/contributions", contributionsRoutes);
 
 // Uploaded photos live on disk in /uploads - this makes them reachable
 // at http://localhost:5000/uploads/whatever-the-filename-is.jpg

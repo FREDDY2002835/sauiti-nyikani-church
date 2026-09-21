@@ -320,7 +320,9 @@
       "tithe": "Dîme",
       "elders": "Comité des Anciens de l'Église",
       "finance": "Caisse",
-      "baptism": "Registre de Baptême"
+      "baptism": "Registre de Baptême",
+      "contributions": "Contributions",
+      "projects": "Projets"
     },
     "members": {
       "heading": "Membres de l'Église",
@@ -531,6 +533,41 @@
       "delete": "Supprimer"
     },
     "manageSermons": "Gérer les Prédications",
-    "manageEvents": "Gérer les Événements"
+    "manageEvents": "Gérer les Événements",
+    "contributions": {
+      "addRecord": "Ajouter une Contribution",
+      "name": "Nom du Contributeur",
+      "kind": "Type de Contribution",
+      "kindPlaceholder": "ex. Fonds de Construction, Récolte, Offrande Spéciale",
+      "amount": "Montant",
+      "date": "Date",
+      "filterMonth": "Mois",
+      "filterYear": "Année",
+      "allMonths": "Tous les Mois",
+      "total": "Total",
+      "given": "Donné",
+      "noRecords": "Aucune contribution pour cette période.",
+      "confirmDelete": "Supprimer cet enregistrement ?",
+      "delete": "Supprimer",
+      "fulfilled": "Donné",
+      "unfulfilled": "Pas encore donné",
+      "markFulfilled": "Marquer comme donné",
+      "markUnfulfilled": "Marquer comme non donné",
+      "project": "Projet",
+      "noProject": "Aucun projet"
+    },
+    "projects": {
+      "title": "Projets",
+      "addProject": "Ajouter un Projet",
+      "name": "Nom du Projet",
+      "goal": "Montant Cible",
+      "noProjects": "Aucun projet pour le moment.",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer ce projet ?",
+      "year": "Année",
+      "progress": "Progression",
+      "raised": "Collecté",
+      "remaining": "Restant"
+    }
   }
 }
