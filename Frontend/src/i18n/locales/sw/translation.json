@@ -322,7 +322,8 @@
       "finance": "Hazina",
       "baptism": "Kitabu cha Ubatizo",
       "contributions": "Michango",
-      "projects": "Miradi"
+      "projects": "Miradi",
+      "announcements": "Matangazo"
     },
     "members": {
       "heading": "Wanachama wa Kanisa",
@@ -568,6 +569,21 @@
       "progress": "Maendeleo",
       "raised": "Kilichokusanywa",
       "remaining": "Kilichobaki"
+    },
+    "announcements": {
+      "heading": "Matangazo ya Kanisa",
+      "title": "Kichwa cha tangazo",
+      "titlePlaceholder": "Mfano: Tangazo la ibada ya Jumapili",
+      "message": "Tangazo",
+      "messagePlaceholder": "Andika tangazo hapa...",
+      "date": "Tarehe ya tangazo",
+      "add": "Ongeza Tangazo",
+      "update": "Sasisha Tangazo",
+      "cancel": "Ghairi",
+      "edit": "Hariri",
+      "delete": "Futa",
+      "empty": "Hakuna matangazo yaliyoongezwa.",
+      "confirmDelete": "Futa tangazo hili?"
     }
   }
 }

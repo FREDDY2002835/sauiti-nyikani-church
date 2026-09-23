@@ -1,9 +1,10 @@
+import { API_URL as API_ROOT } from "../../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCheck } from "react-icons/fa";
 
-const API_URL = "http://127.0.0.1:5000/api/communion";
-const MEMBERS_URL = "http://127.0.0.1:5000/api/members";
+const API_URL = `${API_ROOT}/communion`;
+const MEMBERS_URL = `${API_ROOT}/members`;
 
 const CommunionTab = () => {
   const { t } = useTranslation();

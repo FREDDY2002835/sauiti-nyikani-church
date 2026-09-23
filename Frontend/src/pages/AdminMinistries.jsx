@@ -1,9 +1,10 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 
-const API_URL = "http://127.0.0.1:5000/api/ministries";
+const API_URL = `${API_ROOT}/ministries`;
 
 const emptyForm = { name: "", description: "", leader_name: "", sort_order: 0 };
 

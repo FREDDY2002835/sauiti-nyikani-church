@@ -1,7 +1,7 @@
 {
   "name": "sauiti-nyikani-backend",
   "version": "1.0.0",
-  "description": "Backend API for Sauiti Nyikani Church website (Contact & Prayer forms)",
+  "description": "Backend API for Sauiti Nyikani Church public website and protected management application",
   "main": "src/server.js",
   "type": "module",
   "scripts": {

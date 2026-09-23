@@ -1,3 +1,4 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
@@ -17,7 +18,7 @@ const Prayer = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/prayer", {
+      const response = await fetch(`${API_ROOT}/prayer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

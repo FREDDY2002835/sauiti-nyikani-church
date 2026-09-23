@@ -322,7 +322,8 @@
       "finance": "Finance",
       "baptism": "Baptism Register",
       "contributions": "Contributions",
-      "projects": "Projects"
+      "projects": "Projects",
+      "announcements": "Announcements"
     },
     "members": {
       "heading": "Church Members",
@@ -568,6 +569,21 @@
       "progress": "Progress",
       "raised": "Raised",
       "remaining": "Remaining"
+    },
+    "announcements": {
+      "heading": "Church Announcements",
+      "title": "Announcement title",
+      "titlePlaceholder": "e.g. Sunday service announcement",
+      "message": "Announcement",
+      "messagePlaceholder": "Write the announcement here...",
+      "date": "Announcement date",
+      "add": "Add Announcement",
+      "update": "Update Announcement",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "No announcements added yet.",
+      "confirmDelete": "Delete this announcement?"
     }
   }
 }

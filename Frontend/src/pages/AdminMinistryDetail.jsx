@@ -1,10 +1,11 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
 
-const BASE_URL = "http://127.0.0.1:5000/api/ministries";
+const BASE_URL = `${API_ROOT}/ministries`;
 
 // A small reusable "named list" manager - Members, Activities, and Plans
 // all work the same way (add an item, see the list, remove an item), so

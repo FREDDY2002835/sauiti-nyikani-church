@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { clearSession, getAdminUser } from "../auth/auth";
 import MainLayout from "../layouts/MainLayout";
 import MembersTab from "../components/management/MembersTab";
 import CommunionTab from "../components/management/CommunionTab";
@@ -11,6 +12,7 @@ import FinanceTab from "../components/management/FinanceTab";
 import BaptismTab from "../components/management/BaptismTab";
 import ContributionsTab from "../components/management/ContributionsTab";
 import ProjectsTab from "../components/management/ProjectsTab";
+import AnnouncementsTab from "../components/management/AnnouncementsTab";
 
 const TABS = [
   { key: "members", Component: MembersTab },
@@ -22,11 +24,19 @@ const TABS = [
   { key: "baptism", Component: BaptismTab },
   { key: "contributions", Component: ContributionsTab },
   { key: "projects", Component: ProjectsTab },
+  { key: "announcements", Component: AnnouncementsTab },
 ];
 
 const ChurchManagement = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("members");
+  const navigate = useNavigate();
+  const adminUser = getAdminUser();
+
+  const handleLogout = () => {
+    clearSession();
+    navigate("/admin/login", { replace: true });
+  };
 
   const ActiveComponent = TABS.find((tab) => tab.key === activeTab)?.Component;
 
@@ -36,7 +46,13 @@ const ChurchManagement = () => {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
           {t("management.title")}
         </h1>
-        <p className="text-slate-400 text-sm mb-6">{t("management.subtitle")}</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <p className="text-slate-400 text-sm">{t("management.subtitle")}</p>
+          <div className="flex items-center gap-3">
+            {adminUser?.email && <span className="text-xs text-slate-400 hidden sm:block">{adminUser.email}</span>}
+            <button onClick={handleLogout} className="px-4 py-2 rounded-xl bg-red-500/10 border border-red-400/20 text-red-200 text-sm font-semibold hover:bg-red-500/20">Sign out</button>
+          </div>
+        </div>
 
         {/* --- Links to the other admin areas, so nothing requires typing a URL --- */}
         <div className="flex flex-wrap gap-3 mb-8">

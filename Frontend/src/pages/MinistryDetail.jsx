@@ -1,3 +1,4 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -26,7 +27,7 @@ const MinistryDetail = () => {
       setLoading(true);
       setError(null);
       try {
-        const BASE = "http://127.0.0.1:5000/api/ministries";
+        const BASE = `${API_ROOT}/ministries`;
         const [ministryRes, membersRes, activitiesRes, plansRes] = await Promise.all([
           fetch(`${BASE}/${id}`),
           fetch(`${BASE}/${id}/members`),

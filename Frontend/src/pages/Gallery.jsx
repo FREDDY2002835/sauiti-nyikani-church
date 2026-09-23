@@ -1,10 +1,11 @@
+import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 import { FaTimes } from "react-icons/fa";
 
-const BASE_URL = "http://127.0.0.1:5000";
-const API_URL = `${BASE_URL}/api/gallery`;
+const BASE_URL = API_ORIGIN;
+const API_URL = `${API_ROOT}/gallery`;
 
 const Gallery = () => {
   const { t, i18n } = useTranslation();

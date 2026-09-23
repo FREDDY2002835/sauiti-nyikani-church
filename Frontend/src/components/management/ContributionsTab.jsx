@@ -1,8 +1,9 @@
+import { API_URL as API_ROOT } from "../../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCheck } from "react-icons/fa";
 
-const API_URL = "http://127.0.0.1:5000/api/contributions";
+const API_URL = `${API_ROOT}/contributions`;
 
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",

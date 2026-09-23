@@ -1,9 +1,10 @@
+import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout";
 
-const BASE_URL = "http://127.0.0.1:5000";
+const BASE_URL = API_ORIGIN;
 
 const Events = () => {
   const { t, i18n } = useTranslation();

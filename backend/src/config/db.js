@@ -568,5 +568,15 @@ export const initDb = async () => {
   // Covers events tables created before this column existed.
   await pool.query(`ALTER TABLE events ADD COLUMN IF NOT EXISTS image_url TEXT DEFAULT ''`);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS announcements (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      message TEXT NOT NULL,
+      announcement_date DATE NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
   console.log("Database tables ready.");
 };

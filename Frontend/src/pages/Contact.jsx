@@ -1,3 +1,4 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
@@ -18,7 +19,7 @@ const Contact = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/contact", {
+      const response = await fetch(`${API_ROOT}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

@@ -8,6 +8,7 @@ import "./i18n";
 
 import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
+import "./auth/setupAuthFetch";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

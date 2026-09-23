@@ -1,9 +1,10 @@
+import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 
-const BASE_URL = "http://127.0.0.1:5000";
-const API_URL = `${BASE_URL}/api/events`;
+const BASE_URL = API_ORIGIN;
+const API_URL = `${API_ROOT}/events`;
 
 const emptyForm = {
   title_en: "",
@@ -13,7 +14,7 @@ const emptyForm = {
   event_time: "",
 };
 
-const BASE_URL_FOR_IMAGES = "http://127.0.0.1:5000";
+const BASE_URL_FOR_IMAGES = API_ORIGIN;
 
 const AdminEvents = () => {
   const { t, i18n } = useTranslation();

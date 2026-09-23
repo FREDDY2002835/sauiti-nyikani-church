@@ -1,3 +1,4 @@
+import { API_URL as API_ROOT } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -16,7 +17,7 @@ const Ministries = () => {
   useEffect(() => {
     const fetchMinistries = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/ministries");
+        const response = await fetch(`${API_ROOT}/ministries`);
         if (!response.ok) {
           throw new Error("Failed to load ministries");
         }

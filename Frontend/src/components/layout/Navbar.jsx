@@ -3,17 +3,13 @@ import { NavLink } from "react-router-dom";
 import {
   FaBars,
   FaTimes,
-  FaMoon,
-  FaSun,
   FaGlobe,
   FaChevronDown,
 } from "react-icons/fa";
-import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/logo/logo.png";
 
 const Navbar = () => {
- const { theme, toggleTheme } = useTheme();
 const { t, i18n } = useTranslation();
 
 const [menuOpen, setMenuOpen] = useState(false);
@@ -136,27 +132,11 @@ const changeLanguage = (lang) => {
 
           </div>
 
-          {/* Theme */}
-
-          <button
-            onClick={toggleTheme}
-            className="text-xl text-slate-200 hover:text-yellow-300 transition"
-          >
-            {theme === "dark" ? <FaSun /> : <FaMoon />}
-          </button>
-
         </div>
 
         {/* Mobile Controls */}
 
         <div className="flex items-center gap-4 lg:hidden">
-
-          <button
-            onClick={toggleTheme}
-            className="text-white"
-          >
-            {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
-          </button>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}

@@ -322,7 +322,8 @@
       "finance": "Caisse",
       "baptism": "Registre de Baptême",
       "contributions": "Contributions",
-      "projects": "Projets"
+      "projects": "Projets",
+      "announcements": "Annonces"
     },
     "members": {
       "heading": "Membres de l'Église",
@@ -568,6 +569,21 @@
       "progress": "Progression",
       "raised": "Collecté",
       "remaining": "Restant"
+    },
+    "announcements": {
+      "heading": "Annonces de l'église",
+      "title": "Titre de l'annonce",
+      "titlePlaceholder": "Ex. Annonce du culte du dimanche",
+      "message": "Annonce",
+      "messagePlaceholder": "Écrivez l'annonce ici...",
+      "date": "Date de l'annonce",
+      "add": "Ajouter l'annonce",
+      "update": "Modifier l'annonce",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "empty": "Aucune annonce ajoutée.",
+      "confirmDelete": "Supprimer cette annonce ?"
     }
   }
 }
