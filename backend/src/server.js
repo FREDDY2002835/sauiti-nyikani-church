@@ -118,7 +118,9 @@ const start = async () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
   } catch (err) {
-    console.error("Failed to start server:", err.message);
+    console.error("Failed to start server:", err.message || err);
+    if (err.code) console.error("Error code:", err.code);
+    if (err.errors) err.errors.forEach((e) => console.error(" -", e.code, e.address, e.port));
     process.exit(1);
   }
 };
