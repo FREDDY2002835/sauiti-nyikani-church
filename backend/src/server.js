@@ -65,6 +65,14 @@ app.use(
 // Lets Express understand JSON data sent in a request body (req.body).
 app.use(express.json());
 
+// Temporary fix: the frontend currently sends /api/api/..., so remove the
+// extra /api before the request reaches the routes below.
+// Once the frontend base URL is fixed (no trailing /api), this can be deleted.
+app.use((req, res, next) => {
+  if (req.url.startsWith("/api/api/")) req.url = req.url.slice(4);
+  next();
+});
+
 // --- Routes ---
 // Any request to /api/contact gets handled by contactRoutes,
 // any request to /api/prayer gets handled by prayerRoutes.
