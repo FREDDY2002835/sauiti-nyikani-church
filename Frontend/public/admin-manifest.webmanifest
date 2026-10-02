@@ -1,18 +1,32 @@
 {
+  "id": "/admin/",
   "name": "Sauti Nyikani Church Management",
   "short_name": "Church Admin",
+  "description": "Private management application for Sauti Nyikani Church",
   "start_url": "/admin/login",
   "scope": "/admin/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#081B33",
   "theme_color": "#081B33",
-  "description": "Private management application for Sauti Nyikani Church",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
