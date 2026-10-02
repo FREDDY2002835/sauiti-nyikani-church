@@ -108,7 +108,7 @@ const AdminMinistries = () => {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto px-5 py-16 md:py-24">
+     <div className="max-w-4xl mx-auto px-4 py-10 md:py-24">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
           {t("management.ministriesAdmin.title")}
         </h1>
@@ -180,7 +180,7 @@ const AdminMinistries = () => {
             />
           </div>
 
-          <div className="flex gap-3">
+         <div className="flex flex-wrap gap-3">
             <button
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition"
@@ -209,9 +209,9 @@ const AdminMinistries = () => {
             {ministries.map((m) => (
               <div
                 key={m.id}
-                className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-start justify-between gap-4"
+                className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4"
               >
-                <div>
+                <div className="min-w-0 break-words">
                   <h3 className="text-white font-semibold">{m[`name_${lang}`] || m.name_en}</h3>
                   <p className="text-slate-400 text-sm mt-1">{m[`description_${lang}`] || m.description_en}</p>
                   {m.leader_name && (
@@ -221,7 +221,7 @@ const AdminMinistries = () => {
                   )}
                   <p className="text-slate-500 text-xs mt-1">{t("management.ministriesAdmin.order")}: {m.sort_order}</p>
                 </div>
-                <div className="flex gap-2 shrink-0">
+                <div className="flex flex-wrap gap-2 sm:shrink-0">
                   <Link
                     to={`/admin/ministries/${m.id}`}
                     className="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-lg text-sm hover:bg-white/20 transition"
