@@ -6,6 +6,10 @@ import { FaMusic } from "react-icons/fa";
 
 const BASE_URL = API_ORIGIN;
 
+// New sermons are stored on Cloudinary (full https link).
+// Older ones were stored on the backend server (link starts with "/uploads").
+const getFileUrl = (url) => (url && url.startsWith("http") ? url : `${BASE_URL}${url}`);
+
 const Sermons = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -70,7 +74,7 @@ const Sermons = () => {
                   <video
                     controls
                     className="w-full h-48 bg-black object-contain"
-                    src={`${BASE_URL}${s.file_url}`}
+                    src={getFileUrl(s.file_url)}
                   />
                 ) : (
                   <div className="w-full h-48 bg-blue-950/60 flex flex-col items-center justify-center gap-4 px-6">
@@ -82,7 +86,7 @@ const Sermons = () => {
                       preload="metadata"
                       className="w-full"
                       style={{ colorScheme: "light" }}
-                      src={`${BASE_URL}${s.file_url}`}
+                      src={getFileUrl(s.file_url)}
                     />
                   </div>
                 )}
