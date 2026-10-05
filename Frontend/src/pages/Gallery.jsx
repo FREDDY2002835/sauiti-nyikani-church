@@ -1,11 +1,11 @@
-import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
 import { FaTimes } from "react-icons/fa";
+import { getImageUrl } from "../utils/imageUrl";
 
-const BASE_URL = API_ORIGIN;
-const API_URL = `${API_ROOT}/gallery`;
+const BASE_URL = "http://127.0.0.1:5000";
+const API_URL = `${BASE_URL}/api/gallery`;
 
 const Gallery = () => {
   const { t, i18n } = useTranslation();
@@ -72,7 +72,7 @@ const Gallery = () => {
       )}
 
       {!loading && !error && images.length > 0 && (
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-16 columns-2 md:columns-3 gap-4">
           {images.map((img) => {
             const caption = img[`caption_${lang}`] || img.caption_en;
 
@@ -80,12 +80,12 @@ const Gallery = () => {
               <div
                 key={img.id}
                 onClick={() => setSelectedImage({ ...img, caption })}
-                className="group relative aspect-square rounded-2xl overflow-hidden border border-white/10 cursor-pointer"
+                className="group relative mb-4 break-inside-avoid rounded-2xl overflow-hidden border border-white/10 cursor-pointer"
               >
                 <img
-                  src={`${BASE_URL}${img.image_url}`}
+                  src={getImageUrl(img.image_url, BASE_URL, 800)}
                   alt={caption || "Sauti Nyikani Church"}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                  className="w-full h-auto block group-hover:scale-105 transition duration-300"
                 />
                 {caption && (
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition">
@@ -124,10 +124,9 @@ const Gallery = () => {
           className="max-w-5xl max-h-full flex flex-col items-center cursor-default"
         >
           <img
-            src={`${BASE_URL}${selectedImage.image_url}`}
+            src={getImageUrl(selectedImage.image_url, BASE_URL)}
             alt={selectedImage.caption || "Sauti Nyikani Church"}
-            onClick={() => setSelectedImage(null)}
-            className="max-w-full max-h-[80vh] rounded-2xl object-contain cursor-zoom-out"
+            className="max-w-full max-h-[80vh] rounded-2xl object-contain"
           />
           {selectedImage.caption && (
             <p className="text-white text-sm sm:text-base mt-4 text-center">

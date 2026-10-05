@@ -9,19 +9,12 @@ import {
 
 const router = express.Router();
 
-// Where uploaded photos get saved on disk, and how they're named.
-// Using Date.now() + the original extension keeps filenames unique
-// so two people uploading "photo.jpg" don't overwrite each other.
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => {
-    const ext = file.originalname.split(".").pop();
-    cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}.${ext}`);
-  },
-});
+// Photos are no longer saved on this server's disk. Multer keeps the
+// file in memory just long enough for the controller to send it to
+// Cloudinary, which stores it and gives back a permanent link.
+const storage = multer.memoryStorage();
 
-// Only accept actual images, and cap size at 8MB so one huge photo
-// can't fill up the server's disk.
+// Only accept actual images, and cap size at 8MB.
 const upload = multer({
   storage,
   limits: { fileSize: 8 * 1024 * 1024 },

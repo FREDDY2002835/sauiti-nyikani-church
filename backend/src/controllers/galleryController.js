@@ -4,6 +4,26 @@
 
 import fs from "fs";
 import { pool } from "../config/db.js";
+import cloudinary from "../config/cloudinary.js";
+
+// Sends the photo (held in memory by multer) to Cloudinary and waits
+// for the result. The photo is stored exactly as uploaded - no cropping
+// or resizing happens here.
+const uploadToCloudinary = (buffer) =>
+  new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "sauti-nyikani/gallery", resource_type: "image" },
+      (error, result) => (error ? reject(error) : resolve(result))
+    );
+    stream.end(buffer);
+  });
+
+// Turns a Cloudinary link back into its "public id" so we can delete it.
+// .../upload/v123/sauti-nyikani/gallery/abc.jpg -> sauti-nyikani/gallery/abc
+const getPublicId = (url) => {
+  const match = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z0-9]+$/);
+  return match ? match[1] : null;
+};
 
 // GET /api/gallery - list all photos, for the public Gallery page
 export const getGalleryImages = async (req, res) => {
@@ -27,7 +47,15 @@ export const uploadGalleryImage = async (req, res) => {
   }
 
   const { caption_en, caption_fr, caption_sw, sort_order } = req.body;
-  const imageUrl = `/uploads/${req.file.filename}`;
+
+  let imageUrl;
+  try {
+    const uploaded = await uploadToCloudinary(req.file.buffer);
+    imageUrl = uploaded.secure_url; // full https link, stored in the database
+  } catch (err) {
+    console.error("Cloudinary upload failed:", err.message);
+    return res.status(502).json({ error: "Could not upload the photo. Please try again." });
+  }
 
   try {
     const result = await pool.query(
@@ -91,10 +119,17 @@ export const deleteGalleryImage = async (req, res) => {
       return res.status(404).json({ error: "Photo not found." });
     }
 
-    // Clean up the file too, so deleted photos don't pile up on disk.
-    // If the file's already gone for some reason, that's fine - ignore it.
-    const filePath = `.${result.rows[0].image_url}`;
-    fs.unlink(filePath, () => {});
+    // Clean up the file too. New photos live on Cloudinary; older photos
+    // (uploaded before the switch) are still on this server's disk.
+    const imageUrl = result.rows[0].image_url;
+    if (imageUrl.startsWith("http")) {
+      const publicId = getPublicId(imageUrl);
+      if (publicId) {
+        cloudinary.uploader.destroy(publicId).catch(() => {});
+      }
+    } else {
+      fs.unlink(`.${imageUrl}`, () => {});
+    }
 
     res.json({ success: true });
   } catch (err) {

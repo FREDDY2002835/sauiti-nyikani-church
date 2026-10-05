@@ -1,9 +1,9 @@
-import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import MainLayout from "../layouts/MainLayout";
+import { getImageUrl } from "../utils/imageUrl";
 
-const BASE_URL = API_ORIGIN;
-const API_URL = `${API_ROOT}/gallery`;
+const BASE_URL = "http://127.0.0.1:5000";
+const API_URL = `${BASE_URL}/api/gallery`;
 
 const emptyForm = {
   caption_en: "",
@@ -236,7 +236,7 @@ const AdminGallery = () => {
                 className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center gap-4"
               >
                 <img
-                  src={`${BASE_URL}${img.image_url}`}
+                  src={getImageUrl(img.image_url, BASE_URL, 200)}
                   alt={img.caption_en || "Gallery photo"}
                   className="w-16 h-16 rounded-xl object-cover shrink-0"
                 />
