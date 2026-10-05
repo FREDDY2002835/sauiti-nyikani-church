@@ -2,6 +2,7 @@ import { API_URL as API_ROOT, API_ORIGIN } from "../config/api";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MainLayout from "../layouts/MainLayout";
+import { getImageUrl } from "../utils/imageUrl";
 
 const BASE_URL = API_ORIGIN;
 const API_URL = `${API_ROOT}/events`;
@@ -199,7 +200,7 @@ const AdminEvents = () => {
             <label className="block text-sm text-slate-300 mb-2">Event Poster / Image (optional)</label>
             {existingImageUrl && !file && (
               <img
-                src={`${BASE_URL_FOR_IMAGES}${existingImageUrl}`}
+                src={getImageUrl(existingImageUrl, BASE_URL_FOR_IMAGES, 300)}
                 alt="Current poster"
                 className="w-32 h-32 object-cover rounded-lg mb-3 border border-white/20"
               />
@@ -250,7 +251,7 @@ const AdminEvents = () => {
                 <div className="flex items-start gap-4 min-w-0">
                   {ev.image_url && (
                     <img
-                      src={`${BASE_URL_FOR_IMAGES}${ev.image_url}`}
+                      src={getImageUrl(ev.image_url, BASE_URL_FOR_IMAGES, 200)}
                       alt=""
                       className="w-14 h-14 object-cover rounded-lg shrink-0"
                     />

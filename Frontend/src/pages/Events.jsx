@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import MainLayout from "../layouts/MainLayout";
+import { getImageUrl } from "../utils/imageUrl";
 
 const BASE_URL = API_ORIGIN;
 
@@ -87,9 +88,9 @@ const Events = () => {
                   )}
                   {ev.image_url && (
                     <img
-                      src={`${BASE_URL}${ev.image_url}`}
+                      src={getImageUrl(ev.image_url, BASE_URL, 1000)}
                       alt={title}
-                      onClick={() => setLightboxImage(`${BASE_URL}${ev.image_url}`)}
+                      onClick={() => setLightboxImage(getImageUrl(ev.image_url, BASE_URL))}
                       className="w-full max-h-[420px] object-contain bg-black/20 cursor-pointer hover:opacity-90 transition"
                     />
                   )}
