@@ -1,9 +1,36 @@
 // This file handles everything to do with the "sermons" table: listing
 // sermons, uploading a new one (audio or video, with details), and
 // deleting one.
+//
+// The audio/video files themselves are stored on Cloudinary (permanent),
+// and only the link is saved in the database.
 
 import fs from "fs";
 import { pool } from "../config/db.js";
+import cloudinary from "../config/cloudinary.js";
+
+// Sends the sermon file to Cloudinary in chunks (safe for big files and does
+// not load the whole file into memory). Cloudinary files audio under the
+// "video" resource type, so we use "video" for both audio and video.
+const uploadToCloudinary = (filePath) =>
+  new Promise((resolve, reject) => {
+    cloudinary.uploader.upload_large(
+      filePath,
+      {
+        folder: "sauti-nyikani/sermons",
+        resource_type: "video",
+        chunk_size: 6000000,
+      },
+      (error, result) => (error ? reject(error) : resolve(result))
+    );
+  });
+
+// Turns a Cloudinary link back into its "public id" so we can delete it.
+// .../video/upload/v123/sauti-nyikani/sermons/abc.mp3 -> sauti-nyikani/sermons/abc
+const getPublicId = (url) => {
+  const match = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z0-9]+$/);
+  return match ? match[1] : null;
+};
 
 // GET /api/sermons - list all sermons, for the public Sermons page
 export const getSermons = async (req, res) => {
@@ -26,6 +53,10 @@ export const uploadSermon = async (req, res) => {
     return res.status(400).json({ error: "An audio or video file is required." });
   }
 
+  const tempPath = req.file.path;
+  // Always remove the temporary file from the server, whatever happens.
+  const cleanup = () => fs.unlink(tempPath, () => {});
+
   const {
     title_en, title_fr, title_sw,
     speaker,
@@ -34,13 +65,28 @@ export const uploadSermon = async (req, res) => {
   } = req.body;
 
   if (!title_en || !speaker) {
-    // Clean up the file we already saved, since we're rejecting this upload.
-    fs.unlink(req.file.path, () => {});
+    cleanup();
     return res.status(400).json({ error: "Title and speaker are required." });
   }
 
-  const fileUrl = `/uploads/${req.file.filename}`;
   const fileType = req.file.mimetype.startsWith("video/") ? "video" : "audio";
+
+  let fileUrl;
+  try {
+    const uploaded = await uploadToCloudinary(tempPath);
+    fileUrl = uploaded.secure_url; // full https link, stored in the database
+  } catch (err) {
+    cleanup();
+    console.error("Cloudinary sermon upload failed:", err.message);
+    if (/too large/i.test(err.message || "")) {
+      return res.status(400).json({
+        error: "That file is too large for the storage plan. Please compress it or upgrade Cloudinary.",
+      });
+    }
+    return res.status(502).json({ error: "Could not upload the sermon. Please try again." });
+  }
+
+  cleanup();
 
   try {
     const result = await pool.query(
@@ -64,7 +110,7 @@ export const uploadSermon = async (req, res) => {
 };
 
 // DELETE /api/sermons/:id - remove a sermon (both the database row and
-// the actual file on disk).
+// the stored file).
 export const deleteSermon = async (req, res) => {
   const { id } = req.params;
 
@@ -78,9 +124,17 @@ export const deleteSermon = async (req, res) => {
       return res.status(404).json({ error: "Sermon not found." });
     }
 
-    // Clean up the file too, so deleted sermons don't pile up on disk.
-    const filePath = `.${result.rows[0].file_url}`;
-    fs.unlink(filePath, () => {});
+    // New sermons live on Cloudinary; older ones (uploaded before the switch)
+    // pointed to this server's disk, where the file is usually already gone.
+    const fileUrl = result.rows[0].file_url || "";
+    if (fileUrl.startsWith("http")) {
+      const publicId = getPublicId(fileUrl);
+      if (publicId) {
+        cloudinary.uploader.destroy(publicId, { resource_type: "video" }).catch(() => {});
+      }
+    } else {
+      fs.unlink(`.${fileUrl}`, () => {});
+    }
 
     res.json({ success: true });
   } catch (err) {

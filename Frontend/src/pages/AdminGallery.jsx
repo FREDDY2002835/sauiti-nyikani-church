@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { getImageUrl } from "../utils/imageUrl";
+import { API_ORIGIN } from "../config/api";
 
-const BASE_URL = "http://127.0.0.1:5000";
+const BASE_URL = API_ORIGIN;
 const API_URL = `${BASE_URL}/api/gallery`;
 
 const emptyForm = {
