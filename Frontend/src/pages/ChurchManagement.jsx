@@ -13,6 +13,7 @@ import BaptismTab from "../components/management/BaptismTab";
 import ContributionsTab from "../components/management/ContributionsTab";
 import ProjectsTab from "../components/management/ProjectsTab";
 import AnnouncementsTab from "../components/management/AnnouncementsTab";
+import SectionLock from "../components/management/SectionLock";
 
 const TABS = [
   { key: "members", Component: MembersTab },
@@ -26,6 +27,9 @@ const TABS = [
   { key: "projects", Component: ProjectsTab },
   { key: "announcements", Component: AnnouncementsTab },
 ];
+
+// These tabs need the extra password before they open.
+const PRIVATE_TABS = ["tithe", "elders", "finance"];
 
 const ChurchManagement = () => {
   const { t } = useTranslation();
@@ -99,7 +103,14 @@ const ChurchManagement = () => {
           ))}
         </div>
 
-        {ActiveComponent && <ActiveComponent />}
+        {ActiveComponent &&
+          (PRIVATE_TABS.includes(activeTab) ? (
+            <SectionLock>
+              <ActiveComponent />
+            </SectionLock>
+          ) : (
+            <ActiveComponent />
+          ))}
       </div>
     </MainLayout>
   );

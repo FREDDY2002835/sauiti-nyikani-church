@@ -22,7 +22,7 @@ import baptismRoutes from "./routes/baptisms.js";
 import contributionsRoutes from "./routes/contributions.js";
 import announcementsRoutes from "./routes/announcements.js";
 import authRoutes from "./routes/auth.js";
-import { requireAuth } from "./auth/auth.js";
+import { requireAuth, requireSectionAccess } from "./auth/auth.js";
 
 dotenv.config();
 
@@ -92,6 +92,11 @@ app.use("/api", (req, res, next) => {
 
   return requireAuth(req, res, next);
 });
+
+// Tithes, Elders Council and Finance need a SECOND password on top of the
+// admin login. The website sends a short-lived "unlock" token after the
+// password is entered (see POST /api/auth/unlock).
+app.use(["/api/tithes", "/api/elders", "/api/finance"], requireSectionAccess);
 
 app.use("/api/contact", contactRoutes);
 app.use("/api/prayer", prayerRoutes);
