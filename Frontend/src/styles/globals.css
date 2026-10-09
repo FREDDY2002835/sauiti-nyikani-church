@@ -27,16 +27,44 @@
   --primary: #2563eb;
 }
 
+/* ===========================
+   Mobile-safe page frame
+   - no sideways sliding
+   - no pull-to-refresh / rubber-band bounce
+   - smooth scrolling (the background is painted once, not on every scroll)
+=========================== */
+
+html {
+  background-color: #0a1730; /* same navy as the page: no white flash when bouncing */
+  overflow-x: hidden;        /* the page can never slide left/right */
+  overscroll-behavior-y: none;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
+  color: var(--text);
+  transition: color 0.3s ease;
+  min-height: 100vh;
+  min-height: 100dvh;        /* real visible height on phones (address bar aware) */
+  overflow-x: clip;
+  overflow-wrap: break-word; /* long emails/words wrap instead of widening the page */
+  overscroll-behavior-y: none;
+}
+
+/* The gradient background lives on its own fixed layer. This looks exactly
+   like before, but scrolls much more smoothly on phones than
+   "background-attachment: fixed" did. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.28), transparent 32%),
     radial-gradient(circle at 88% 52%, rgba(59, 130, 246, 0.22), transparent 38%),
     radial-gradient(circle at 18% 92%, rgba(59, 130, 246, 0.22), transparent 32%),
     radial-gradient(ellipse at center, #14294f 0%, #0a1730 45%, #020509 100%);
-  background-attachment: fixed;
-  color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
-  min-height: 100vh;
 }
 
 /* ===========================

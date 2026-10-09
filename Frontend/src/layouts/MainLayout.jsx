@@ -3,7 +3,7 @@ import Footer from "../components/layout/Footer";
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col text-white">
+    <div className="min-h-dvh flex flex-col text-white">
       <Navbar />
 
       <main className="flex-1">
