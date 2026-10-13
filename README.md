@@ -1,7 +1,7 @@
 # ⛪ Sauti Nyikani Church
 
-<p align="center">
-  <img src="Frontend/src/assets/images/logo.png" alt="Sauti Nyikani Church Logo" width="160"/>
+ <p align="center">
+  <img src="Frontend/src/assets/logo/logo.png" alt="Sauti Nyikani Church Logo" width="150">
 </p>
 
 <h3 align="center">Church Website & Management Application</h3>
