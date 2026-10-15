@@ -9,7 +9,9 @@
 <p align="center">
   A modern, responsive, and installable platform connecting the church community through worship, sermons, events, ministries, and church administration.
 </p>
+<p>
 Demo Live: https://sauiti-nyikani-church-1.onrender.com
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black" alt="React"/>
